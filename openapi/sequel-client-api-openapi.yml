@@ -1,0 +1,103 @@
+openapi: 3.0.1
+info:
+  title: Introvoke Analytics Client API
+  description: This is the documentation required to access the Introvoke API. It contains information on how to create Companies, add events to each company and manage the presenters.
+  termsOfService: https://www.introvoke.com/terms/
+  contact:
+    email: support@introvoke.com
+  version: 1.0.0
+servers:
+- url: https://api.introvoke.com/api/v1
+security:
+- bearerAuth: []
+tags:
+- name: Client
+paths:
+  /api/client/removeEventSimulive:
+    put:
+      summary: Remove simulive from an event
+      description: Use this endpoint to remove the Simulive video for an event.
+      operationId: remove-simulive-event
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                eventId:
+                  type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      tags:
+      - Client
+  /api/client/setEventSimuliveUrl:
+    put:
+      summary: Set simulive for an event
+      description: Use this endpoint to set the Simulive video for an event. The event will automatically go live at the start time.
+      operationId: set-event-simulive
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                eventId:
+                  type: string
+                url:
+                  type: string
+                  description: The public URL of the video to be used as simulive. This URL MUST be accessible without any login, test the url in incognito before setting or the simulive will fail.
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      tags:
+      - Client
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    sec0:
+      type: apiKey
+      in: header
+      name: Authorization
+      x-bearer-format: bearer

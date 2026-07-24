@@ -1,0 +1,1051 @@
+openapi: 3.0.1
+info:
+  title: Introvoke Analytics event API
+  description: This is the documentation required to access the Introvoke API. It contains information on how to create Companies, add events to each company and manage the presenters.
+  termsOfService: https://www.introvoke.com/terms/
+  contact:
+    email: support@introvoke.com
+  version: 1.0.0
+servers:
+- url: https://api.introvoke.com/api/v1
+security:
+- bearerAuth: []
+tags:
+- name: event
+  description: Calls to managing events
+paths:
+  /event/create:
+    post:
+      tags:
+      - event
+      summary: Create a new event
+      operationId: addEvent
+      requestBody:
+        description: Event object that needs to be added to the backend
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EventCreate'
+        required: true
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Event'
+        '400':
+          description: Invalid input
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                common host and presenter emails:
+                  value:
+                    hasError: true
+                    errorMessage: 'Users cannot be hosts and presenters at the same time: test@email.com'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          description: Company not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                hasError: true
+                errorMessage: Company not found
+  /event/{eventId}:
+    delete:
+      tags:
+      - event
+      summary: Delete an event
+      operationId: deleteevent
+      parameters:
+      - name: eventId
+        in: path
+        description: event id to delete
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: successful operation
+        '400':
+          description: Invalid ID supplied
+          content: {}
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          description: event not found
+          content: {}
+    get:
+      tags:
+      - event
+      summary: Find event by ID
+      description: Returns a single event
+      operationId: geteventById
+      parameters:
+      - name: eventId
+        in: path
+        description: ID of event to return
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Event'
+        '400':
+          description: Invalid ID supplied
+          content: {}
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          description: event not found
+          content: {}
+    post:
+      tags:
+      - event
+      summary: Update an event with json data
+      operationId: updateEventWithJsonData
+      parameters:
+      - name: eventId
+        in: path
+        description: ID of event that needs to be updated
+        required: true
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EventUpdate'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Event'
+        '400':
+          description: Invalid input
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                hasError: true
+                errorMessage: 'Users cannot be hosts and presenters at the same time: test@email.com'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          description: Event not found
+          content: {}
+  /event/{eventId}/availableReplays:
+    get:
+      summary: Return a list of replays for this event
+      description: Returns an array of replays for this event
+      tags:
+      - event
+      parameters:
+      - in: path
+        name: eventId
+        required: true
+        description: Unique ID of the event
+        schema:
+          type: string
+      - in: query
+        name: secondsValidFor
+        required: false
+        description: Number of seconds the replay is valid for. 3600 (1 hour) by default.
+        schema:
+          type: integer
+          minimum: 0
+      responses:
+        '200':
+          description: list of replays
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    downloadVideoUrl:
+                      type: string
+                    downloadStatus:
+                      type: string
+                    isCustomReplay:
+                      type: boolean
+                    url:
+                      type: string
+                  additionalProperties: false
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          description: event not found
+          content: {}
+  /event/{eventId}/clone:
+    post:
+      tags:
+      - event
+      summary: 'Create a new event based on source event '
+      operationId: cloneEvent
+      requestBody:
+        description: 'Event object that needs to be added to the backend. Body props that are optional and will be taken from source event if missing in request: `name`, `bannerUrl`, `networkingHub`, `presenterPasscode`, `hostPasscode`, `attendeePasscode`, `isAttendeeRegistrationModeEnabled`, `isPresenterRegistrationModeEnabled`, `isRegistrationModeEnabled`, `hosts`, `presenters`. Additionaly event customization, list of hosts and presenters is also copied from source event'
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EventClone'
+        required: true
+      parameters:
+      - name: eventId
+        in: path
+        description: ID of event to return
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Event'
+        '400':
+          description: Invalid input
+          content: {}
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+  /event/{eventId}/embedCode:
+    post:
+      tags:
+      - event
+      summary: Return the embed code for the event component
+      operationId: getEmbedEventById
+      requestBody:
+        description: Object used to identify the user
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      parameters:
+      - name: eventId
+        in: path
+        description: ID of event for the embed code
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: string
+                description: The url source that needs to be added to an iframe
+                example: https://embed.introvoke.com/event/{eventId}?userEmail={userEmail}&userId={userId}&userName={userDisplayName}&userProfile={userAvatar}&authKey={serverGenerated}
+        '400':
+          description: Invalid parameters supplied
+          content: {}
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          description: event not found
+          content: {}
+  /event/{eventId}/organizer:
+    put:
+      tags:
+      - event
+      summary: Add an organizer id to the event
+      description: Returns the updated list of organizers
+      operationId: putHostById
+      parameters:
+      - name: eventId
+        in: path
+        description: ID of event to update
+        required: true
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                organizer:
+                  type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                description: Array of organizer ids
+                items:
+                  type: string
+        '400':
+          description: Invalid payload was sent
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                missing organizer field:
+                  value:
+                    hasError: true
+                    errorMessage: Missing organizer field in request
+                common host and presenter emails:
+                  value:
+                    hasError: true
+                    errorMessage: 'Users cannot be hosts and presenters at the same time: test@email.com'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          description: Event not found
+          content: {}
+  /event/{eventId}/organizer/{organizerId}:
+    delete:
+      tags:
+      - event
+      summary: Delete an organizer id from the event
+      description: Returns the updated list of organizers
+      operationId: deleteHostById
+      parameters:
+      - name: eventId
+        in: path
+        description: ID of event to update
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: organizerId
+        in: path
+        description: ID of the organizer to delete
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                description: Array of organizer ids
+                items:
+                  type: string
+        '400':
+          description: Invalid parameter was sent
+          content: {}
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          description: event not found
+          content: {}
+  /event/{eventId}/presenter:
+    put:
+      tags:
+      - event
+      summary: Add a presenter id to the event
+      description: Returns the updated list of presenters
+      operationId: putPresenterById
+      parameters:
+      - name: eventId
+        in: path
+        description: ID of event to update
+        required: true
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                presenter:
+                  type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                description: Array of presenter ids
+                items:
+                  type: string
+        '400':
+          description: Invalid payload was sent
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                missing presenter field:
+                  value:
+                    hasError: true
+                    errorMessage: Missing presenter field in request
+                common host and presenter emails:
+                  value:
+                    hasError: true
+                    errorMessage: 'Users cannot be hosts and presenters at the same time: test@email.com'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          description: event not found
+          content: {}
+  /event/{eventId}/presenter/{presenterId}:
+    delete:
+      tags:
+      - event
+      summary: Delete a presenter id from the event
+      description: Returns the updated list of presenters
+      operationId: deletePresenterById
+      parameters:
+      - name: eventId
+        in: path
+        description: ID of event to update
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: presenterId
+        in: path
+        description: ID of the presenter to delete
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                description: Array of presenter ids
+                items:
+                  type: string
+        '400':
+          description: Invalid parameter was sent
+          content: {}
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          description: event not found
+          content: {}
+  /event/{eventId}/registrant:
+    delete:
+      tags:
+      - event
+      summary: Delete a registered user from the event
+      description: Returns OK
+      operationId: deleteRegistrantById
+      parameters:
+      - name: eventId
+        in: path
+        description: ID of event to update
+        required: true
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  description: The user email to delete
+              additionalProperties: false
+              required:
+              - email
+      responses:
+        '204':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: string
+                description: OK message
+        '400':
+          description: Invalid parameter was sent
+          content: {}
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          description: event not found
+          content: {}
+    post:
+      summary: Register a user for the event
+      description: Adds a new registered user to this event
+      tags:
+      - event
+      parameters:
+      - in: path
+        name: eventId
+        required: true
+        description: Unique ID of the event
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: The name of the user
+                email:
+                  type: string
+                  description: The email of the user
+                metadata:
+                  type: object
+                  description: Additional metadata to include about the user
+                  additionalProperties: true
+              required:
+              - name
+              - email
+      responses:
+        '200':
+          description: User was registered for this event
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Information about the registered user
+                properties:
+                  name:
+                    type: string
+                    description: The name of the user
+                  email:
+                    type: string
+                    description: The email of the user
+                  join_url:
+                    type: string
+                    description: The unique url that the user can use to join the event
+                  metadata:
+                    type: object
+                    description: Additional metadata to include about the user
+                    additionalProperties: true
+                additionalProperties: false
+        '400':
+          description: An invalid parameter was sent
+        '404':
+          description: Invalid auth token
+  /event/{eventId}/registrants:
+    get:
+      summary: Return a list of all registered users
+      description: Returns an array of registrants for this event
+      tags:
+      - event
+      parameters:
+      - in: path
+        name: eventId
+        required: true
+        description: Unique ID of the event
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                description: List of registered users
+                items:
+                  type: object
+                  description: Information about a single registered user
+                  properties:
+                    name:
+                      type: string
+                      description: The name of the user
+                    email:
+                      type: string
+                      description: The email of the user
+                    join_url:
+                      type: string
+                      description: The unique url that the user can use to join the event
+                    metadata:
+                      type: object
+                      description: Additional metadata that was included when the user registered
+                      additionalProperties: true
+                  additionalProperties: false
+          description: Returns list of participants
+components:
+  schemas:
+    EventUpdate:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Updated name of the event
+        startDate:
+          type: string
+          format: date-time
+          description: Updated start date and time of the event
+        endDate:
+          type: string
+          format: date-time
+          description: Updated end date and time of the event
+        timezone:
+          $ref: '#/components/schemas/Timezones'
+          description: Updated timezone
+        type:
+          type: string
+          enum:
+          - Virtual
+          - LiveStreamInPerson
+          description: Updated event type
+        picture:
+          type: string
+          description: Picture of the event
+        networkingHub:
+          type: string
+          description: (Optional) The networking hub linked when networking starts
+        presenters:
+          type: array
+          description: Array of presenters ids
+          items:
+            type: string
+        organizers:
+          type: array
+          description: Array of organizers ids
+          items:
+            type: string
+        autoSelectLatestReplay:
+          description: (Optional) Turn on automatic selection of latest replay
+          type: boolean
+          nullable: true
+        disableEventRecording:
+          description: (Optional) Turn off recording for this event
+          type: boolean
+          nullable: true
+        isRegistrationModeEnabled:
+          type: boolean
+          nullable: true
+        isAttendeeRegistrationModeEnabled:
+          type: boolean
+          nullable: true
+        closeCaptioningSettings:
+          description: (Optional) Turn on automatic closed captioning
+          type: object
+          nullable: true
+          properties:
+            transcription:
+              type: object
+              nullable: true
+              properties:
+                enabled:
+                  type: boolean
+                  nullable: true
+    EventClone:
+      required:
+      - name
+      - startDate
+      - endDate
+      - timezone
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the event
+        startDate:
+          type: string
+          format: date-time
+        endDate:
+          type: string
+          format: date-time
+        timezone:
+          $ref: '#/components/schemas/Timezones'
+        type:
+          type: string
+          enum:
+          - Virtual
+          - LiveStreamInPerson
+        picture:
+          type: string
+          description: Picture of the event
+        networkingHub:
+          type: string
+          description: The networking hub linked when networking starts
+        presenters:
+          type: array
+          description: Array of ids for presenters
+          items:
+            type: string
+        organizers:
+          type: array
+          description: Array of organizers ids
+          items:
+            type: string
+        autoSelectLatestReplay:
+          description: Turn on automatic selection of latest replay
+          type: boolean
+          nullable: true
+        disableEventRecording:
+          description: Turn off recording for this event
+          type: boolean
+          nullable: true
+        isRegistrationModeEnabled:
+          description: Turn on registration mode
+          type: boolean
+          nullable: true
+        isAttendeeRegistrationModeEnabled:
+          description: Turn on to require attendee codes to enter
+          type: boolean
+          nullable: true
+    Error:
+      type: object
+      properties:
+        hasError:
+          description: Always `true` if the request has failed.
+          type: boolean
+          default: true
+        errorMessage:
+          type: string
+          description: The error message describing the issue.
+    EventCreate:
+      required:
+      - companyId
+      - name
+      - startDate
+      - endDate
+      - timezone
+      - type
+      type: object
+      properties:
+        companyId:
+          type: string
+          description: Id of company
+        name:
+          type: string
+          description: Name of the event
+        startDate:
+          type: string
+          format: date-time
+        endDate:
+          type: string
+          format: date-time
+        timezone:
+          $ref: '#/components/schemas/Timezones'
+        type:
+          type: string
+          enum:
+          - Virtual
+          - LiveStreamInPerson
+        picture:
+          type: string
+          description: (Optional) Picture of the event
+        networkingHub:
+          type: string
+          description: (Optional) The networking hub linked when networking starts
+        presenters:
+          type: array
+          description: (Optional) Array of ids for presenters
+          items:
+            type: string
+        organizers:
+          type: array
+          description: (Optional) Array of organizers ids
+          items:
+            type: string
+        autoSelectLatestReplay:
+          description: (Optional) Turn on automatic selection of latest replay
+          type: boolean
+          nullable: true
+        disableEventRecording:
+          description: (Optional) Turn off recording for this event
+          type: boolean
+          nullable: true
+        isRegistrationModeEnabled:
+          description: (Optional) Turn on registration mode
+          type: boolean
+          nullable: true
+        isAttendeeRegistrationModeEnabled:
+          description: (Optional) Turn on to require attendee codes to enter
+          type: boolean
+          nullable: true
+        closeCaptioningSettings:
+          description: (Optional) Turn on automatic closed captioning
+          type: object
+          nullable: true
+          properties:
+            transcription:
+              type: object
+              nullable: true
+              properties:
+                enabled:
+                  type: boolean
+                  nullable: true
+    Timezones:
+      type: string
+      description: Timezones taken from https://www.npmjs.com/package/timezone-support
+      enum:
+      - Africa/Abidjan
+      - Africa/Nairobi
+      - Africa/Algiers
+      - Africa/Lagos
+      - Africa/Maputo
+      - Africa/Cairo
+      - Africa/Casablanca
+      - Europe/Paris
+      - Africa/Johannesburg
+      - Africa/Khartoum
+      - Africa/Sao_Tome
+      - Africa/Tripoli
+      - Africa/Windhoek
+      - America/Adak
+      - America/Anchorage
+      - America/Santo_Domingo
+      - America/Araguaina
+      - America/Fortaleza
+      - America/Asuncion
+      - America/Panama
+      - America/Mexico_City
+      - America/Bahia
+      - America/Managua
+      - America/La_Paz
+      - America/Lima
+      - America/Denver
+      - America/Campo_Grande
+      - America/Cancun
+      - America/Caracas
+      - America/Chicago
+      - America/Chihuahua
+      - America/Phoenix
+      - America/Los_Angeles
+      - America/New_York
+      - America/Rio_Branco
+      - America/Fort_Nelson
+      - America/Halifax
+      - America/Godthab
+      - America/Grand_Turk
+      - America/Havana
+      - America/Metlakatla
+      - America/Miquelon
+      - America/Montevideo
+      - America/Noronha
+      - America/Port-au-Prince
+      - Antarctica/Palmer
+      - America/Santiago
+      - America/Sao_Paulo
+      - Atlantic/Azores
+      - America/St_Johns
+      - Antarctica/Casey
+      - Antarctica/Davis
+      - Pacific/Port_Moresby
+      - Pacific/Guadalcanal
+      - Asia/Tashkent
+      - Pacific/Auckland
+      - Asia/Baghdad
+      - Antarctica/Troll
+      - Asia/Dhaka
+      - Asia/Amman
+      - Asia/Kamchatka
+      - Asia/Baku
+      - Asia/Bangkok
+      - Asia/Barnaul
+      - Asia/Beirut
+      - Asia/Kuala_Lumpur
+      - Asia/Kolkata
+      - Asia/Chita
+      - Asia/Ulaanbaatar
+      - Asia/Shanghai
+      - Asia/Colombo
+      - Asia/Damascus
+      - Asia/Dili
+      - Asia/Dubai
+      - Asia/Famagusta
+      - Asia/Gaza
+      - Asia/Hong_Kong
+      - Asia/Hovd
+      - Asia/Irkutsk
+      - Europe/Istanbul
+      - Asia/Jakarta
+      - Asia/Jayapura
+      - Asia/Jerusalem
+      - Asia/Kabul
+      - Asia/Karachi
+      - Asia/Kathmandu
+      - Asia/Yakutsk
+      - Asia/Krasnoyarsk
+      - Asia/Magadan
+      - Asia/Makassar
+      - Asia/Manila
+      - Europe/Athens
+      - Asia/Novosibirsk
+      - Asia/Omsk
+      - Asia/Pyongyang
+      - Asia/Qyzylorda
+      - Asia/Rangoon
+      - Asia/Sakhalin
+      - Asia/Seoul
+      - Asia/Srednekolymsk
+      - Asia/Tehran
+      - Asia/Tokyo
+      - Asia/Tomsk
+      - Asia/Vladivostok
+      - Asia/Yekaterinburg
+      - Europe/Lisbon
+      - Atlantic/Cape_Verde
+      - Australia/Sydney
+      - Australia/Adelaide
+      - Australia/Brisbane
+      - Australia/Darwin
+      - Australia/Eucla
+      - Australia/Lord_Howe
+      - Australia/Perth
+      - Pacific/Easter
+      - Europe/Dublin
+      - Etc/GMT-1
+      - Pacific/Fakaofo
+      - Pacific/Kiritimati
+      - Etc/GMT-2
+      - Pacific/Tahiti
+      - Pacific/Niue
+      - Etc/GMT+12
+      - Pacific/Galapagos
+      - Etc/GMT+7
+      - Pacific/Pitcairn
+      - Pacific/Gambier
+      - Etc/UTC
+      - Europe/Ulyanovsk
+      - Europe/London
+      - Europe/Chisinau
+      - Europe/Kaliningrad
+      - Europe/Kirov
+      - Europe/Moscow
+      - Europe/Saratov
+      - Europe/Simferopol
+      - Europe/Volgograd
+      - Pacific/Honolulu
+      - MET
+      - Pacific/Chatham
+      - Pacific/Apia
+      - Pacific/Bougainville
+      - Pacific/Fiji
+      - Pacific/Guam
+      - Pacific/Marquesas
+      - Pacific/Pago_Pago
+      - Pacific/Norfolk
+      - Pacific/Tongatapu
+    User:
+      type: object
+      properties:
+        userId:
+          type: string
+        userDisplayName:
+          type: string
+        userEmail:
+          type: string
+        userAvatar:
+          type: string
+    Event:
+      type: object
+      properties:
+        uid:
+          type: string
+        companyUid:
+          type: string
+        creatorUid:
+          type: string
+        name:
+          type: string
+        picture:
+          type: string
+          nullable: true
+        startDate:
+          type: string
+          format: date-time
+        endDate:
+          type: string
+          format: date-time
+        timezone:
+          type: string
+        type:
+          type: string
+          enum:
+          - Virtual
+          - LiveStreamInPerson
+        metadata:
+          description: Can be any value - string, number, boolean, array or object.
+          type: object
+          nullable: true
+        networkingHub:
+          type: string
+          description: (Optional) The networking hub linked when networking starts
+          nullable: true
+        presenters:
+          type: array
+          nullable: true
+          items:
+            type: string
+        organizers:
+          type: array
+          nullable: true
+          items:
+            type: string
+        isRegistrationModeEnabled:
+          type: boolean
+          nullable: true
+        isAttendeeRegistrationModeEnabled:
+          type: boolean
+          nullable: true
+        privateEventInfo:
+          type: object
+          nullable: true
+          properties:
+            attendeePasscode:
+              type: string
+            presenterPasscode:
+              type: string
+            hostPasscode:
+              type: string
+            rtmpKey:
+              type: string
+            rtmpUrl:
+              type: string
+        closeCaptioningSettings:
+          type: object
+          nullable: true
+          properties:
+            transcription:
+              type: object
+              nullable: true
+              properties:
+                enabled:
+                  type: boolean
+                  nullable: true
+      xml:
+        name: Event
+  responses:
+    UnauthorizedError:
+      description: Access token is missing or invalid
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    sec0:
+      type: apiKey
+      in: header
+      name: Authorization
+      x-bearer-format: bearer

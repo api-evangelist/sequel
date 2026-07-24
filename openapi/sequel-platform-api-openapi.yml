@@ -1,0 +1,369 @@
+openapi: 3.0.1
+info:
+  title: Introvoke Analytics platform API
+  description: This is the documentation required to access the Introvoke API. It contains information on how to create Companies, add events to each company and manage the presenters.
+  termsOfService: https://www.introvoke.com/terms/
+  contact:
+    email: support@introvoke.com
+  version: 1.0.0
+servers:
+- url: https://api.introvoke.com/api/v1
+security:
+- bearerAuth: []
+tags:
+- name: platform
+paths:
+  /customizations/events/default:
+    get:
+      description: 'Returns the default event customization theme that applies to all events, unless overridden at the company and event level.
+
+        This endpoint can be used for clients which update to theme or for preview. The default theme can be used as a starting point to edit new themes.'
+      tags:
+      - platform
+      responses:
+        '200':
+          description: default platform event customization theme
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IntrovokeEventTheme'
+  /customizations/events/suggested-color-pallets:
+    get:
+      description: Returns an array of color pallets (with primary, secondary and tertiary colors) that can be used in the editor. This endpoint can be used for clients which update to theme or for preview.
+      tags:
+      - platform
+      responses:
+        '200':
+          description: suggested color pallets
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: array
+                  nullable: true
+                  items:
+                    type: string
+                    nullable: true
+                    minItems: 2
+                    maxItems: 3
+components:
+  schemas:
+    IntrovokeEventTheme:
+      type: object
+      properties:
+        name:
+          type: string
+        defaultTheme:
+          type: boolean
+        brandColors:
+          type: array
+          items:
+            type: string
+          maxItems: 3
+          minItems: 2
+        fonts:
+          type: array
+          nullable: true
+          items:
+            type: object
+            properties:
+              fontName:
+                type: string
+              fontUrl:
+                type: string
+              isPrimary:
+                type: boolean
+            required:
+            - fontName
+            - fontUrl
+            - isPrimary
+            additionalProperties: false
+        virtualStage:
+          type: object
+          properties:
+            background:
+              type: object
+              properties:
+                backgroundColor:
+                  type: string
+                  nullable: true
+                imageUrl:
+                  type: string
+                  nullable: true
+                textColor:
+                  type: string
+                  nullable: true
+              additionalProperties: false
+            watermark:
+              type: object
+              properties:
+                backgroundColor:
+                  type: string
+                  nullable: true
+                imageUrl:
+                  type: string
+                  nullable: true
+                textColor:
+                  type: string
+                  nullable: true
+              additionalProperties: false
+            countdown:
+              type: object
+              nullable: true
+              properties:
+                textColor:
+                  type: string
+                  nullable: true
+              additionalProperties: false
+            presenter:
+              type: object
+              nullable: true
+              properties:
+                glowColor:
+                  type: string
+                  nullable: true
+              additionalProperties: false
+          additionalProperties: false
+        networkingHub:
+          type: object
+          properties:
+            circleGraphics:
+              type: object
+              nullable: true
+              properties:
+                backgroundColor:
+                  type: string
+                  nullable: true
+                imageUrl:
+                  type: string
+                  nullable: true
+                textColor:
+                  type: string
+                  nullable: true
+              additionalProperties: false
+            joinNetworking:
+              type: object
+              nullable: true
+              properties:
+                backgroundColor:
+                  type: string
+                  nullable: true
+                imageUrl:
+                  type: string
+                  nullable: true
+                textColor:
+                  type: string
+                  nullable: true
+              additionalProperties: false
+            returnToStage:
+              type: object
+              properties:
+                backgroundColor:
+                  type: string
+                  nullable: true
+                imageUrl:
+                  type: string
+                  nullable: true
+                textColor:
+                  type: string
+                  nullable: true
+              additionalProperties: false
+          additionalProperties: false
+        warningNotices:
+          type: object
+          properties:
+            buttonColor:
+              type: string
+              nullable: true
+          additionalProperties: false
+        chat:
+          type: object
+          properties:
+            enabled:
+              type: boolean
+              nullable: true
+            colors:
+              type: array
+              nullable: true
+              items:
+                type: string
+                nullable: true
+            badge:
+              type: object
+              properties:
+                backgroundColor:
+                  type: string
+                  nullable: true
+                imageUrl:
+                  type: string
+                  nullable: true
+                textColor:
+                  type: string
+                  nullable: true
+              additionalProperties: false
+          additionalProperties: false
+        participantList:
+          type: object
+          nullable: true
+          properties:
+            enabled:
+              type: boolean
+              deprecated: true
+              nullable: true
+            showTabFor:
+              type: number
+              nullable: true
+              description: Expects a number for the user role. 0 - Host, 1 - Host & Presenter, 2 - Everyone
+            showCountFor:
+              type: number
+              nullable: true
+              description: Expects a number for the user role. 0 - Host, 1 - Host & Presenter, 2 - Everyone
+          additionalProperties: false
+        qna:
+          type: object
+          nullable: true
+          properties:
+            enabled:
+              type: boolean
+              nullable: true
+          additionalProperties: false
+        polls:
+          type: object
+          nullable: true
+          properties:
+            enabled:
+              type: boolean
+              nullable: true
+          additionalProperties: false
+        privateMessages:
+          type: object
+          nullable: true
+          properties:
+            enabled:
+              type: boolean
+              nullable: true
+          additionalProperties: false
+        poweredByIntrovokeLabel:
+          type: object
+          nullable: true
+          properties:
+            enabled:
+              type: boolean
+              nullable: true
+          additionalProperties: false
+        chatReactions:
+          type: object
+          nullable: true
+          properties:
+            enabled:
+              type: boolean
+              nullable: true
+            reactions:
+              type: array
+              nullable: true
+              items:
+                type: object
+                nullable: true
+                properties:
+                  reaction:
+                    type: string
+                    nullable: false
+                  image:
+                    type: string
+                    nullable: false
+                  label:
+                    type: string
+                    nullable: true
+                maxItems: 7
+                required:
+                - reaction
+                - image
+                additionalProperties: false
+          additionalProperties: false
+        liveReactions:
+          type: object
+          nullable: true
+          properties:
+            enabled:
+              type: boolean
+              nullable: true
+            reactions:
+              type: array
+              nullable: true
+              items:
+                type: object
+                nullable: true
+                properties:
+                  reaction:
+                    type: string
+                    nullable: false
+                  image:
+                    type: string
+                    nullable: false
+                  label:
+                    type: string
+                    nullable: true
+                maxItems: 7
+                required:
+                - reaction
+                - image
+                additionalProperties: false
+          additionalProperties: false
+        emailSettings:
+          type: object
+          nullable: true
+          properties:
+            id:
+              type: string
+            name:
+              type: string
+            when:
+              type: string
+            replayToEmail:
+              type: string
+              nullable: true
+            fromEmail:
+              type: string
+              nullable: true
+            fromName:
+              type: string
+              nullable: true
+            isCustom:
+              type: boolean
+            activated:
+              type: boolean
+            emailTemplate:
+              type: object
+              properties:
+                name:
+                  type: string
+                subject:
+                  type: string
+                  nullable: true
+                hoursToWait:
+                  type: number
+                  nullable: true
+                htmlBody:
+                  type: string
+                  nullable: true
+                sendGridTemplateId:
+                  type: string
+                  nullable: true
+                bodyText:
+                  type: string
+                  nullable: true
+      additionalProperties: false
+      required:
+      - name
+      - defaultTheme
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    sec0:
+      type: apiKey
+      in: header
+      name: Authorization
+      x-bearer-format: bearer

@@ -1,0 +1,402 @@
+openapi: 3.0.1
+info:
+  title: Introvoke Analytics company API
+  description: This is the documentation required to access the Introvoke API. It contains information on how to create Companies, add events to each company and manage the presenters.
+  termsOfService: https://www.introvoke.com/terms/
+  contact:
+    email: support@introvoke.com
+  version: 1.0.0
+servers:
+- url: https://api.introvoke.com/api/v1
+security:
+- bearerAuth: []
+tags:
+- name: company
+  description: Calls to managing companies
+paths:
+  /company/{companyId}:
+    get:
+      tags:
+      - company
+      summary: Find company by ID
+      description: Returns a single company
+      operationId: getcompanyById
+      parameters:
+      - name: companyId
+        in: path
+        description: ID of company to return
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Company'
+        '400':
+          description: Invalid ID supplied
+          content: {}
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          description: company not found
+          content: {}
+    post:
+      tags:
+      - company
+      summary: Update a company with json data
+      operationId: updatecompanyWithJson
+      parameters:
+      - name: companyId
+        in: path
+        description: ID of company that needs to be updated
+        required: true
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CompanyUpdate'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Company'
+        '400':
+          description: Company id not found
+          content: {}
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          description: Invalid input
+          content: {}
+  /company/{companyId}/circleRecordings:
+    get:
+      tags:
+      - company
+      summary: Get all circle recordings for a company
+      description: Returns a list of all circle recordings associated with the company
+      operationId: getCompanyCircleRecordings
+      parameters:
+      - name: companyId
+        in: path
+        description: ID of company to get circle recordings for
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CompanyCircleRecording'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          description: Company not found
+          content: {}
+  /company/{companyId}/create:
+    post:
+      tags:
+      - company
+      summary: Create a new company under a parent company
+      operationId: addCompanyToParent
+      parameters:
+      - name: companyId
+        in: path
+        description: ID of company to return
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: Company object that needs to be added under a parent company
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CompanyCreate'
+        required: true
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Company'
+        '400':
+          description: Invalid input
+          content: {}
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          description: Parent company has an invalid license
+          content: {}
+  /company/{companyId}/events:
+    get:
+      tags:
+      - company
+      summary: List all events under a parent company
+      operationId: listCompanyEvents
+      parameters:
+      - name: companyId
+        in: path
+        description: ID of company to return
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Event'
+        '400':
+          description: Invalid input
+          content: {}
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          description: Parent company has an invalid license
+          content: {}
+  /company/{companyId}/list:
+    get:
+      tags:
+      - company
+      summary: List all companies under a parent company
+      operationId: listChildCompanies
+      parameters:
+      - name: companyId
+        in: path
+        description: ID of company to return
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Company'
+        '400':
+          description: Invalid input
+          content: {}
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          description: Parent company has an invalid license
+          content: {}
+  /company/{companyId}/metadata:
+    post:
+      tags:
+      - company
+      summary: Update metadata for the company
+      operationId: updateCompanyMetadata
+      parameters:
+      - name: companyId
+        in: path
+        description: ID of company to update
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: Metadata object to update in the company
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Metadata'
+        required: true
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Metadata'
+        '400':
+          description: Invalid input
+          content: {}
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+components:
+  schemas:
+    Metadata:
+      type: object
+      additionalProperties:
+        items:
+          additionalProperties: false
+          properties:
+            value:
+              type: string
+          required:
+          - value
+          type: object
+        type: array
+    Company:
+      type: object
+      properties:
+        uid:
+          type: string
+        name:
+          type: string
+        logo:
+          type: string
+        parentCompanyId:
+          type: string
+          nullable: true
+        eventIds:
+          description: Holds an array of all the events for this company
+          type: array
+          items:
+            type: string
+          nullable: true
+        metadata:
+          $ref: '#/components/schemas/Metadata'
+      xml:
+        name: Company
+    CompanyCircleRecording:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier of the circle recording
+        name:
+          type: string
+          description: Name of the circle recording
+        url:
+          type: string
+          description: Public URL to access the recording
+        downloadVideoUrl:
+          type: string
+          description: URL to download the video recording
+      required:
+      - id
+      - name
+      - url
+      - downloadVideoUrl
+    CompanyCreate:
+      required:
+      - name
+      - logo
+      - metadata
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the company
+        logo:
+          type: string
+          description: Logo of the company
+    CompanyUpdate:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Updated name of the company
+        logo:
+          type: string
+          description: Updated logo of the company
+    Event:
+      type: object
+      properties:
+        uid:
+          type: string
+        companyUid:
+          type: string
+        creatorUid:
+          type: string
+        name:
+          type: string
+        picture:
+          type: string
+          nullable: true
+        startDate:
+          type: string
+          format: date-time
+        endDate:
+          type: string
+          format: date-time
+        timezone:
+          type: string
+        type:
+          type: string
+          enum:
+          - Virtual
+          - LiveStreamInPerson
+        metadata:
+          description: Can be any value - string, number, boolean, array or object.
+          type: object
+          nullable: true
+        networkingHub:
+          type: string
+          description: (Optional) The networking hub linked when networking starts
+          nullable: true
+        presenters:
+          type: array
+          nullable: true
+          items:
+            type: string
+        organizers:
+          type: array
+          nullable: true
+          items:
+            type: string
+        isRegistrationModeEnabled:
+          type: boolean
+          nullable: true
+        isAttendeeRegistrationModeEnabled:
+          type: boolean
+          nullable: true
+        privateEventInfo:
+          type: object
+          nullable: true
+          properties:
+            attendeePasscode:
+              type: string
+            presenterPasscode:
+              type: string
+            hostPasscode:
+              type: string
+            rtmpKey:
+              type: string
+            rtmpUrl:
+              type: string
+        closeCaptioningSettings:
+          type: object
+          nullable: true
+          properties:
+            transcription:
+              type: object
+              nullable: true
+              properties:
+                enabled:
+                  type: boolean
+                  nullable: true
+      xml:
+        name: Event
+  responses:
+    UnauthorizedError:
+      description: Access token is missing or invalid
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    sec0:
+      type: apiKey
+      in: header
+      name: Authorization
+      x-bearer-format: bearer

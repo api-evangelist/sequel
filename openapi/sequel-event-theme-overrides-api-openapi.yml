@@ -1,0 +1,405 @@
+openapi: 3.0.1
+info:
+  title: Introvoke Analytics event theme overrides API
+  description: This is the documentation required to access the Introvoke API. It contains information on how to create Companies, add events to each company and manage the presenters.
+  termsOfService: https://www.introvoke.com/terms/
+  contact:
+    email: support@introvoke.com
+  version: 1.0.0
+servers:
+- url: https://api.introvoke.com/api/v1
+security:
+- bearerAuth: []
+tags:
+- name: event theme overrides
+paths:
+  /customizations/events/event/{eventId}:
+    delete:
+      description: Deletes the event customization theme overrides for the event. All events default to company specific event customization theme, if it exists or the default platform theme, after deletion.
+      tags:
+      - event theme overrides
+      parameters:
+      - in: path
+        name: eventId
+        required: true
+        description: Unique ID of the event
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Theme overrides for the event removed from the data store.
+        '404':
+          description: Event Id is incorrect or user does not have access to the event.
+    get:
+      description: 'Returns the event customization theme overrides over the platform and event company customization theme for the event.
+
+        This endpoint can be used for clients which update to theme or for preview.'
+      tags:
+      - event theme overrides
+      parameters:
+      - in: path
+        name: eventId
+        required: true
+        description: Unique ID of the event
+        schema:
+          type: string
+      - in: query
+        name: fullTheme
+        description: flag to return full theme merged with overrides
+        schema:
+          type: boolean
+          default: false
+      responses:
+        '200':
+          description: event customization theme overrides (or full theme) at applied at event level
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IntrovokeEventTheme'
+    post:
+      description: 'Adds or updates event customization theme overrides that will be applied for the event.
+
+        This endpoint can be used by clients which update to theme or for preview.'
+      tags:
+      - event theme overrides
+      parameters:
+      - in: path
+        name: eventId
+        required: true
+        description: Unique ID of the event
+        schema:
+          type: string
+      requestBody:
+        description: The part of event customization theme to override in default platform and company theme.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IntrovokeEventTheme'
+      responses:
+        '202':
+          description: Theme overrides accepted and committed to data store.
+        '400':
+          description: Theme overrides did not match the expected schema.
+        '404':
+          description: Event ID is incorrect or user does not have access to the event.
+components:
+  schemas:
+    IntrovokeEventTheme:
+      type: object
+      properties:
+        name:
+          type: string
+        defaultTheme:
+          type: boolean
+        brandColors:
+          type: array
+          items:
+            type: string
+          maxItems: 3
+          minItems: 2
+        fonts:
+          type: array
+          nullable: true
+          items:
+            type: object
+            properties:
+              fontName:
+                type: string
+              fontUrl:
+                type: string
+              isPrimary:
+                type: boolean
+            required:
+            - fontName
+            - fontUrl
+            - isPrimary
+            additionalProperties: false
+        virtualStage:
+          type: object
+          properties:
+            background:
+              type: object
+              properties:
+                backgroundColor:
+                  type: string
+                  nullable: true
+                imageUrl:
+                  type: string
+                  nullable: true
+                textColor:
+                  type: string
+                  nullable: true
+              additionalProperties: false
+            watermark:
+              type: object
+              properties:
+                backgroundColor:
+                  type: string
+                  nullable: true
+                imageUrl:
+                  type: string
+                  nullable: true
+                textColor:
+                  type: string
+                  nullable: true
+              additionalProperties: false
+            countdown:
+              type: object
+              nullable: true
+              properties:
+                textColor:
+                  type: string
+                  nullable: true
+              additionalProperties: false
+            presenter:
+              type: object
+              nullable: true
+              properties:
+                glowColor:
+                  type: string
+                  nullable: true
+              additionalProperties: false
+          additionalProperties: false
+        networkingHub:
+          type: object
+          properties:
+            circleGraphics:
+              type: object
+              nullable: true
+              properties:
+                backgroundColor:
+                  type: string
+                  nullable: true
+                imageUrl:
+                  type: string
+                  nullable: true
+                textColor:
+                  type: string
+                  nullable: true
+              additionalProperties: false
+            joinNetworking:
+              type: object
+              nullable: true
+              properties:
+                backgroundColor:
+                  type: string
+                  nullable: true
+                imageUrl:
+                  type: string
+                  nullable: true
+                textColor:
+                  type: string
+                  nullable: true
+              additionalProperties: false
+            returnToStage:
+              type: object
+              properties:
+                backgroundColor:
+                  type: string
+                  nullable: true
+                imageUrl:
+                  type: string
+                  nullable: true
+                textColor:
+                  type: string
+                  nullable: true
+              additionalProperties: false
+          additionalProperties: false
+        warningNotices:
+          type: object
+          properties:
+            buttonColor:
+              type: string
+              nullable: true
+          additionalProperties: false
+        chat:
+          type: object
+          properties:
+            enabled:
+              type: boolean
+              nullable: true
+            colors:
+              type: array
+              nullable: true
+              items:
+                type: string
+                nullable: true
+            badge:
+              type: object
+              properties:
+                backgroundColor:
+                  type: string
+                  nullable: true
+                imageUrl:
+                  type: string
+                  nullable: true
+                textColor:
+                  type: string
+                  nullable: true
+              additionalProperties: false
+          additionalProperties: false
+        participantList:
+          type: object
+          nullable: true
+          properties:
+            enabled:
+              type: boolean
+              deprecated: true
+              nullable: true
+            showTabFor:
+              type: number
+              nullable: true
+              description: Expects a number for the user role. 0 - Host, 1 - Host & Presenter, 2 - Everyone
+            showCountFor:
+              type: number
+              nullable: true
+              description: Expects a number for the user role. 0 - Host, 1 - Host & Presenter, 2 - Everyone
+          additionalProperties: false
+        qna:
+          type: object
+          nullable: true
+          properties:
+            enabled:
+              type: boolean
+              nullable: true
+          additionalProperties: false
+        polls:
+          type: object
+          nullable: true
+          properties:
+            enabled:
+              type: boolean
+              nullable: true
+          additionalProperties: false
+        privateMessages:
+          type: object
+          nullable: true
+          properties:
+            enabled:
+              type: boolean
+              nullable: true
+          additionalProperties: false
+        poweredByIntrovokeLabel:
+          type: object
+          nullable: true
+          properties:
+            enabled:
+              type: boolean
+              nullable: true
+          additionalProperties: false
+        chatReactions:
+          type: object
+          nullable: true
+          properties:
+            enabled:
+              type: boolean
+              nullable: true
+            reactions:
+              type: array
+              nullable: true
+              items:
+                type: object
+                nullable: true
+                properties:
+                  reaction:
+                    type: string
+                    nullable: false
+                  image:
+                    type: string
+                    nullable: false
+                  label:
+                    type: string
+                    nullable: true
+                maxItems: 7
+                required:
+                - reaction
+                - image
+                additionalProperties: false
+          additionalProperties: false
+        liveReactions:
+          type: object
+          nullable: true
+          properties:
+            enabled:
+              type: boolean
+              nullable: true
+            reactions:
+              type: array
+              nullable: true
+              items:
+                type: object
+                nullable: true
+                properties:
+                  reaction:
+                    type: string
+                    nullable: false
+                  image:
+                    type: string
+                    nullable: false
+                  label:
+                    type: string
+                    nullable: true
+                maxItems: 7
+                required:
+                - reaction
+                - image
+                additionalProperties: false
+          additionalProperties: false
+        emailSettings:
+          type: object
+          nullable: true
+          properties:
+            id:
+              type: string
+            name:
+              type: string
+            when:
+              type: string
+            replayToEmail:
+              type: string
+              nullable: true
+            fromEmail:
+              type: string
+              nullable: true
+            fromName:
+              type: string
+              nullable: true
+            isCustom:
+              type: boolean
+            activated:
+              type: boolean
+            emailTemplate:
+              type: object
+              properties:
+                name:
+                  type: string
+                subject:
+                  type: string
+                  nullable: true
+                hoursToWait:
+                  type: number
+                  nullable: true
+                htmlBody:
+                  type: string
+                  nullable: true
+                sendGridTemplateId:
+                  type: string
+                  nullable: true
+                bodyText:
+                  type: string
+                  nullable: true
+      additionalProperties: false
+      required:
+      - name
+      - defaultTheme
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    sec0:
+      type: apiKey
+      in: header
+      name: Authorization
+      x-bearer-format: bearer

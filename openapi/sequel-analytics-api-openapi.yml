@@ -1,0 +1,183 @@
+openapi: 3.0.1
+info:
+  title: Introvoke Analytics API
+  description: This is the documentation required to access the Introvoke API. It contains information on how to create Companies, add events to each company and manage the presenters.
+  termsOfService: https://www.introvoke.com/terms/
+  contact:
+    email: support@introvoke.com
+  version: 1.0.0
+servers:
+- url: https://api.introvoke.com/api/v1
+security:
+- bearerAuth: []
+tags:
+- name: Analytics
+paths:
+  /api/analytics/getVideoWatchOverTime/{EVENT_ID}:
+    get:
+      summary: Live video watched over time
+      description: The endpoint returns peak concurrent users for each minute during a live event
+      operationId: live-video-watched-over-time
+      parameters:
+      - name: EVENT_ID
+        in: path
+        schema:
+          type: string
+        required: true
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{"VideoViews":[[0,3],[1,3],[2,3],[3,3],[4,12],[5,10],[6,13],[7,13],[8,14],[9,14],[10,16]]}'
+              schema:
+                type: object
+                properties:
+                  VideoViews:
+                    type: array
+                    items:
+                      type: array
+                      items:
+                        type: integer
+                        example: 0
+                        default: 0
+        '401':
+          description: '401'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: Token not found
+        '404':
+          description: '404'
+          content:
+            text/plain:
+              examples:
+                Result:
+                  value: Event not found
+      deprecated: false
+      tags:
+      - Analytics
+  /api/analytics/user-engagement/events/{eventId}/top-participants (COPY):
+    get:
+      summary: Participant List with engaged minutes
+      description: ''
+      operationId: participant-list-with-engaged-minutes
+      parameters:
+      - name: eventId
+        in: path
+        schema:
+          type: string
+        required: true
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          format: int32
+          default: 10
+      - name: startDate
+        in: query
+        schema:
+          type: string
+          format: date
+      - name: endDate
+        in: query
+        schema:
+          type: string
+          format: date
+      - name: engagementType
+        in: query
+        schema:
+          type: string
+          enum:
+          - all
+          - live
+          - onDemand
+          default: all
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"eventName\": \"From One-time Events to Recurring Engagements  \",\n  \"eventId\": \"2f64d929-aa02-457d-852a-50b2756e3029\",\n  \"eventType\": \"virtualStageEvent\",\n  \"company\": \"Introvoke Marketing\",\n  \"companyId\": \"fab4f3d2-aaf8-49ab-a5c0-0924b8773593\",\n  \"startDate\": null,\n  \"endDate\": \"2022-08-23T09:56:13.937Z\",\n  \"limit\": 10,\n  \"numberOfUsers\": 57,\n  \"totalEngagedMinutes\": 898,\n  \"averageEngagedMinutesByUser\": 15.75,\n  \"topParticipants\": [\n    {\n      \"name\": \"Yuliya\",\n      \"userEmail\": \"yuliya@sequel.io\",\n      \"engagedMinutes\": 113\n    },\n    {\n      \"name\": \"Oana\",\n      \"userEmail\": \"oana@sequel.io\",\n      \"engagedMinutes\": 108\n    },\n    {\n      \"name\": \"Connor Kirsch\",\n      \"userEmail\": \"connor@sequel.io\",\n      \"engagedMinutes\": 107\n    },\n    {\n      \"name\": \"jennifer li\",\n      \"userEmail\": \"jennifer.li.125@gmail.com\",\n      \"engagedMinutes\": 45\n    },\n    {\n      \"name\": \"Andrei Ermilov\",\n      \"userEmail\": \"andrei@sequel.io\",\n      \"engagedMinutes\": 41\n    },\n    {\n      \"name\": \"Zach\",\n      \"userEmail\": \"zach@sequel.io\",\n      \"engagedMinutes\": 38\n    },\n    {\n      \"name\": \"Eric\",\n      \"userEmail\": \"eric@sequel.io\",\n      \"engagedMinutes\": 32\n    },\n    {\n      \"name\": \"Kevin Verronneau\",\n      \"userEmail\": \"kevin@edny.com\",\n      \"engagedMinutes\": 31\n    },\n    {\n      \"name\": \"Logan Amstey\",\n      \"userEmail\": \"logan@sequel.io\",\n      \"engagedMinutes\": 31\n    },\n    {\n      \"name\": \"Rachel \",\n      \"userEmail\": \"rachel@earthcoast.com\",\n      \"engagedMinutes\": 31\n    }\n  ]\n}"
+              schema:
+                type: object
+                properties:
+                  eventName:
+                    type: string
+                    example: 'From One-time Events to Recurring Engagements  '
+                  eventId:
+                    type: string
+                    example: 2f64d929-aa02-457d-852a-50b2756e3029
+                  eventType:
+                    type: string
+                    example: virtualStageEvent
+                  company:
+                    type: string
+                    example: Introvoke Marketing
+                  companyId:
+                    type: string
+                    example: fab4f3d2-aaf8-49ab-a5c0-0924b8773593
+                  startDate: {}
+                  endDate:
+                    type: string
+                    example: '2022-08-23T09:56:13.937Z'
+                  limit:
+                    type: integer
+                    example: 10
+                    default: 0
+                  numberOfUsers:
+                    type: integer
+                    example: 57
+                    default: 0
+                  totalEngagedMinutes:
+                    type: integer
+                    example: 898
+                    default: 0
+                  averageEngagedMinutesByUser:
+                    type: number
+                    example: 15.75
+                    default: 0
+                  topParticipants:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                          example: Yuliya
+                        userEmail:
+                          type: string
+                          example: yuliya@sequel.io
+                        engagedMinutes:
+                          type: integer
+                          example: 113
+                          default: 0
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      tags:
+      - Analytics
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    sec0:
+      type: apiKey
+      in: header
+      name: Authorization
+      x-bearer-format: bearer

@@ -1,0 +1,46 @@
+openapi: 3.0.1
+info:
+  title: Introvoke Analytics Media API
+  description: This is the documentation required to access the Introvoke API. It contains information on how to create Companies, add events to each company and manage the presenters.
+  termsOfService: https://www.introvoke.com/terms/
+  contact:
+    email: support@introvoke.com
+  version: 1.0.0
+servers:
+- url: https://api.introvoke.com/api/v1
+security:
+- bearerAuth: []
+tags:
+- name: Media
+paths:
+  /api/media/create-asset:
+    get:
+      description: ''
+      operationId: get_apimediacreate-asset
+      responses:
+        '200':
+          description: ''
+      parameters: []
+      tags:
+      - Media
+  /api/media/upload-asset:
+    get:
+      description: ''
+      operationId: get_apimediaupload-asset
+      responses:
+        '200':
+          description: ''
+      parameters: []
+      tags:
+      - Media
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    sec0:
+      type: apiKey
+      in: header
+      name: Authorization
+      x-bearer-format: bearer

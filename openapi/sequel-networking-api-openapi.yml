@@ -1,0 +1,603 @@
+openapi: 3.0.1
+info:
+  title: Introvoke Analytics networking API
+  description: This is the documentation required to access the Introvoke API. It contains information on how to create Companies, add events to each company and manage the presenters.
+  termsOfService: https://www.introvoke.com/terms/
+  contact:
+    email: support@introvoke.com
+  version: 1.0.0
+servers:
+- url: https://api.introvoke.com/api/v1
+security:
+- bearerAuth: []
+tags:
+- name: networking
+  description: Calls to managing networking hubs
+paths:
+  /networking:
+    post:
+      tags:
+      - networking
+      summary: Create a new networking hub
+      operationId: addNetworkingHub
+      requestBody:
+        description: Networking hub that will be added to the backend
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NetworkingHubCreate'
+        required: true
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NetworkingHubCreate'
+        '400':
+          description: Invalid input
+          content: {}
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          description: Company not found
+          content: {}
+  /networking/{id}:
+    get:
+      tags:
+      - networking
+      summary: Find NetworkingHub by ID
+      description: Returns a single NetworkingHub
+      operationId: getNetworkingHubById
+      parameters:
+      - name: id
+        in: path
+        description: ID of NetworkingHub hub to return
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NetworkingHub'
+        '400':
+          description: Invalid ID supplied
+          content: {}
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          description: NetworkingHub not found
+          content: {}
+    post:
+      tags:
+      - networking
+      summary: Update a NetworkingHub hub with json data
+      operationId: updateNetworkingHub
+      parameters:
+      - name: id
+        in: path
+        description: ID of NetworkingHub that needs to be updated
+        required: true
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NetworkingHub'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NetworkingHub'
+        '400':
+          description: NetworkingHub id not found
+          content: {}
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          description: Invalid input
+          content: {}
+  /networking/{id}/circle/{circleId}/recording/{recordingId}:
+    get:
+      tags:
+      - networking
+      summary: Retrieves the download URL for the MP4 recording for the specified circle id and recording id
+      description: Returns the download URL for the recording and expiration date/time for the URL
+      operationId: getNetworkingHubCircleRecordingDownloadUrl
+      parameters:
+      - name: id
+        in: path
+        description: 'ID of Networking Hub '
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: circleId
+        in: path
+        description: 'ID of Networking Hub Circle '
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: recordingId
+        in: path
+        description: 'ID of recording '
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CircleRecording'
+        '400':
+          description: Invalid ID supplied
+          content: {}
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          description: Networking Hub, Circle or Recordings not found
+          content: {}
+  /networking/{id}/clearChat:
+    post:
+      tags:
+      - networking
+      summary: Clear all networking hub chat channels with the option to clear individual circles
+      operationId: postClearChat
+      parameters:
+      - name: id
+        in: path
+        description: ID of NetworkingHub
+        required: true
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        description: '
+
+          To specify which chats to clear, follow the patterns below:
+
+          - Networking Hub: `${hubId}-chat` and `${hubId}-presenters-chat`
+
+          - Circle: `${hubId}-${circleId}-circle-chat`'
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                channels:
+                  description: When included, only the chats for the provided channels will be cleared. Otherwise, all chats will be cleared by default.
+                  type: array
+                  items:
+                    type: string
+                hard:
+                  description: (Optional) boolean flag specifying whether to delete the chats permanently (true) or hide them (default)
+                  type: boolean
+              example:
+                channels:
+                - 123456789-chat
+                - 123456789-presenters-chat
+                - 123456789-123-circle-chat
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    channel:
+                      type: string
+                    success:
+                      type: boolean
+                example:
+                - channel: 123456789-chat
+                  success: true
+                - channel: 123456789-presenters-chat
+                  success: true
+                - channel: 123456789-123-circle-chat
+                  success: true
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          description: NetworkingHub hub not found
+          content: {}
+  /networking/{id}/embedCode:
+    post:
+      tags:
+      - networking
+      summary: Return the embed code for the Networking hub component
+      operationId: getEmbedNetworkingHubById
+      requestBody:
+        description: Object used to identify the user
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      parameters:
+      - name: id
+        in: path
+        description: ID of NetworkingHub for the embed code
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: string
+                description: The url source that needs to be added to an iframe
+                example: https://embed.introvoke.com/networking/{id}?userEmail={userEmail}&userId={userId}&userName={userDisplayName}&userProfile={userAvatar}&authKey={serverGenerated}
+        '400':
+          description: Invalid parameters supplied
+          content: {}
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          description: NetworkingHub not found
+          content: {}
+  /networking/{id}/inviteUser:
+    post:
+      tags:
+      - networking
+      summary: Invite another user to join a conversation
+      operationId: inviteUser
+      requestBody:
+        description: The user id that originated the invite and the target user id are required
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                userId:
+                  type: string
+                invitedUserId:
+                  type: string
+        required: true
+      parameters:
+      - name: id
+        in: path
+        description: ID of NetworkingHub
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: Invite was sent successfully
+          content:
+            application/json:
+              schema:
+                type: boolean
+        '400':
+          description: Invalid parameters or users state
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          description: NetworkingHub not found
+          content: {}
+  /networking/{id}/participantsList:
+    get:
+      tags:
+      - networking
+      summary: Return a list of participants
+      operationId: returnNetworkingHubParticipants
+      parameters:
+      - name: id
+        in: path
+        description: ID of NetworkingHub that needs to be updated
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Participant'
+        '400':
+          description: Invalid input
+          content: {}
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          description: Company not found
+          content: {}
+  /networking/{id}/registrant:
+    delete:
+      tags:
+      - networking
+      summary: Delete a registered user from the networking hub
+      description: Returns OK
+      operationId: deleteHubRegistrantById
+      parameters:
+      - name: id
+        in: path
+        description: ID of networking hub to delete
+        required: true
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  description: The user email to delete
+              additionalProperties: false
+              required:
+              - email
+      responses:
+        '204':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: string
+                description: OK message
+        '400':
+          description: Invalid parameter was sent
+          content: {}
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          description: networking hub not found
+          content: {}
+    post:
+      summary: Register a user for the networking hub
+      description: Adds a new registered user to this networking hub
+      tags:
+      - networking
+      parameters:
+      - in: path
+        name: id
+        required: true
+        description: Unique ID of the networking hub
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: The name of the user
+                email:
+                  type: string
+                  description: The email of the user
+                metadata:
+                  type: object
+                  description: Additional metadata to include about the user
+                  additionalProperties: true
+              required:
+              - name
+              - email
+      responses:
+        '200':
+          description: User was registered for this networking hub
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Information about the registered user
+                properties:
+                  name:
+                    type: string
+                    description: The name of the user
+                  email:
+                    type: string
+                    description: The email of the user
+                  join_url:
+                    type: string
+                    description: The unique url that the user can use to join the networking hub
+                  metadata:
+                    type: object
+                    description: Additional metadata to include about the user
+                    additionalProperties: true
+                additionalProperties: false
+        '400':
+          description: An invalid parameter was sent
+        '404':
+          description: Invalid auth token
+  /networking/{id}/setUserProfile:
+    post:
+      tags:
+      - networking
+      summary: Set a user profile
+      operationId: setUserProfile
+      requestBody:
+        description: The binary data and user id to be set
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                userId:
+                  type: string
+                userProfile:
+                  type: object
+                  description: The binary data of the photo
+        required: true
+      parameters:
+      - name: id
+        in: path
+        description: ID of NetworkingHub
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: boolean
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          description: NetworkingHub hub not found
+          content: {}
+components:
+  schemas:
+    NetworkingHub:
+      required:
+      - uid
+      - friendlyName
+      - organizers
+      - networkingHubRooms
+      type: object
+      properties:
+        uid:
+          type: string
+        friendlyName:
+          type: string
+          description: Friendly name to identify the hub
+        company:
+          type: string
+          description: The company that owns this hub
+        organizers:
+          description: Holds the ids of users that have organizer permission for this hub
+          type: array
+          items:
+            type: string
+          nullable: true
+        networkingHubRooms:
+          description: Holds the networking hub rooms
+          type: array
+          items:
+            $ref: '#/components/schemas/NetworkingHubRooms'
+        whitelabel:
+          type: object
+          description: Whitelabel options for this hub
+          properties:
+            hidePagination:
+              type: boolean
+            hideChat:
+              type: boolean
+            hideRandomUserMingle:
+              type: boolean
+    CircleRecording:
+      type: object
+      properties:
+        downloadUrl:
+          type: string
+        expiresOn:
+          type: string
+    NetworkingHubRooms:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the networking hub room
+        maxSlots:
+          type: number
+          description: Max number of users that can join the room
+    Participant:
+      type: object
+      properties:
+        meta:
+          type: object
+          properties:
+            userId:
+              type: string
+            username:
+              type: string
+            email:
+              type: string
+            avatar:
+              type: string
+        when:
+          type: number
+    User:
+      type: object
+      properties:
+        userId:
+          type: string
+        userDisplayName:
+          type: string
+        userEmail:
+          type: string
+        userAvatar:
+          type: string
+    NetworkingHubCreate:
+      required:
+      - friendlyName
+      - organizers
+      - networkingHubRooms
+      type: object
+      properties:
+        friendlyName:
+          type: string
+          description: Friendly name to identify the hub
+        company:
+          type: string
+          description: The company that owns this hub
+        organizers:
+          description: Holds the ids of users that have organizer permission for this hub
+          type: array
+          items:
+            type: string
+          nullable: true
+        networkingHubRooms:
+          description: Holds the networking hub rooms
+          type: array
+          items:
+            $ref: '#/components/schemas/NetworkingHubRooms'
+        whitelabel:
+          type: object
+          description: Whitelabel options for this hub
+          properties:
+            hidePagination:
+              type: boolean
+            hideChat:
+              type: boolean
+            hideRandomUserMingle:
+              type: boolean
+  responses:
+    UnauthorizedError:
+      description: Access token is missing or invalid
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    sec0:
+      type: apiKey
+      in: header
+      name: Authorization
+      x-bearer-format: bearer
