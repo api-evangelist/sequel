@@ -1,0 +1,36 @@
+{
+  "provider": "sequel",
+  "sources": [
+    "sequel-analytics-api-openapi.yml",
+    "sequel-client-api-openapi.yml",
+    "sequel-company-api-openapi.yml",
+    "sequel-company-theme-api-openapi.yml",
+    "sequel-company-theme-fonts-api-openapi.yml",
+    "sequel-company-theme-overrides-api-openapi.yml",
+    "sequel-event-api-openapi.yml",
+    "sequel-event-theme-api-openapi.yml",
+    "sequel-event-theme-overrides-api-openapi.yml",
+    "sequel-media-api-openapi.yml",
+    "sequel-networking-api-openapi.yml",
+    "sequel-platform-api-openapi.yml"
+  ],
+  "outputs": [
+    "sequel-analytics-api-openapi.yml",
+    "sequel-client-api-openapi.yml",
+    "sequel-company-api-openapi.yml",
+    "sequel-company-theme-api-openapi.yml",
+    "sequel-company-theme-fonts-api-openapi.yml",
+    "sequel-company-theme-overrides-api-openapi.yml",
+    "sequel-event-api-openapi.yml",
+    "sequel-event-theme-api-openapi.yml",
+    "sequel-event-theme-overrides-api-openapi.yml",
+    "sequel-media-api-openapi.yml",
+    "sequel-networking-api-openapi.yml",
+    "sequel-platform-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

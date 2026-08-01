@@ -1,7 +1,28 @@
 aid: sequel
 name: Sequel
-description: Sequel is a company surfaced as a portfolio company of techstars and added to the API Evangelist
-  network as a stub for enrichment. This profile is a lead awaiting the enrichment pipeline.
+description: >-
+  Sequel is a webinar and virtual-event platform for data-driven marketing teams. It
+  runs live, simulive, and on-demand event experiences directly on a company's own
+  domain, capturing unified first-party engagement data (watch time, polls, questions,
+  CTA clicks) and syncing it to CRMs like Salesforce, HubSpot, Marketo, and Pardot.
+  Sequel exposes a REST API (the Introvoke API) for managing companies, events,
+  presenters, organizers, registrants, networking hubs, customization/theming,
+  analytics, simulive video, MediaHub assets, and webhooks, plus pre-built embeddable
+  video/networking components, a JavaScript SDK, and an official hosted MCP server that
+  gives AI agents read access to webinar transcripts for content repurposing.
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://sequel.io/wp-content/themes/sequelio/assets/favicon-128x128.png
 url: https://raw.githubusercontent.com/api-evangelist/sequel/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
@@ -11,15 +32,253 @@ x-tier: stub
 x-tier-reason: portfolio-lead
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-21'
 tags:
 - Company
-apis: []
+- Webinars
+- Virtual Events
+- Live Streaming
+- Video
+- Networking
+- Marketing
+- Events
+- Webhooks
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
+apis:
+- aid: sequel:sequel-analytics-api
+  name: Sequel Analytics API
+  description: The Analytics API from Sequel — 2 operation(s) for analytics.
+  humanURL: https://docs.introvoke.com/reference
+  baseURL: https://api.introvoke.com/api/v1
+  tags:
+  - Analytics
+  properties:
+  - type: OpenAPI
+    url: openapi/sequel-analytics-api-openapi.yml
+  - type: Documentation
+    url: https://docs.introvoke.com/docs
+  - type: APIReference
+    url: https://docs.introvoke.com/reference
+- aid: sequel:sequel-client-api
+  name: Sequel Client API
+  description: The Client API from Sequel — 2 operation(s) for client.
+  humanURL: https://docs.introvoke.com/reference
+  baseURL: https://api.introvoke.com/api/v1
+  tags:
+  - Client
+  properties:
+  - type: OpenAPI
+    url: openapi/sequel-client-api-openapi.yml
+  - type: Documentation
+    url: https://docs.introvoke.com/docs
+  - type: APIReference
+    url: https://docs.introvoke.com/reference
+- aid: sequel:sequel-company-api
+  name: Sequel company API
+  description: Calls to managing companies
+  humanURL: https://docs.introvoke.com/reference
+  baseURL: https://api.introvoke.com/api/v1
+  tags:
+  - company
+  properties:
+  - type: OpenAPI
+    url: openapi/sequel-company-api-openapi.yml
+  - type: Documentation
+    url: https://docs.introvoke.com/docs
+  - type: APIReference
+    url: https://docs.introvoke.com/reference
+- aid: sequel:sequel-company-theme-api
+  name: Sequel company theme API
+  description: The company theme API from Sequel — 1 operation(s) for company theme.
+  humanURL: https://docs.introvoke.com/reference
+  baseURL: https://api.introvoke.com/api/v1
+  tags:
+  - company theme
+  properties:
+  - type: OpenAPI
+    url: openapi/sequel-company-theme-api-openapi.yml
+  - type: Documentation
+    url: https://docs.introvoke.com/docs
+  - type: APIReference
+    url: https://docs.introvoke.com/reference
+- aid: sequel:sequel-company-theme-fonts-api
+  name: Sequel company theme fonts API
+  description: The company theme fonts API from Sequel — 2 operation(s) for company theme fonts.
+  humanURL: https://docs.introvoke.com/reference
+  baseURL: https://api.introvoke.com/api/v1
+  tags:
+  - company theme fonts
+  properties:
+  - type: OpenAPI
+    url: openapi/sequel-company-theme-fonts-api-openapi.yml
+  - type: Documentation
+    url: https://docs.introvoke.com/docs
+  - type: APIReference
+    url: https://docs.introvoke.com/reference
+- aid: sequel:sequel-company-theme-overrides-api
+  name: Sequel company theme overrides API
+  description: >-
+    The company theme overrides API from Sequel — 1 operation(s) for company theme overrides.
+  humanURL: https://docs.introvoke.com/reference
+  baseURL: https://api.introvoke.com/api/v1
+  tags:
+  - company theme overrides
+  properties:
+  - type: OpenAPI
+    url: openapi/sequel-company-theme-overrides-api-openapi.yml
+  - type: Documentation
+    url: https://docs.introvoke.com/docs
+  - type: APIReference
+    url: https://docs.introvoke.com/reference
+- aid: sequel:sequel-event-api
+  name: Sequel event API
+  description: Calls to managing events
+  humanURL: https://docs.introvoke.com/reference
+  baseURL: https://api.introvoke.com/api/v1
+  tags:
+  - event
+  properties:
+  - type: OpenAPI
+    url: openapi/sequel-event-api-openapi.yml
+  - type: Documentation
+    url: https://docs.introvoke.com/docs
+  - type: APIReference
+    url: https://docs.introvoke.com/reference
+- aid: sequel:sequel-event-theme-api
+  name: Sequel event theme API
+  description: The event theme API from Sequel — 1 operation(s) for event theme.
+  humanURL: https://docs.introvoke.com/reference
+  baseURL: https://api.introvoke.com/api/v1
+  tags:
+  - event theme
+  properties:
+  - type: OpenAPI
+    url: openapi/sequel-event-theme-api-openapi.yml
+  - type: Documentation
+    url: https://docs.introvoke.com/docs
+  - type: APIReference
+    url: https://docs.introvoke.com/reference
+- aid: sequel:sequel-event-theme-overrides-api
+  name: Sequel event theme overrides API
+  description: The event theme overrides API from Sequel — 1 operation(s) for event theme overrides.
+  humanURL: https://docs.introvoke.com/reference
+  baseURL: https://api.introvoke.com/api/v1
+  tags:
+  - event theme overrides
+  properties:
+  - type: OpenAPI
+    url: openapi/sequel-event-theme-overrides-api-openapi.yml
+  - type: Documentation
+    url: https://docs.introvoke.com/docs
+  - type: APIReference
+    url: https://docs.introvoke.com/reference
+- aid: sequel:sequel-media-api
+  name: Sequel Media API
+  description: The Media API from Sequel — 2 operation(s) for media.
+  humanURL: https://docs.introvoke.com/reference
+  baseURL: https://api.introvoke.com/api/v1
+  tags:
+  - Media
+  properties:
+  - type: OpenAPI
+    url: openapi/sequel-media-api-openapi.yml
+  - type: Documentation
+    url: https://docs.introvoke.com/docs
+  - type: APIReference
+    url: https://docs.introvoke.com/reference
+- aid: sequel:sequel-networking-api
+  name: Sequel networking API
+  description: Calls to managing networking hubs
+  humanURL: https://docs.introvoke.com/reference
+  baseURL: https://api.introvoke.com/api/v1
+  tags:
+  - networking
+  properties:
+  - type: OpenAPI
+    url: openapi/sequel-networking-api-openapi.yml
+  - type: Documentation
+    url: https://docs.introvoke.com/docs
+  - type: APIReference
+    url: https://docs.introvoke.com/reference
+- aid: sequel:sequel-platform-api
+  name: Sequel platform API
+  description: The platform API from Sequel — 2 operation(s) for platform.
+  humanURL: https://docs.introvoke.com/reference
+  baseURL: https://api.introvoke.com/api/v1
+  tags:
+  - platform
+  properties:
+  - type: OpenAPI
+    url: openapi/sequel-platform-api-openapi.yml
+  - type: Documentation
+    url: https://docs.introvoke.com/docs
+  - type: APIReference
+    url: https://docs.introvoke.com/reference
 common:
 - type: Website
   url: https://sequel.io/
+- type: DeveloperPortal
+  url: https://docs.introvoke.com/docs
+- type: Documentation
+  url: https://docs.introvoke.com/docs
+- type: APIReference
+  url: https://docs.introvoke.com/reference
+- type: GettingStarted
+  url: https://github.com/introvoke/sequel-react-quickstart
+- type: Support
+  url: https://help.sequel.io/en/
+- type: GitHubOrganization
+  url: https://github.com/introvoke
+- type: Pricing
+  url: https://sequel.io/pricing/
+- type: SignUp
+  url: https://sequel.io/book-a-demo
+- type: Login
+  url: https://admin.sequel.io
+- type: TermsOfService
+  url: https://sequel.io/terms-and-conditions
+- type: PrivacyPolicy
+  url: https://sequel.io/privacy-policy
+- type: StatusPage
+  url: https://status.sequel.io/
+- type: Authentication
+  url: authentication/sequel-authentication.yml
+- type: DomainSecurity
+  url: security/sequel-domain-security.yml
+- type: WellKnown
+  url: well-known/sequel-well-known.yml
+- type: MCPServer
+  url: mcp/sequel-mcp.yml
+- type: Packages
+  url: packages/sequel-packages.yml
+- type: SDKs
+  url: packages/sequel-packages.yml
+- type: Lifecycle
+  url: lifecycle/sequel-lifecycle.yml
+- type: Conventions
+  url: conventions/sequel-conventions.yml
+- type: ErrorCatalog
+  url: errors/sequel-problem-types.yml
+- type: DataModel
+  url: data-model/sequel-data-model.yml
+- type: Conformance
+  url: conformance/sequel-conformance.yml
+- type: Components
+  url: components/sequel-components.yml
+- type: Webhooks
+  url: asyncapi/sequel-webhooks.yml
+- type: LLMsTxt
+  url: llms/sequel-llms.txt
+- type: AgentSkill
+  url: skills/sequel-create-and-embed-event.md
+- type: AgentSkill
+  url: skills/sequel-networking-hub-setup.md
+x-enrichment:
+  date: '2026-07-21'
+  status: enriched
+  artifacts_added: 19
+  pass: local-v1

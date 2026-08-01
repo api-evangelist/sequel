@@ -1,0 +1,71 @@
+generated: '2026-07-21'
+method: derived
+source: openapi/sequel-openapi-original.yml
+entities:
+- name: Company
+  description: Top-level account/tenant; can have child companies (parent/child hierarchy).
+  key: companyId
+- name: Event
+  description: A webinar / live, simulive, or on-demand event owned by a company.
+  key: eventId
+- name: NetworkingHub
+  description: A networking space with circles, chat channels, and participants.
+  key: id
+- name: Presenter
+  description: A presenter attached to an event.
+- name: Organizer
+  description: An organizer (host) attached to an event.
+- name: Registrant
+  description: A user registered for an event or networking hub.
+- name: CircleRecording
+  description: Recording of a networking circle.
+- name: EventTheme
+  description: Customization/theme overrides at platform, company, or event scope.
+- name: MediaHubAsset
+  description: Uploaded media asset (e.g. simulive video source).
+relationships:
+- from: Company
+  to: Company
+  type: has_many
+  via: parentCompanyId
+  description: Parent company owns child companies.
+- from: Company
+  to: Event
+  type: has_many
+  via: companyId
+- from: Company
+  to: NetworkingHub
+  type: has_many
+  via: companyId
+- from: Company
+  to: CompanyFontInfo
+  type: has_many
+  via: companyId
+- from: Event
+  to: Presenter
+  type: has_many
+  via: eventId
+- from: Event
+  to: Organizer
+  type: has_many
+  via: eventId
+- from: Event
+  to: Registrant
+  type: has_many
+  via: eventId
+- from: Event
+  to: EventTheme
+  type: has_one
+  via: eventId
+- from: NetworkingHub
+  to: Registrant
+  type: has_many
+  via: id
+- from: NetworkingHub
+  to: CircleRecording
+  type: has_many
+  via: id
+notes: >-
+  Derived from OpenAPI component schemas and path parameters. Ids are opaque strings
+  (no documented type prefixes). Company is the tenant root; Event and NetworkingHub
+  are the primary child resources.

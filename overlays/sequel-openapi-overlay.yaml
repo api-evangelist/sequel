@@ -1,0 +1,25 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Sequel (Introvoke) API
+  version: 1.0.0
+extends: openapi/sequel-openapi-original.yml
+actions:
+- target: $.info
+  update:
+    x-apievangelist-provider: sequel
+    x-apievangelist-product: Sequel webinar & virtual event platform (Introvoke API)
+    x-apievangelist-docs: https://docs.introvoke.com/docs
+    x-apievangelist-auth: oauth2 client-credentials -> JWT bearer
+    x-apievangelist-mcp: https://api.introvoke.com/api/mcp
+- target: $.servers
+  update:
+  - url: https://api.introvoke.com/api/v1
+    description: Production (Introvoke API v1)
+- target: $.info
+  update:
+    x-apievangelist-tags:
+    - webinars
+    - virtual-events
+    - live-streaming
+    - networking
+    - webhooks

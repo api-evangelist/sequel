@@ -1,0 +1,30 @@
+generated: '2026-07-21'
+method: searched
+status: published
+source: https://github.com/introvoke/sequel-claude-plugin
+server:
+  name: sequel
+  transport: http
+  url: https://api.introvoke.com/api/mcp
+  auth: OAuth 2.0 (Auth0) — interactive browser flow via /mcp; tokens stored on client
+  description: >-
+    Official Sequel MCP server. Exposes read-only access to a Sequel account's
+    companies, webinar events, and PII-redacted transcripts so agents can browse
+    events and repurpose transcript content (blog posts, newsletters, social posts).
+distribution:
+  claude_plugin: introvoke/sequel-claude-plugin
+  marketplace: sequel-plugins
+  install: claude plugin install sequel@sequel-plugins
+  license: MIT
+  author: Sequel (https://sequel.io)
+tools:
+- name: list_companies
+  description: Returns the companies your account belongs to
+- name: list_events
+  description: Lists past webinar events for a company
+- name: get_event
+  description: Returns metadata for a specific event
+- name: get_event_assets
+  description: Returns SRT/VTT transcript file references for an event
+- name: get_event_srt_chunks
+  description: Returns paginated, PII-redacted transcript text

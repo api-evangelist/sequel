@@ -1,0 +1,29 @@
+generated: '2026-07-21'
+method: searched
+source: npm registry + https://docs.introvoke.com/docs
+packages:
+- language: javascript
+  registry: npm
+  name: "@sequel.io/api"
+  url: https://www.npmjs.com/package/@sequel.io/api
+  install: npm install @sequel.io/api
+  official: true
+  description: Sequel JavaScript API SDK for Node.js — access to pre-built audio, video and chat components.
+- language: javascript
+  registry: npm
+  name: "@sequel.io/sdk-core"
+  url: https://www.npmjs.com/package/@sequel.io/sdk-core
+  install: npm install @sequel.io/sdk-core
+  official: true
+  description: Core SDK primitives that @sequel.io/api depends on.
+examples:
+- name: sequel-react-quickstart
+  url: https://github.com/introvoke/sequel-react-quickstart
+  description: Quickstart React app demonstrating Sequel's APIs to display events.
+- name: sequel-custom-form-example
+  url: https://github.com/introvoke/sequel-custom-form-example
+  description: Next.js example integrating a custom registration form with Sequel embeds.
+notes: >-
+  No first-party MySQL/SQL "sequel-mcp" or "@sequel/react" package exists on npm;
+  the only official libraries are scoped under @sequel.io. The unrelated npm package
+  "sequel-mcp" is a third-party MySQL query tool and is NOT a Sequel.io product.

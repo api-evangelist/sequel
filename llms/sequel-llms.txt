@@ -1,0 +1,66 @@
+# Sequel API docs Documentation
+
+> Sequel API provides pre-built live streaming, WebRTC, virtual communication and networking components that allow companies to quickly build unique video solutions.
+
+## Guides
+- [Sequel and Marketo embed code in React](https://docs.introvoke.com/docs/sequel-and-marketo-embed-code-in-react.md)
+- [Sequel and Hubspot embed code in React](https://docs.introvoke.com/docs/sequel-and-hubspot-embed-code-in-react.md)
+- [Sequel and custom form integration](https://docs.introvoke.com/docs/sequel-and-custom-form-integration.md): Learn how to integrate Sequel with a custom form and render on submission
+
+## API Reference
+- [Find company by ID](https://docs.introvoke.com/reference/getcompanybyid.md): Returns a single company
+- [Update a company with json data](https://docs.introvoke.com/reference/updatecompanywithjson.md)
+- [List all companies under a parent company](https://docs.introvoke.com/reference/listchildcompanies.md)
+- [List all events under a parent company](https://docs.introvoke.com/reference/listcompanyevents.md)
+- [Create a new company under a parent company](https://docs.introvoke.com/reference/addcompanytoparent.md)
+- [Update metadata for the company](https://docs.introvoke.com/reference/updatecompanymetadata.md)
+- [Get all circle recordings for a company](https://docs.introvoke.com/reference/getcompanycirclerecordings.md): Returns a list of all circle recordings associated with the company
+- [Create a new event](https://docs.introvoke.com/reference/addevent.md)
+- [Return the embed code for the event component](https://docs.introvoke.com/reference/getembedeventbyid.md)
+- [Return a list of all registered users](https://docs.introvoke.com/reference/get_event-eventid-registrants.md): Returns an array of registrants for this event
+- [Register a user for the event](https://docs.introvoke.com/reference/post_event-eventid-registrant.md): Adds a new registered user to this event
+- [Delete a registered user from the event](https://docs.introvoke.com/reference/deleteregistrantbyid.md): Returns OK
+- [Delete a presenter id from the event](https://docs.introvoke.com/reference/deletepresenterbyid.md): Returns the updated list of presenters
+- [Add a presenter id to the event](https://docs.introvoke.com/reference/putpresenterbyid.md): Returns the updated list of presenters
+- [Delete an organizer id from the event](https://docs.introvoke.com/reference/deletehostbyid.md): Returns the updated list of organizers
+- [Add an organizer id to the event](https://docs.introvoke.com/reference/puthostbyid.md): Returns the updated list of organizers
+- [Return a list of replays for this event](https://docs.introvoke.com/reference/get_event-eventid-availablereplays.md): Returns an array of replays for this event
+- [Find event by ID](https://docs.introvoke.com/reference/geteventbyid.md): Returns a single event
+- [Update an event with json data](https://docs.introvoke.com/reference/updateeventwithjsondata.md)
+- [Delete an event](https://docs.introvoke.com/reference/deleteevent.md)
+- [Create a new event based on source event ](https://docs.introvoke.com/reference/cloneevent.md)
+- [Create a new networking hub](https://docs.introvoke.com/reference/addnetworkinghub.md)
+- [Return a list of participants](https://docs.introvoke.com/reference/returnnetworkinghubparticipants.md)
+- [Clear all networking hub chat channels with the option to clear individual circles](https://docs.introvoke.com/reference/postclearchat.md)
+- [Set a user profile](https://docs.introvoke.com/reference/setuserprofile.md)
+- [Invite another user to join a conversation](https://docs.introvoke.com/reference/inviteuser.md)
+- [Register a user for the networking hub](https://docs.introvoke.com/reference/post_networking-id-registrant.md): Adds a new registered user to this networking hub
+- [Delete a registered user from the networking hub](https://docs.introvoke.com/reference/deletehubregistrantbyid.md): Returns OK
+- [Return the embed code for the Networking hub component](https://docs.introvoke.com/reference/getembednetworkinghubbyid.md)
+- [Find NetworkingHub by ID](https://docs.introvoke.com/reference/getnetworkinghubbyid.md): Returns a single NetworkingHub
+- [Update a NetworkingHub hub with json data](https://docs.introvoke.com/reference/updatenetworkinghub.md)
+- [Retrieves the download URL for the MP4 recording for the specified circle id and recording id](https://docs.introvoke.com/reference/getnetworkinghubcirclerecordingdownloadurl.md): Returns the download URL for the recording and expiration date/time for the URL
+- [/customizations/events/company/{companyId}/all-events](https://docs.introvoke.com/reference/get_customizations-events-company-companyid-all-events.md): Returns the event customization theme overrides over the platform event customization theme that applies to all events for the company, unless overridden at the event level. This endpoint can be used for clients which update to theme or for preview.
+- [/customizations/events/company/{companyId}/all-events](https://docs.introvoke.com/reference/post_customizations-events-company-companyid-all-events.md): Adds or updates event customization theme overrides that will be applied to the all events for the company. This endpoint can be used by clients which update to theme or for preview.
+- [/customizations/events/company/{companyId}/all-events](https://docs.introvoke.com/reference/delete_customizations-events-company-companyid-all-events.md): Deletes the event customization theme for company. The events without their own customization will use the default Introvoke Platform theme, after deletion.
+- [/customizations/events/company/{companyId}/fonts](https://docs.introvoke.com/reference/get_customizations-events-company-companyid-fonts.md): Returns list of customized fonts associated with the company
+- [/customizations/events/company/{companyId}/fonts](https://docs.introvoke.com/reference/post_customizations-events-company-companyid-fonts.md): Add new fonts for the company. The value is stored at the company level, but can be used by customization themes on both event and company levels. If the name of the font, matches the existing font, it will update the font URL.
+- [/customizations/events/company/{companyId}/fonts/font/{fontId}](https://docs.introvoke.com/reference/delete_customizations-events-company-companyid-fonts-font-fontid.md): Unregister the specified font associated with the specified company.
+- [/customizations/events/default](https://docs.introvoke.com/reference/get_customizations-events-default.md): Returns the default event customization theme that applies to all events, unless overridden at the company and event level. This endpoint can be used for clients which update to theme or for preview. The default theme can be used as a starting point to edit new themes.
+- [/customizations/events/suggested-color-pallets](https://docs.introvoke.com/reference/get_customizations-events-suggested-color-pallets.md): Returns an array of color pallets (with primary, secondary and tertiary colors) that can be used in the editor. This endpoint can be used for clients which update to theme or for preview.
+- [/customizations/events/event/{eventId}](https://docs.introvoke.com/reference/get_customizations-events-event-eventid.md): Returns the event customization theme overrides over the platform and event company customization theme for the event. This endpoint can be used for clients which update to theme or for preview.
+- [/customizations/events/event/{eventId}](https://docs.introvoke.com/reference/post_customizations-events-event-eventid.md): Adds or updates event customization theme overrides that will be applied for the event. This endpoint can be used by clients which update to theme or for preview.
+- [/customizations/events/event/{eventId}](https://docs.introvoke.com/reference/delete_customizations-events-event-eventid.md): Deletes the event customization theme overrides for the event. All events default to company specific event customization theme, if it exists or the default platform theme, after deletion.
+- [/v3/companies/{companyId}/theme](https://docs.introvoke.com/reference/get_v3-companies-companyid-theme.md): Returns the event customization theme for all events for the company based on the business rules.
+- [/v3/events/{eventId}/theme](https://docs.introvoke.com/reference/get_v3-events-eventid-theme.md): Returns the event customization theme for the event based on the business rules.
+- [User activity](https://docs.introvoke.com/reference/user-activity.md)
+- [Participant List with engaged minutes](https://docs.introvoke.com/reference/participant-list-with-engaged-minutes.md)
+- [Live attendance chart](https://docs.introvoke.com/reference/live-attendance.md)
+- [Live video watched over time](https://docs.introvoke.com/reference/live-video-watched-over-time.md): The endpoint returns peak concurrent users for each minute during a live event
+- [Getting started](https://docs.introvoke.com/reference/getting-started-with-sequel-web-hooks.md)
+- [Using Custom CMS Webhooks](https://docs.introvoke.com/reference/using-custom-cms.md)
+- [Using Custom CRM Integration](https://docs.introvoke.com/reference/using-custom-crm-integration.md)
+- [Set simulive for an event](https://docs.introvoke.com/reference/set-event-simulive.md): Use this endpoint to set the Simulive video for an event. The event will automatically go live at the start time.
+- [Remove simulive from an event](https://docs.introvoke.com/reference/remove-simulive-event.md): Use this endpoint to remove the Simulive video for an event.
+- [Create MediaHub Asset](https://docs.introvoke.com/reference/create-mediahub-asset.md): Create MediaHub asset
+- [Upload MediaHub Asset](https://docs.introvoke.com/reference/upload-mediahub-asset.md)

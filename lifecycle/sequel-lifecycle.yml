@@ -1,0 +1,25 @@
+generated: '2026-07-21'
+method: searched
+source: https://status.sequel.io/ + https://docs.introvoke.com/reference
+versioning:
+  scheme: uri-path
+  current: v1
+  base_url: https://api.introvoke.com/api/v1
+  notes: >-
+    Path-based versioning. The core API is served under /api/v1; a small number of
+    theme/customization endpoints are exposed under a /v3 prefix.
+status_page:
+  url: https://status.sequel.io/
+  provider: Atlassian Statuspage
+  api_component_monitored: true
+  feeds:
+  - https://status.sequel.io/history.atom
+  - https://status.sequel.io/history.rss
+sla:
+  observed_uptime_90d: "100%"
+  source: status.sequel.io APIs component
+deprecation:
+  policy_url: null
+  sunset_header: null
+  notes: No published formal deprecation / Sunset-header policy was found.
+deprecated_operations: []

@@ -1,0 +1,30 @@
+generated: '2026-07-21'
+method: searched
+source: https://docs.introvoke.com/docs + https://help.sequel.io/en/collections/7968382-building-with-apis
+description: >-
+  Sequel ships pre-built embeddable video/networking UI components ("get started in
+  5 minutes") that render live, simulive, and on-demand event experiences directly on
+  the customer's own domain, plus CMS embed integrations.
+families:
+- name: Event embed
+  kind: embed
+  description: Embeddable event/webinar player component; embed code retrieved per event.
+  source_operation: getEmbedEventById (POST /event/{eventId}/embedCode)
+- name: Networking Hub embed
+  kind: embed
+  description: Embeddable networking-hub component; embed code retrieved per hub.
+  source_operation: getEmbedNetworkingHubById (POST /networking/{id}/embedCode)
+loaders:
+- language: javascript
+  package: "@sequel.io/api"
+  registry: npm
+  usage: React / Node embed of Sequel components.
+cms_embeds:
+- WordPress (one-click plugin)
+- Webflow (one-click CMS integration)
+- Contentful
+- Sanity CMS (webhook-based)
+framework_guides:
+- Sequel and Marketo embed code in React
+- Sequel and Hubspot embed code in React
+- Sequel and custom form integration

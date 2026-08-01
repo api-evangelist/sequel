@@ -1,0 +1,26 @@
+generated: '2026-07-21'
+method: probed
+source: live DNS/TLS/HTTP probes of apis.yml + OpenAPI hosts
+hosts:
+- host: sequel.io
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Sep 21 14:50:13 2026 GMT
+  hsts: false
+- host: api.introvoke.com
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Nov  8 23:59:59 2026 GMT
+  hsts: null
+domains:
+- domain: sequel.io
+  dnssec: false
+  caa: []
+  spf: true
+  dmarc: true
+  dmarc_policy: none
+- domain: introvoke.com
+  dnssec: false
+  caa: []
+  spf: true
+  dmarc: false

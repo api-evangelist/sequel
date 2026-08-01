@@ -1,0 +1,2816 @@
+openapi: 3.0.1
+info:
+  title: Introvoke API
+  description: This is the documentation required to access the Introvoke API. It contains information
+    on how to create Companies, add events to each company and manage the presenters.
+  termsOfService: https://www.introvoke.com/terms/
+  contact:
+    email: support@introvoke.com
+  version: 1.0.0
+servers:
+- url: https://api.introvoke.com/api/v1
+security:
+- bearerAuth: []
+tags:
+- name: company
+  description: Calls to managing companies
+- name: event
+  description: Calls to managing events
+- name: networking
+  description: Calls to managing networking hubs
+paths:
+  /api/analytics/getVideoWatchOverTime/{EVENT_ID}:
+    get:
+      summary: Live video watched over time
+      description: The endpoint returns peak concurrent users for each minute during a live event
+      operationId: live-video-watched-over-time
+      parameters:
+      - name: EVENT_ID
+        in: path
+        schema:
+          type: string
+        required: true
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{"VideoViews":[[0,3],[1,3],[2,3],[3,3],[4,12],[5,10],[6,13],[7,13],[8,14],[9,14],[10,16]]}'
+              schema:
+                type: object
+                properties:
+                  VideoViews:
+                    type: array
+                    items:
+                      type: array
+                      items:
+                        type: integer
+                        example: 0
+                        default: 0
+        '401':
+          description: '401'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: Token not found
+        '404':
+          description: '404'
+          content:
+            text/plain:
+              examples:
+                Result:
+                  value: Event not found
+      deprecated: false
+  /api/analytics/user-engagement/events/{eventId}/top-participants (COPY):
+    get:
+      summary: Participant List with engaged minutes
+      description: ''
+      operationId: participant-list-with-engaged-minutes
+      parameters:
+      - name: eventId
+        in: path
+        schema:
+          type: string
+        required: true
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          format: int32
+          default: 10
+      - name: startDate
+        in: query
+        schema:
+          type: string
+          format: date
+      - name: endDate
+        in: query
+        schema:
+          type: string
+          format: date
+      - name: engagementType
+        in: query
+        schema:
+          type: string
+          enum:
+          - all
+          - live
+          - onDemand
+          default: all
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"eventName\": \"From One-time Events to Recurring Engagements  \",\n \
+                    \ \"eventId\": \"2f64d929-aa02-457d-852a-50b2756e3029\",\n  \"eventType\": \"virtualStageEvent\"\
+                    ,\n  \"company\": \"Introvoke Marketing\",\n  \"companyId\": \"fab4f3d2-aaf8-49ab-a5c0-0924b8773593\"\
+                    ,\n  \"startDate\": null,\n  \"endDate\": \"2022-08-23T09:56:13.937Z\",\n  \"limit\"\
+                    : 10,\n  \"numberOfUsers\": 57,\n  \"totalEngagedMinutes\": 898,\n  \"averageEngagedMinutesByUser\"\
+                    : 15.75,\n  \"topParticipants\": [\n    {\n      \"name\": \"Yuliya\",\n      \"userEmail\"\
+                    : \"yuliya@sequel.io\",\n      \"engagedMinutes\": 113\n    },\n    {\n      \"name\"\
+                    : \"Oana\",\n      \"userEmail\": \"oana@sequel.io\",\n      \"engagedMinutes\": 108\n\
+                    \    },\n    {\n      \"name\": \"Connor Kirsch\",\n      \"userEmail\": \"connor@sequel.io\"\
+                    ,\n      \"engagedMinutes\": 107\n    },\n    {\n      \"name\": \"jennifer li\",\n\
+                    \      \"userEmail\": \"jennifer.li.125@gmail.com\",\n      \"engagedMinutes\": 45\n\
+                    \    },\n    {\n      \"name\": \"Andrei Ermilov\",\n      \"userEmail\": \"andrei@sequel.io\"\
+                    ,\n      \"engagedMinutes\": 41\n    },\n    {\n      \"name\": \"Zach\",\n      \"\
+                    userEmail\": \"zach@sequel.io\",\n      \"engagedMinutes\": 38\n    },\n    {\n  \
+                    \    \"name\": \"Eric\",\n      \"userEmail\": \"eric@sequel.io\",\n      \"engagedMinutes\"\
+                    : 32\n    },\n    {\n      \"name\": \"Kevin Verronneau\",\n      \"userEmail\": \"\
+                    kevin@edny.com\",\n      \"engagedMinutes\": 31\n    },\n    {\n      \"name\": \"\
+                    Logan Amstey\",\n      \"userEmail\": \"logan@sequel.io\",\n      \"engagedMinutes\"\
+                    : 31\n    },\n    {\n      \"name\": \"Rachel \",\n      \"userEmail\": \"rachel@earthcoast.com\"\
+                    ,\n      \"engagedMinutes\": 31\n    }\n  ]\n}"
+              schema:
+                type: object
+                properties:
+                  eventName:
+                    type: string
+                    example: 'From One-time Events to Recurring Engagements  '
+                  eventId:
+                    type: string
+                    example: 2f64d929-aa02-457d-852a-50b2756e3029
+                  eventType:
+                    type: string
+                    example: virtualStageEvent
+                  company:
+                    type: string
+                    example: Introvoke Marketing
+                  companyId:
+                    type: string
+                    example: fab4f3d2-aaf8-49ab-a5c0-0924b8773593
+                  startDate: {}
+                  endDate:
+                    type: string
+                    example: '2022-08-23T09:56:13.937Z'
+                  limit:
+                    type: integer
+                    example: 10
+                    default: 0
+                  numberOfUsers:
+                    type: integer
+                    example: 57
+                    default: 0
+                  totalEngagedMinutes:
+                    type: integer
+                    example: 898
+                    default: 0
+                  averageEngagedMinutesByUser:
+                    type: number
+                    example: 15.75
+                    default: 0
+                  topParticipants:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                          example: Yuliya
+                        userEmail:
+                          type: string
+                          example: yuliya@sequel.io
+                        engagedMinutes:
+                          type: integer
+                          example: 113
+                          default: 0
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+  /api/client/removeEventSimulive:
+    put:
+      summary: Remove simulive from an event
+      description: Use this endpoint to remove the Simulive video for an event.
+      operationId: remove-simulive-event
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                eventId:
+                  type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+  /api/client/setEventSimuliveUrl:
+    put:
+      summary: Set simulive for an event
+      description: Use this endpoint to set the Simulive video for an event. The event will automatically
+        go live at the start time.
+      operationId: set-event-simulive
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                eventId:
+                  type: string
+                url:
+                  type: string
+                  description: The public URL of the video to be used as simulive. This URL MUST be accessible
+                    without any login, test the url in incognito before setting or the simulive will fail.
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+  /api/media/create-asset:
+    get:
+      description: ''
+      operationId: get_apimediacreate-asset
+      responses:
+        '200':
+          description: ''
+      parameters: []
+  /api/media/upload-asset:
+    get:
+      description: ''
+      operationId: get_apimediaupload-asset
+      responses:
+        '200':
+          description: ''
+      parameters: []
+  /company/{companyId}:
+    get:
+      tags:
+      - company
+      summary: Find company by ID
+      description: Returns a single company
+      operationId: getcompanyById
+      parameters:
+      - name: companyId
+        in: path
+        description: ID of company to return
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Company'
+        '400':
+          description: Invalid ID supplied
+          content: {}
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          description: company not found
+          content: {}
+    post:
+      tags:
+      - company
+      summary: Update a company with json data
+      operationId: updatecompanyWithJson
+      parameters:
+      - name: companyId
+        in: path
+        description: ID of company that needs to be updated
+        required: true
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CompanyUpdate'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Company'
+        '400':
+          description: Company id not found
+          content: {}
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          description: Invalid input
+          content: {}
+  /company/{companyId}/circleRecordings:
+    get:
+      tags:
+      - company
+      summary: Get all circle recordings for a company
+      description: Returns a list of all circle recordings associated with the company
+      operationId: getCompanyCircleRecordings
+      parameters:
+      - name: companyId
+        in: path
+        description: ID of company to get circle recordings for
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CompanyCircleRecording'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          description: Company not found
+          content: {}
+  /company/{companyId}/create:
+    post:
+      tags:
+      - company
+      summary: Create a new company under a parent company
+      operationId: addCompanyToParent
+      parameters:
+      - name: companyId
+        in: path
+        description: ID of company to return
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: Company object that needs to be added under a parent company
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CompanyCreate'
+        required: true
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Company'
+        '400':
+          description: Invalid input
+          content: {}
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          description: Parent company has an invalid license
+          content: {}
+  /company/{companyId}/events:
+    get:
+      tags:
+      - company
+      summary: List all events under a parent company
+      operationId: listCompanyEvents
+      parameters:
+      - name: companyId
+        in: path
+        description: ID of company to return
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Event'
+        '400':
+          description: Invalid input
+          content: {}
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          description: Parent company has an invalid license
+          content: {}
+  /company/{companyId}/list:
+    get:
+      tags:
+      - company
+      summary: List all companies under a parent company
+      operationId: listChildCompanies
+      parameters:
+      - name: companyId
+        in: path
+        description: ID of company to return
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Company'
+        '400':
+          description: Invalid input
+          content: {}
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          description: Parent company has an invalid license
+          content: {}
+  /company/{companyId}/metadata:
+    post:
+      tags:
+      - company
+      summary: Update metadata for the company
+      operationId: updateCompanyMetadata
+      parameters:
+      - name: companyId
+        in: path
+        description: ID of company to update
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: Metadata object to update in the company
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Metadata'
+        required: true
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Metadata'
+        '400':
+          description: Invalid input
+          content: {}
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+  /customizations/events/company/{companyId}/all-events:
+    delete:
+      description: Deletes the event customization theme for company. The events without their own customization
+        will use the default Introvoke Platform theme, after deletion.
+      tags:
+      - company theme overrides
+      parameters:
+      - in: path
+        name: companyId
+        required: true
+        description: Unique ID of the company
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Event Customization Theme Overrides for the company removed from the data store.
+        '404':
+          description: Company ID is incorrect or user does not have access to the company.
+    get:
+      description: 'Returns the event customization theme overrides over the platform event customization
+        theme that applies to all events for the company, unless overridden at the event level.
+
+        This endpoint can be used for clients which update to theme or for preview.'
+      tags:
+      - company theme overrides
+      parameters:
+      - in: path
+        name: companyId
+        required: true
+        description: Unique ID of the company
+        schema:
+          type: string
+      - in: query
+        name: fullTheme
+        description: flag to return full theme merged with overrides
+        schema:
+          type: boolean
+          default: false
+      responses:
+        '200':
+          description: event customization theme overrides (or full theme) at company level
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IntrovokeEventTheme'
+        '404':
+          description: Company ID is incorrect or user does not have access to the company.
+    post:
+      description: 'Adds or updates event customization theme overrides that will be applied to the all
+        events for the company.
+
+        This endpoint can be used by clients which update to theme or for preview.'
+      tags:
+      - company theme overrides
+      parameters:
+      - in: path
+        name: companyId
+        required: true
+        description: Unique ID of the company
+        schema:
+          type: string
+      requestBody:
+        description: The part of event customization theme to override in default platform theme.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IntrovokeEventTheme'
+      responses:
+        '202':
+          description: Theme overrides accepted and committed to data store
+        '400':
+          description: Theme overrides did not match the expected schema.
+        '404':
+          description: Company ID is incorrect or user does not have access to the company
+  /customizations/events/company/{companyId}/fonts:
+    get:
+      description: Returns list of customized fonts associated with the company
+      tags:
+      - company theme fonts
+      parameters:
+      - in: path
+        name: companyId
+        required: true
+        description: Unique ID of the company
+        schema:
+          type: string
+      responses:
+        '200':
+          description: list of custom fonts associated with company
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CompanyFontInfo'
+        '404':
+          description: Company ID is incorrect or user does not have access to the company
+    post:
+      description: Add new fonts for the company. The value is stored at the company level, but can be
+        used by customization themes on both event and company levels. If the name of the font, matches
+        the existing font, it will update the font URL.
+      tags:
+      - company theme fonts
+      parameters:
+      - in: path
+        name: companyId
+        required: true
+        description: Unique ID of the companyId
+        schema:
+          type: string
+      requestBody:
+        description: The new company font to upload.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CompanyFontInfo'
+      responses:
+        '202':
+          description: Font accepted and committed to data store
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  uid:
+                    type: string
+        '400':
+          description: Incorrect format for the font schema
+        '404':
+          description: Company ID is incorrect or user does not have access to the company
+  /customizations/events/company/{companyId}/fonts/font/{fontId}:
+    delete:
+      description: Unregister the specified font associated with the specified company.
+      tags:
+      - company theme fonts
+      parameters:
+      - in: path
+        name: companyId
+        required: true
+        description: Unique ID of the company
+        schema:
+          type: string
+      - in: path
+        name: fontId
+        required: true
+        description: Unique ID of the registered font
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Font unregistered from the company.
+        '404':
+          description: Company or Font Id is incorrect or user does not have access to the company.
+  /customizations/events/default:
+    get:
+      description: 'Returns the default event customization theme that applies to all events, unless overridden
+        at the company and event level.
+
+        This endpoint can be used for clients which update to theme or for preview. The default theme
+        can be used as a starting point to edit new themes.'
+      tags:
+      - platform
+      responses:
+        '200':
+          description: default platform event customization theme
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IntrovokeEventTheme'
+  /customizations/events/event/{eventId}:
+    delete:
+      description: Deletes the event customization theme overrides for the event. All events default to
+        company specific event customization theme, if it exists or the default platform theme, after
+        deletion.
+      tags:
+      - event theme overrides
+      parameters:
+      - in: path
+        name: eventId
+        required: true
+        description: Unique ID of the event
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Theme overrides for the event removed from the data store.
+        '404':
+          description: Event Id is incorrect or user does not have access to the event.
+    get:
+      description: 'Returns the event customization theme overrides over the platform and event company
+        customization theme for the event.
+
+        This endpoint can be used for clients which update to theme or for preview.'
+      tags:
+      - event theme overrides
+      parameters:
+      - in: path
+        name: eventId
+        required: true
+        description: Unique ID of the event
+        schema:
+          type: string
+      - in: query
+        name: fullTheme
+        description: flag to return full theme merged with overrides
+        schema:
+          type: boolean
+          default: false
+      responses:
+        '200':
+          description: event customization theme overrides (or full theme) at applied at event level
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IntrovokeEventTheme'
+    post:
+      description: 'Adds or updates event customization theme overrides that will be applied for the event.
+
+        This endpoint can be used by clients which update to theme or for preview.'
+      tags:
+      - event theme overrides
+      parameters:
+      - in: path
+        name: eventId
+        required: true
+        description: Unique ID of the event
+        schema:
+          type: string
+      requestBody:
+        description: The part of event customization theme to override in default platform and company
+          theme.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IntrovokeEventTheme'
+      responses:
+        '202':
+          description: Theme overrides accepted and committed to data store.
+        '400':
+          description: Theme overrides did not match the expected schema.
+        '404':
+          description: Event ID is incorrect or user does not have access to the event.
+  /customizations/events/suggested-color-pallets:
+    get:
+      description: Returns an array of color pallets (with primary, secondary and tertiary colors) that
+        can be used in the editor. This endpoint can be used for clients which update to theme or for
+        preview.
+      tags:
+      - platform
+      responses:
+        '200':
+          description: suggested color pallets
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: array
+                  nullable: true
+                  items:
+                    type: string
+                    nullable: true
+                    minItems: 2
+                    maxItems: 3
+  /event/create:
+    post:
+      tags:
+      - event
+      summary: Create a new event
+      operationId: addEvent
+      requestBody:
+        description: Event object that needs to be added to the backend
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EventCreate'
+        required: true
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Event'
+        '400':
+          description: Invalid input
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                common host and presenter emails:
+                  value:
+                    hasError: true
+                    errorMessage: 'Users cannot be hosts and presenters at the same time: test@email.com'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          description: Company not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                hasError: true
+                errorMessage: Company not found
+  /event/{eventId}:
+    delete:
+      tags:
+      - event
+      summary: Delete an event
+      operationId: deleteevent
+      parameters:
+      - name: eventId
+        in: path
+        description: event id to delete
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: successful operation
+        '400':
+          description: Invalid ID supplied
+          content: {}
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          description: event not found
+          content: {}
+    get:
+      tags:
+      - event
+      summary: Find event by ID
+      description: Returns a single event
+      operationId: geteventById
+      parameters:
+      - name: eventId
+        in: path
+        description: ID of event to return
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Event'
+        '400':
+          description: Invalid ID supplied
+          content: {}
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          description: event not found
+          content: {}
+    post:
+      tags:
+      - event
+      summary: Update an event with json data
+      operationId: updateEventWithJsonData
+      parameters:
+      - name: eventId
+        in: path
+        description: ID of event that needs to be updated
+        required: true
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EventUpdate'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Event'
+        '400':
+          description: Invalid input
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                hasError: true
+                errorMessage: 'Users cannot be hosts and presenters at the same time: test@email.com'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          description: Event not found
+          content: {}
+  /event/{eventId}/availableReplays:
+    get:
+      summary: Return a list of replays for this event
+      description: Returns an array of replays for this event
+      tags:
+      - event
+      parameters:
+      - in: path
+        name: eventId
+        required: true
+        description: Unique ID of the event
+        schema:
+          type: string
+      - in: query
+        name: secondsValidFor
+        required: false
+        description: Number of seconds the replay is valid for. 3600 (1 hour) by default.
+        schema:
+          type: integer
+          minimum: 0
+      responses:
+        '200':
+          description: list of replays
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    downloadVideoUrl:
+                      type: string
+                    downloadStatus:
+                      type: string
+                    isCustomReplay:
+                      type: boolean
+                    url:
+                      type: string
+                  additionalProperties: false
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          description: event not found
+          content: {}
+  /event/{eventId}/clone:
+    post:
+      tags:
+      - event
+      summary: 'Create a new event based on source event '
+      operationId: cloneEvent
+      requestBody:
+        description: 'Event object that needs to be added to the backend. Body props that are optional
+          and will be taken from source event if missing in request: `name`, `bannerUrl`, `networkingHub`,
+          `presenterPasscode`, `hostPasscode`, `attendeePasscode`, `isAttendeeRegistrationModeEnabled`,
+          `isPresenterRegistrationModeEnabled`, `isRegistrationModeEnabled`, `hosts`, `presenters`. Additionaly
+          event customization, list of hosts and presenters is also copied from source event'
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EventClone'
+        required: true
+      parameters:
+      - name: eventId
+        in: path
+        description: ID of event to return
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Event'
+        '400':
+          description: Invalid input
+          content: {}
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+  /event/{eventId}/embedCode:
+    post:
+      tags:
+      - event
+      summary: Return the embed code for the event component
+      operationId: getEmbedEventById
+      requestBody:
+        description: Object used to identify the user
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      parameters:
+      - name: eventId
+        in: path
+        description: ID of event for the embed code
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: string
+                description: The url source that needs to be added to an iframe
+                example: https://embed.introvoke.com/event/{eventId}?userEmail={userEmail}&userId={userId}&userName={userDisplayName}&userProfile={userAvatar}&authKey={serverGenerated}
+        '400':
+          description: Invalid parameters supplied
+          content: {}
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          description: event not found
+          content: {}
+  /event/{eventId}/organizer:
+    put:
+      tags:
+      - event
+      summary: Add an organizer id to the event
+      description: Returns the updated list of organizers
+      operationId: putHostById
+      parameters:
+      - name: eventId
+        in: path
+        description: ID of event to update
+        required: true
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                organizer:
+                  type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                description: Array of organizer ids
+                items:
+                  type: string
+        '400':
+          description: Invalid payload was sent
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                missing organizer field:
+                  value:
+                    hasError: true
+                    errorMessage: Missing organizer field in request
+                common host and presenter emails:
+                  value:
+                    hasError: true
+                    errorMessage: 'Users cannot be hosts and presenters at the same time: test@email.com'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          description: Event not found
+          content: {}
+  /event/{eventId}/organizer/{organizerId}:
+    delete:
+      tags:
+      - event
+      summary: Delete an organizer id from the event
+      description: Returns the updated list of organizers
+      operationId: deleteHostById
+      parameters:
+      - name: eventId
+        in: path
+        description: ID of event to update
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: organizerId
+        in: path
+        description: ID of the organizer to delete
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                description: Array of organizer ids
+                items:
+                  type: string
+        '400':
+          description: Invalid parameter was sent
+          content: {}
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          description: event not found
+          content: {}
+  /event/{eventId}/presenter:
+    put:
+      tags:
+      - event
+      summary: Add a presenter id to the event
+      description: Returns the updated list of presenters
+      operationId: putPresenterById
+      parameters:
+      - name: eventId
+        in: path
+        description: ID of event to update
+        required: true
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                presenter:
+                  type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                description: Array of presenter ids
+                items:
+                  type: string
+        '400':
+          description: Invalid payload was sent
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                missing presenter field:
+                  value:
+                    hasError: true
+                    errorMessage: Missing presenter field in request
+                common host and presenter emails:
+                  value:
+                    hasError: true
+                    errorMessage: 'Users cannot be hosts and presenters at the same time: test@email.com'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          description: event not found
+          content: {}
+  /event/{eventId}/presenter/{presenterId}:
+    delete:
+      tags:
+      - event
+      summary: Delete a presenter id from the event
+      description: Returns the updated list of presenters
+      operationId: deletePresenterById
+      parameters:
+      - name: eventId
+        in: path
+        description: ID of event to update
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: presenterId
+        in: path
+        description: ID of the presenter to delete
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                description: Array of presenter ids
+                items:
+                  type: string
+        '400':
+          description: Invalid parameter was sent
+          content: {}
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          description: event not found
+          content: {}
+  /event/{eventId}/registrant:
+    delete:
+      tags:
+      - event
+      summary: Delete a registered user from the event
+      description: Returns OK
+      operationId: deleteRegistrantById
+      parameters:
+      - name: eventId
+        in: path
+        description: ID of event to update
+        required: true
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  description: The user email to delete
+              additionalProperties: false
+              required:
+              - email
+      responses:
+        '204':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: string
+                description: OK message
+        '400':
+          description: Invalid parameter was sent
+          content: {}
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          description: event not found
+          content: {}
+    post:
+      summary: Register a user for the event
+      description: Adds a new registered user to this event
+      tags:
+      - event
+      parameters:
+      - in: path
+        name: eventId
+        required: true
+        description: Unique ID of the event
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: The name of the user
+                email:
+                  type: string
+                  description: The email of the user
+                metadata:
+                  type: object
+                  description: Additional metadata to include about the user
+                  additionalProperties: true
+              required:
+              - name
+              - email
+      responses:
+        '200':
+          description: User was registered for this event
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Information about the registered user
+                properties:
+                  name:
+                    type: string
+                    description: The name of the user
+                  email:
+                    type: string
+                    description: The email of the user
+                  join_url:
+                    type: string
+                    description: The unique url that the user can use to join the event
+                  metadata:
+                    type: object
+                    description: Additional metadata to include about the user
+                    additionalProperties: true
+                additionalProperties: false
+        '400':
+          description: An invalid parameter was sent
+        '404':
+          description: Invalid auth token
+  /event/{eventId}/registrants:
+    get:
+      summary: Return a list of all registered users
+      description: Returns an array of registrants for this event
+      tags:
+      - event
+      parameters:
+      - in: path
+        name: eventId
+        required: true
+        description: Unique ID of the event
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                description: List of registered users
+                items:
+                  type: object
+                  description: Information about a single registered user
+                  properties:
+                    name:
+                      type: string
+                      description: The name of the user
+                    email:
+                      type: string
+                      description: The email of the user
+                    join_url:
+                      type: string
+                      description: The unique url that the user can use to join the event
+                    metadata:
+                      type: object
+                      description: Additional metadata that was included when the user registered
+                      additionalProperties: true
+                  additionalProperties: false
+          description: Returns list of participants
+  /networking:
+    post:
+      tags:
+      - networking
+      summary: Create a new networking hub
+      operationId: addNetworkingHub
+      requestBody:
+        description: Networking hub that will be added to the backend
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NetworkingHubCreate'
+        required: true
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NetworkingHubCreate'
+        '400':
+          description: Invalid input
+          content: {}
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          description: Company not found
+          content: {}
+  /networking/{id}:
+    get:
+      tags:
+      - networking
+      summary: Find NetworkingHub by ID
+      description: Returns a single NetworkingHub
+      operationId: getNetworkingHubById
+      parameters:
+      - name: id
+        in: path
+        description: ID of NetworkingHub hub to return
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NetworkingHub'
+        '400':
+          description: Invalid ID supplied
+          content: {}
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          description: NetworkingHub not found
+          content: {}
+    post:
+      tags:
+      - networking
+      summary: Update a NetworkingHub hub with json data
+      operationId: updateNetworkingHub
+      parameters:
+      - name: id
+        in: path
+        description: ID of NetworkingHub that needs to be updated
+        required: true
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NetworkingHub'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NetworkingHub'
+        '400':
+          description: NetworkingHub id not found
+          content: {}
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          description: Invalid input
+          content: {}
+  /networking/{id}/circle/{circleId}/recording/{recordingId}:
+    get:
+      tags:
+      - networking
+      summary: Retrieves the download URL for the MP4 recording for the specified circle id and recording
+        id
+      description: Returns the download URL for the recording and expiration date/time for the URL
+      operationId: getNetworkingHubCircleRecordingDownloadUrl
+      parameters:
+      - name: id
+        in: path
+        description: 'ID of Networking Hub '
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: circleId
+        in: path
+        description: 'ID of Networking Hub Circle '
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: recordingId
+        in: path
+        description: 'ID of recording '
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CircleRecording'
+        '400':
+          description: Invalid ID supplied
+          content: {}
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          description: Networking Hub, Circle or Recordings not found
+          content: {}
+  /networking/{id}/clearChat:
+    post:
+      tags:
+      - networking
+      summary: Clear all networking hub chat channels with the option to clear individual circles
+      operationId: postClearChat
+      parameters:
+      - name: id
+        in: path
+        description: ID of NetworkingHub
+        required: true
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        description: '
+
+          To specify which chats to clear, follow the patterns below:
+
+          - Networking Hub: `${hubId}-chat` and `${hubId}-presenters-chat`
+
+          - Circle: `${hubId}-${circleId}-circle-chat`'
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                channels:
+                  description: When included, only the chats for the provided channels will be cleared.
+                    Otherwise, all chats will be cleared by default.
+                  type: array
+                  items:
+                    type: string
+                hard:
+                  description: (Optional) boolean flag specifying whether to delete the chats permanently
+                    (true) or hide them (default)
+                  type: boolean
+              example:
+                channels:
+                - 123456789-chat
+                - 123456789-presenters-chat
+                - 123456789-123-circle-chat
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    channel:
+                      type: string
+                    success:
+                      type: boolean
+                example:
+                - channel: 123456789-chat
+                  success: true
+                - channel: 123456789-presenters-chat
+                  success: true
+                - channel: 123456789-123-circle-chat
+                  success: true
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          description: NetworkingHub hub not found
+          content: {}
+  /networking/{id}/embedCode:
+    post:
+      tags:
+      - networking
+      summary: Return the embed code for the Networking hub component
+      operationId: getEmbedNetworkingHubById
+      requestBody:
+        description: Object used to identify the user
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      parameters:
+      - name: id
+        in: path
+        description: ID of NetworkingHub for the embed code
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: string
+                description: The url source that needs to be added to an iframe
+                example: https://embed.introvoke.com/networking/{id}?userEmail={userEmail}&userId={userId}&userName={userDisplayName}&userProfile={userAvatar}&authKey={serverGenerated}
+        '400':
+          description: Invalid parameters supplied
+          content: {}
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          description: NetworkingHub not found
+          content: {}
+  /networking/{id}/inviteUser:
+    post:
+      tags:
+      - networking
+      summary: Invite another user to join a conversation
+      operationId: inviteUser
+      requestBody:
+        description: The user id that originated the invite and the target user id are required
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                userId:
+                  type: string
+                invitedUserId:
+                  type: string
+        required: true
+      parameters:
+      - name: id
+        in: path
+        description: ID of NetworkingHub
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: Invite was sent successfully
+          content:
+            application/json:
+              schema:
+                type: boolean
+        '400':
+          description: Invalid parameters or users state
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          description: NetworkingHub not found
+          content: {}
+  /networking/{id}/participantsList:
+    get:
+      tags:
+      - networking
+      summary: Return a list of participants
+      operationId: returnNetworkingHubParticipants
+      parameters:
+      - name: id
+        in: path
+        description: ID of NetworkingHub that needs to be updated
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Participant'
+        '400':
+          description: Invalid input
+          content: {}
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          description: Company not found
+          content: {}
+  /networking/{id}/registrant:
+    delete:
+      tags:
+      - networking
+      summary: Delete a registered user from the networking hub
+      description: Returns OK
+      operationId: deleteHubRegistrantById
+      parameters:
+      - name: id
+        in: path
+        description: ID of networking hub to delete
+        required: true
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  description: The user email to delete
+              additionalProperties: false
+              required:
+              - email
+      responses:
+        '204':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: string
+                description: OK message
+        '400':
+          description: Invalid parameter was sent
+          content: {}
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          description: networking hub not found
+          content: {}
+    post:
+      summary: Register a user for the networking hub
+      description: Adds a new registered user to this networking hub
+      tags:
+      - networking
+      parameters:
+      - in: path
+        name: id
+        required: true
+        description: Unique ID of the networking hub
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: The name of the user
+                email:
+                  type: string
+                  description: The email of the user
+                metadata:
+                  type: object
+                  description: Additional metadata to include about the user
+                  additionalProperties: true
+              required:
+              - name
+              - email
+      responses:
+        '200':
+          description: User was registered for this networking hub
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Information about the registered user
+                properties:
+                  name:
+                    type: string
+                    description: The name of the user
+                  email:
+                    type: string
+                    description: The email of the user
+                  join_url:
+                    type: string
+                    description: The unique url that the user can use to join the networking hub
+                  metadata:
+                    type: object
+                    description: Additional metadata to include about the user
+                    additionalProperties: true
+                additionalProperties: false
+        '400':
+          description: An invalid parameter was sent
+        '404':
+          description: Invalid auth token
+  /networking/{id}/setUserProfile:
+    post:
+      tags:
+      - networking
+      summary: Set a user profile
+      operationId: setUserProfile
+      requestBody:
+        description: The binary data and user id to be set
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                userId:
+                  type: string
+                userProfile:
+                  type: object
+                  description: The binary data of the photo
+        required: true
+      parameters:
+      - name: id
+        in: path
+        description: ID of NetworkingHub
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: boolean
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          description: NetworkingHub hub not found
+          content: {}
+  /v3/companies/{companyId}/theme:
+    get:
+      description: Returns the event customization theme for all events for the company based on the business
+        rules.
+      tags:
+      - company theme
+      security: []
+      parameters:
+      - in: path
+        name: companyId
+        required: true
+        description: Unique ID of the company
+        schema:
+          type: string
+      responses:
+        '200':
+          description: event customization theme for the all events for the company
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IntrovokeEventTheme'
+        '404':
+          description: company id is incorrect or user does not have access the company.
+  /v3/events/{eventId}/theme:
+    get:
+      description: Returns the event customization theme for the event based on the business rules.
+      tags:
+      - event theme
+      security: []
+      parameters:
+      - in: path
+        name: eventId
+        required: true
+        description: Unique ID of the event
+        schema:
+          type: string
+      responses:
+        '200':
+          description: event customization theme for the specified event
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IntrovokeEventTheme'
+        '404':
+          description: event id is incorrect or user does not have access the event.
+components:
+  schemas:
+    CircleRecording:
+      type: object
+      properties:
+        downloadUrl:
+          type: string
+        expiresOn:
+          type: string
+    Company:
+      type: object
+      properties:
+        uid:
+          type: string
+        name:
+          type: string
+        logo:
+          type: string
+        parentCompanyId:
+          type: string
+          nullable: true
+        eventIds:
+          description: Holds an array of all the events for this company
+          type: array
+          items:
+            type: string
+          nullable: true
+        metadata:
+          $ref: '#/components/schemas/Metadata'
+      xml:
+        name: Company
+    CompanyCircleRecording:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier of the circle recording
+        name:
+          type: string
+          description: Name of the circle recording
+        url:
+          type: string
+          description: Public URL to access the recording
+        downloadVideoUrl:
+          type: string
+          description: URL to download the video recording
+      required:
+      - id
+      - name
+      - url
+      - downloadVideoUrl
+    CompanyCreate:
+      required:
+      - name
+      - logo
+      - metadata
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the company
+        logo:
+          type: string
+          description: Logo of the company
+    CompanyFontInfo:
+      type: object
+      properties:
+        uid:
+          type: string
+        fontName:
+          type: string
+        fontUrl:
+          type: string
+        isIntrovokeManaged:
+          type: boolean
+      additionalProperties: false
+      required:
+      - fontName
+      - fontUrl
+      - isIntrovokeManaged
+    CompanyUpdate:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Updated name of the company
+        logo:
+          type: string
+          description: Updated logo of the company
+    Error:
+      type: object
+      properties:
+        hasError:
+          description: Always `true` if the request has failed.
+          type: boolean
+          default: true
+        errorMessage:
+          type: string
+          description: The error message describing the issue.
+    Event:
+      type: object
+      properties:
+        uid:
+          type: string
+        companyUid:
+          type: string
+        creatorUid:
+          type: string
+        name:
+          type: string
+        picture:
+          type: string
+          nullable: true
+        startDate:
+          type: string
+          format: date-time
+        endDate:
+          type: string
+          format: date-time
+        timezone:
+          type: string
+        type:
+          type: string
+          enum:
+          - Virtual
+          - LiveStreamInPerson
+        metadata:
+          description: Can be any value - string, number, boolean, array or object.
+          type: object
+          nullable: true
+        networkingHub:
+          type: string
+          description: (Optional) The networking hub linked when networking starts
+          nullable: true
+        presenters:
+          type: array
+          nullable: true
+          items:
+            type: string
+        organizers:
+          type: array
+          nullable: true
+          items:
+            type: string
+        isRegistrationModeEnabled:
+          type: boolean
+          nullable: true
+        isAttendeeRegistrationModeEnabled:
+          type: boolean
+          nullable: true
+        privateEventInfo:
+          type: object
+          nullable: true
+          properties:
+            attendeePasscode:
+              type: string
+            presenterPasscode:
+              type: string
+            hostPasscode:
+              type: string
+            rtmpKey:
+              type: string
+            rtmpUrl:
+              type: string
+        closeCaptioningSettings:
+          type: object
+          nullable: true
+          properties:
+            transcription:
+              type: object
+              nullable: true
+              properties:
+                enabled:
+                  type: boolean
+                  nullable: true
+      xml:
+        name: Event
+    EventClone:
+      required:
+      - name
+      - startDate
+      - endDate
+      - timezone
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the event
+        startDate:
+          type: string
+          format: date-time
+        endDate:
+          type: string
+          format: date-time
+        timezone:
+          $ref: '#/components/schemas/Timezones'
+        type:
+          type: string
+          enum:
+          - Virtual
+          - LiveStreamInPerson
+        picture:
+          type: string
+          description: Picture of the event
+        networkingHub:
+          type: string
+          description: The networking hub linked when networking starts
+        presenters:
+          type: array
+          description: Array of ids for presenters
+          items:
+            type: string
+        organizers:
+          type: array
+          description: Array of organizers ids
+          items:
+            type: string
+        autoSelectLatestReplay:
+          description: Turn on automatic selection of latest replay
+          type: boolean
+          nullable: true
+        disableEventRecording:
+          description: Turn off recording for this event
+          type: boolean
+          nullable: true
+        isRegistrationModeEnabled:
+          description: Turn on registration mode
+          type: boolean
+          nullable: true
+        isAttendeeRegistrationModeEnabled:
+          description: Turn on to require attendee codes to enter
+          type: boolean
+          nullable: true
+    EventCreate:
+      required:
+      - companyId
+      - name
+      - startDate
+      - endDate
+      - timezone
+      - type
+      type: object
+      properties:
+        companyId:
+          type: string
+          description: Id of company
+        name:
+          type: string
+          description: Name of the event
+        startDate:
+          type: string
+          format: date-time
+        endDate:
+          type: string
+          format: date-time
+        timezone:
+          $ref: '#/components/schemas/Timezones'
+        type:
+          type: string
+          enum:
+          - Virtual
+          - LiveStreamInPerson
+        picture:
+          type: string
+          description: (Optional) Picture of the event
+        networkingHub:
+          type: string
+          description: (Optional) The networking hub linked when networking starts
+        presenters:
+          type: array
+          description: (Optional) Array of ids for presenters
+          items:
+            type: string
+        organizers:
+          type: array
+          description: (Optional) Array of organizers ids
+          items:
+            type: string
+        autoSelectLatestReplay:
+          description: (Optional) Turn on automatic selection of latest replay
+          type: boolean
+          nullable: true
+        disableEventRecording:
+          description: (Optional) Turn off recording for this event
+          type: boolean
+          nullable: true
+        isRegistrationModeEnabled:
+          description: (Optional) Turn on registration mode
+          type: boolean
+          nullable: true
+        isAttendeeRegistrationModeEnabled:
+          description: (Optional) Turn on to require attendee codes to enter
+          type: boolean
+          nullable: true
+        closeCaptioningSettings:
+          description: (Optional) Turn on automatic closed captioning
+          type: object
+          nullable: true
+          properties:
+            transcription:
+              type: object
+              nullable: true
+              properties:
+                enabled:
+                  type: boolean
+                  nullable: true
+    EventUpdate:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Updated name of the event
+        startDate:
+          type: string
+          format: date-time
+          description: Updated start date and time of the event
+        endDate:
+          type: string
+          format: date-time
+          description: Updated end date and time of the event
+        timezone:
+          $ref: '#/components/schemas/Timezones'
+          description: Updated timezone
+        type:
+          type: string
+          enum:
+          - Virtual
+          - LiveStreamInPerson
+          description: Updated event type
+        picture:
+          type: string
+          description: Picture of the event
+        networkingHub:
+          type: string
+          description: (Optional) The networking hub linked when networking starts
+        presenters:
+          type: array
+          description: Array of presenters ids
+          items:
+            type: string
+        organizers:
+          type: array
+          description: Array of organizers ids
+          items:
+            type: string
+        autoSelectLatestReplay:
+          description: (Optional) Turn on automatic selection of latest replay
+          type: boolean
+          nullable: true
+        disableEventRecording:
+          description: (Optional) Turn off recording for this event
+          type: boolean
+          nullable: true
+        isRegistrationModeEnabled:
+          type: boolean
+          nullable: true
+        isAttendeeRegistrationModeEnabled:
+          type: boolean
+          nullable: true
+        closeCaptioningSettings:
+          description: (Optional) Turn on automatic closed captioning
+          type: object
+          nullable: true
+          properties:
+            transcription:
+              type: object
+              nullable: true
+              properties:
+                enabled:
+                  type: boolean
+                  nullable: true
+    IntrovokeEventTheme:
+      type: object
+      properties:
+        name:
+          type: string
+        defaultTheme:
+          type: boolean
+        brandColors:
+          type: array
+          items:
+            type: string
+          maxItems: 3
+          minItems: 2
+        fonts:
+          type: array
+          nullable: true
+          items:
+            type: object
+            properties:
+              fontName:
+                type: string
+              fontUrl:
+                type: string
+              isPrimary:
+                type: boolean
+            required:
+            - fontName
+            - fontUrl
+            - isPrimary
+            additionalProperties: false
+        virtualStage:
+          type: object
+          properties:
+            background:
+              type: object
+              properties:
+                backgroundColor:
+                  type: string
+                  nullable: true
+                imageUrl:
+                  type: string
+                  nullable: true
+                textColor:
+                  type: string
+                  nullable: true
+              additionalProperties: false
+            watermark:
+              type: object
+              properties:
+                backgroundColor:
+                  type: string
+                  nullable: true
+                imageUrl:
+                  type: string
+                  nullable: true
+                textColor:
+                  type: string
+                  nullable: true
+              additionalProperties: false
+            countdown:
+              type: object
+              nullable: true
+              properties:
+                textColor:
+                  type: string
+                  nullable: true
+              additionalProperties: false
+            presenter:
+              type: object
+              nullable: true
+              properties:
+                glowColor:
+                  type: string
+                  nullable: true
+              additionalProperties: false
+          additionalProperties: false
+        networkingHub:
+          type: object
+          properties:
+            circleGraphics:
+              type: object
+              nullable: true
+              properties:
+                backgroundColor:
+                  type: string
+                  nullable: true
+                imageUrl:
+                  type: string
+                  nullable: true
+                textColor:
+                  type: string
+                  nullable: true
+              additionalProperties: false
+            joinNetworking:
+              type: object
+              nullable: true
+              properties:
+                backgroundColor:
+                  type: string
+                  nullable: true
+                imageUrl:
+                  type: string
+                  nullable: true
+                textColor:
+                  type: string
+                  nullable: true
+              additionalProperties: false
+            returnToStage:
+              type: object
+              properties:
+                backgroundColor:
+                  type: string
+                  nullable: true
+                imageUrl:
+                  type: string
+                  nullable: true
+                textColor:
+                  type: string
+                  nullable: true
+              additionalProperties: false
+          additionalProperties: false
+        warningNotices:
+          type: object
+          properties:
+            buttonColor:
+              type: string
+              nullable: true
+          additionalProperties: false
+        chat:
+          type: object
+          properties:
+            enabled:
+              type: boolean
+              nullable: true
+            colors:
+              type: array
+              nullable: true
+              items:
+                type: string
+                nullable: true
+            badge:
+              type: object
+              properties:
+                backgroundColor:
+                  type: string
+                  nullable: true
+                imageUrl:
+                  type: string
+                  nullable: true
+                textColor:
+                  type: string
+                  nullable: true
+              additionalProperties: false
+          additionalProperties: false
+        participantList:
+          type: object
+          nullable: true
+          properties:
+            enabled:
+              type: boolean
+              deprecated: true
+              nullable: true
+            showTabFor:
+              type: number
+              nullable: true
+              description: Expects a number for the user role. 0 - Host, 1 - Host & Presenter, 2 - Everyone
+            showCountFor:
+              type: number
+              nullable: true
+              description: Expects a number for the user role. 0 - Host, 1 - Host & Presenter, 2 - Everyone
+          additionalProperties: false
+        qna:
+          type: object
+          nullable: true
+          properties:
+            enabled:
+              type: boolean
+              nullable: true
+          additionalProperties: false
+        polls:
+          type: object
+          nullable: true
+          properties:
+            enabled:
+              type: boolean
+              nullable: true
+          additionalProperties: false
+        privateMessages:
+          type: object
+          nullable: true
+          properties:
+            enabled:
+              type: boolean
+              nullable: true
+          additionalProperties: false
+        poweredByIntrovokeLabel:
+          type: object
+          nullable: true
+          properties:
+            enabled:
+              type: boolean
+              nullable: true
+          additionalProperties: false
+        chatReactions:
+          type: object
+          nullable: true
+          properties:
+            enabled:
+              type: boolean
+              nullable: true
+            reactions:
+              type: array
+              nullable: true
+              items:
+                type: object
+                nullable: true
+                properties:
+                  reaction:
+                    type: string
+                    nullable: false
+                  image:
+                    type: string
+                    nullable: false
+                  label:
+                    type: string
+                    nullable: true
+                maxItems: 7
+                required:
+                - reaction
+                - image
+                additionalProperties: false
+          additionalProperties: false
+        liveReactions:
+          type: object
+          nullable: true
+          properties:
+            enabled:
+              type: boolean
+              nullable: true
+            reactions:
+              type: array
+              nullable: true
+              items:
+                type: object
+                nullable: true
+                properties:
+                  reaction:
+                    type: string
+                    nullable: false
+                  image:
+                    type: string
+                    nullable: false
+                  label:
+                    type: string
+                    nullable: true
+                maxItems: 7
+                required:
+                - reaction
+                - image
+                additionalProperties: false
+          additionalProperties: false
+        emailSettings:
+          type: object
+          nullable: true
+          properties:
+            id:
+              type: string
+            name:
+              type: string
+            when:
+              type: string
+            replayToEmail:
+              type: string
+              nullable: true
+            fromEmail:
+              type: string
+              nullable: true
+            fromName:
+              type: string
+              nullable: true
+            isCustom:
+              type: boolean
+            activated:
+              type: boolean
+            emailTemplate:
+              type: object
+              properties:
+                name:
+                  type: string
+                subject:
+                  type: string
+                  nullable: true
+                hoursToWait:
+                  type: number
+                  nullable: true
+                htmlBody:
+                  type: string
+                  nullable: true
+                sendGridTemplateId:
+                  type: string
+                  nullable: true
+                bodyText:
+                  type: string
+                  nullable: true
+      additionalProperties: false
+      required:
+      - name
+      - defaultTheme
+    Metadata:
+      type: object
+      additionalProperties:
+        items:
+          additionalProperties: false
+          properties:
+            value:
+              type: string
+          required:
+          - value
+          type: object
+        type: array
+    NetworkingHub:
+      required:
+      - uid
+      - friendlyName
+      - organizers
+      - networkingHubRooms
+      type: object
+      properties:
+        uid:
+          type: string
+        friendlyName:
+          type: string
+          description: Friendly name to identify the hub
+        company:
+          type: string
+          description: The company that owns this hub
+        organizers:
+          description: Holds the ids of users that have organizer permission for this hub
+          type: array
+          items:
+            type: string
+          nullable: true
+        networkingHubRooms:
+          description: Holds the networking hub rooms
+          type: array
+          items:
+            $ref: '#/components/schemas/NetworkingHubRooms'
+        whitelabel:
+          type: object
+          description: Whitelabel options for this hub
+          properties:
+            hidePagination:
+              type: boolean
+            hideChat:
+              type: boolean
+            hideRandomUserMingle:
+              type: boolean
+    NetworkingHubCreate:
+      required:
+      - friendlyName
+      - organizers
+      - networkingHubRooms
+      type: object
+      properties:
+        friendlyName:
+          type: string
+          description: Friendly name to identify the hub
+        company:
+          type: string
+          description: The company that owns this hub
+        organizers:
+          description: Holds the ids of users that have organizer permission for this hub
+          type: array
+          items:
+            type: string
+          nullable: true
+        networkingHubRooms:
+          description: Holds the networking hub rooms
+          type: array
+          items:
+            $ref: '#/components/schemas/NetworkingHubRooms'
+        whitelabel:
+          type: object
+          description: Whitelabel options for this hub
+          properties:
+            hidePagination:
+              type: boolean
+            hideChat:
+              type: boolean
+            hideRandomUserMingle:
+              type: boolean
+    NetworkingHubRooms:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the networking hub room
+        maxSlots:
+          type: number
+          description: Max number of users that can join the room
+    Participant:
+      type: object
+      properties:
+        meta:
+          type: object
+          properties:
+            userId:
+              type: string
+            username:
+              type: string
+            email:
+              type: string
+            avatar:
+              type: string
+        when:
+          type: number
+    Timezones:
+      type: string
+      description: Timezones taken from https://www.npmjs.com/package/timezone-support
+      enum:
+      - Africa/Abidjan
+      - Africa/Nairobi
+      - Africa/Algiers
+      - Africa/Lagos
+      - Africa/Maputo
+      - Africa/Cairo
+      - Africa/Casablanca
+      - Europe/Paris
+      - Africa/Johannesburg
+      - Africa/Khartoum
+      - Africa/Sao_Tome
+      - Africa/Tripoli
+      - Africa/Windhoek
+      - America/Adak
+      - America/Anchorage
+      - America/Santo_Domingo
+      - America/Araguaina
+      - America/Fortaleza
+      - America/Asuncion
+      - America/Panama
+      - America/Mexico_City
+      - America/Bahia
+      - America/Managua
+      - America/La_Paz
+      - America/Lima
+      - America/Denver
+      - America/Campo_Grande
+      - America/Cancun
+      - America/Caracas
+      - America/Chicago
+      - America/Chihuahua
+      - America/Phoenix
+      - America/Los_Angeles
+      - America/New_York
+      - America/Rio_Branco
+      - America/Fort_Nelson
+      - America/Halifax
+      - America/Godthab
+      - America/Grand_Turk
+      - America/Havana
+      - America/Metlakatla
+      - America/Miquelon
+      - America/Montevideo
+      - America/Noronha
+      - America/Port-au-Prince
+      - Antarctica/Palmer
+      - America/Santiago
+      - America/Sao_Paulo
+      - Atlantic/Azores
+      - America/St_Johns
+      - Antarctica/Casey
+      - Antarctica/Davis
+      - Pacific/Port_Moresby
+      - Pacific/Guadalcanal
+      - Asia/Tashkent
+      - Pacific/Auckland
+      - Asia/Baghdad
+      - Antarctica/Troll
+      - Asia/Dhaka
+      - Asia/Amman
+      - Asia/Kamchatka
+      - Asia/Baku
+      - Asia/Bangkok
+      - Asia/Barnaul
+      - Asia/Beirut
+      - Asia/Kuala_Lumpur
+      - Asia/Kolkata
+      - Asia/Chita
+      - Asia/Ulaanbaatar
+      - Asia/Shanghai
+      - Asia/Colombo
+      - Asia/Damascus
+      - Asia/Dili
+      - Asia/Dubai
+      - Asia/Famagusta
+      - Asia/Gaza
+      - Asia/Hong_Kong
+      - Asia/Hovd
+      - Asia/Irkutsk
+      - Europe/Istanbul
+      - Asia/Jakarta
+      - Asia/Jayapura
+      - Asia/Jerusalem
+      - Asia/Kabul
+      - Asia/Karachi
+      - Asia/Kathmandu
+      - Asia/Yakutsk
+      - Asia/Krasnoyarsk
+      - Asia/Magadan
+      - Asia/Makassar
+      - Asia/Manila
+      - Europe/Athens
+      - Asia/Novosibirsk
+      - Asia/Omsk
+      - Asia/Pyongyang
+      - Asia/Qyzylorda
+      - Asia/Rangoon
+      - Asia/Sakhalin
+      - Asia/Seoul
+      - Asia/Srednekolymsk
+      - Asia/Tehran
+      - Asia/Tokyo
+      - Asia/Tomsk
+      - Asia/Vladivostok
+      - Asia/Yekaterinburg
+      - Europe/Lisbon
+      - Atlantic/Cape_Verde
+      - Australia/Sydney
+      - Australia/Adelaide
+      - Australia/Brisbane
+      - Australia/Darwin
+      - Australia/Eucla
+      - Australia/Lord_Howe
+      - Australia/Perth
+      - Pacific/Easter
+      - Europe/Dublin
+      - Etc/GMT-1
+      - Pacific/Fakaofo
+      - Pacific/Kiritimati
+      - Etc/GMT-2
+      - Pacific/Tahiti
+      - Pacific/Niue
+      - Etc/GMT+12
+      - Pacific/Galapagos
+      - Etc/GMT+7
+      - Pacific/Pitcairn
+      - Pacific/Gambier
+      - Etc/UTC
+      - Europe/Ulyanovsk
+      - Europe/London
+      - Europe/Chisinau
+      - Europe/Kaliningrad
+      - Europe/Kirov
+      - Europe/Moscow
+      - Europe/Saratov
+      - Europe/Simferopol
+      - Europe/Volgograd
+      - Pacific/Honolulu
+      - MET
+      - Pacific/Chatham
+      - Pacific/Apia
+      - Pacific/Bougainville
+      - Pacific/Fiji
+      - Pacific/Guam
+      - Pacific/Marquesas
+      - Pacific/Pago_Pago
+      - Pacific/Norfolk
+      - Pacific/Tongatapu
+    User:
+      type: object
+      properties:
+        userId:
+          type: string
+        userDisplayName:
+          type: string
+        userEmail:
+          type: string
+        userAvatar:
+          type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    sec0:
+      type: apiKey
+      in: header
+      name: Authorization
+      x-bearer-format: bearer
+  responses:
+    UnauthorizedError:
+      description: Access token is missing or invalid

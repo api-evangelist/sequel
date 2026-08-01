@@ -1,0 +1,12 @@
+generated: '2026-07-21'
+method: generated
+source: openapi/sequel-openapi-original.yml
+skills:
+- file: sequel-create-and-embed-event.md
+  name: Create and embed a Sequel webinar event
+  api: openapi/sequel-openapi-original.yml
+  operations: [addEvent, geteventById, getEmbedEventById]
+- file: sequel-networking-hub-setup.md
+  name: Set up and embed a Sequel networking hub
+  api: openapi/sequel-openapi-original.yml
+  operations: [addNetworkingHub, getNetworkingHubById, getEmbedNetworkingHubById, returnNetworkingHubParticipants]

@@ -1,0 +1,33 @@
+generated: '2026-07-21'
+method: searched
+source: https://docs.introvoke.com/docs + openapi/sequel-openapi-original.yml
+base_url: https://api.introvoke.com/api/v1
+authentication:
+  style: oauth2-client-credentials -> JWT bearer
+  header: 'Authorization: Bearer <access_token>'
+  token_url: https://api.introvoke.com/api/oauth/token
+  ref: authentication/sequel-authentication.yml
+versioning:
+  style: uri-path
+  current: v1
+  ref: lifecycle/sequel-lifecycle.yml
+pagination:
+  style: cursor/offset (endpoint-specific)
+  notes: >-
+    Transcript retrieval (get_event_srt_chunks via the MCP surface) and list endpoints
+    return paginated collections; parameters are documented per endpoint. No single
+    global pagination envelope is published.
+error_envelope:
+  shape:
+    hasError: boolean (always true on failure)
+    errorMessage: string
+  media_type: application/json
+  rfc9457: false
+  ref: errors/sequel-problem-types.yml
+idempotency:
+  supported: false
+  notes: No Idempotency-Key header or documented idempotency contract was found.
+rate_limiting:
+  signaled: unknown
+  notes: No documented rate-limit headers were found in the spec or docs.
+content_type: application/json

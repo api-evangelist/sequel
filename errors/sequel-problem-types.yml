@@ -1,0 +1,42 @@
+generated: '2026-07-21'
+method: derived
+source: openapi/sequel-openapi-original.yml
+format: custom-envelope
+envelope:
+  hasError: boolean (always true on failure)
+  errorMessage: string
+media_type: application/json
+problems:
+- status: 400
+  title: Bad Request
+  occurrences: 33
+  example_operations:
+  - GET /api/analytics/user-engagement/events/{eventId}/top-participants (COPY)
+  - PUT /api/client/removeEventSimulive
+  - PUT /api/client/setEventSimuliveUrl
+  remediation: Validate the request body/params against the schema.
+- status: 401
+  title: Unauthorized
+  occurrences: 30
+  example_operations:
+  - GET /api/analytics/getVideoWatchOverTime/{EVENT_ID}
+  - GET /company/{companyId}
+  - POST /company/{companyId}
+  remediation: Obtain a fresh JWT via the client-credentials token endpoint and send
+    it as a bearer token.
+- status: 403
+  title: Forbidden
+  occurrences: 3
+  example_operations:
+  - POST /company/{companyId}/create
+  - GET /company/{companyId}/events
+  - GET /company/{companyId}/list
+  remediation: The authenticated client lacks access to this company/event resource.
+- status: 404
+  title: Not Found
+  occurrences: 37
+  example_operations:
+  - GET /api/analytics/getVideoWatchOverTime/{EVENT_ID}
+  - GET /company/{companyId}
+  - POST /company/{companyId}
+  remediation: Verify the company/event/networking id exists and belongs to your account.

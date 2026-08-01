@@ -1,0 +1,55 @@
+generated: '2026-07-21'
+method: searched
+source: openapi/sequel-openapi-original.yml
+docs: https://docs.introvoke.com/docs
+summary:
+  types:
+  - oauth2
+  - http
+  oauth2_flows:
+  - clientCredentials
+  bearer_format: JWT
+  notes: >-
+    The Sequel (Introvoke) API is protected with an OAuth 2.0 client-credentials
+    flow. Exchange a client_id/client_secret for a JWT access token, then send it
+    as an HTTP bearer token on every API call. End-user / admin login to the Sequel
+    dashboard is a separate Auth0 OpenID Connect authorization-code flow.
+schemes:
+- name: oauth2ClientCredentials
+  type: oauth2
+  flow: clientCredentials
+  token_url: https://api.introvoke.com/api/oauth/token
+  audience: https://www.introvoke.com/api
+  grant_type: client_credentials
+  credentials: client_id + client_secret from the Sequel Admin Dashboard > Integrations > APIs
+  request_body: |-
+    {
+      "client_id": "<your_client_id>",
+      "client_secret": "<your_client_secret>",
+      "audience": "https://www.introvoke.com/api",
+      "grant_type": "client_credentials"
+    }
+  response: returns access_token and token_type "Bearer"
+  source: searched (https://docs.introvoke.com/docs)
+- name: bearerAuth
+  type: http
+  scheme: bearer
+  bearerFormat: JWT
+  usage: 'Authorization: Bearer <access_token>'
+  sources:
+  - openapi/sequel-openapi-original.yml
+end_user_login:
+  provider: Auth0
+  type: openIdConnect
+  issuer: https://login.introvoke.com
+  authorization_endpoint: https://login.introvoke.com/authorize
+  token_endpoint: https://login.introvoke.com/oauth/token
+  flows:
+  - authorization_code
+  - refresh_token
+  scopes_supported:
+  - openid
+  - profile
+  - email
+  - offline_access
+  source: well-known/sequel-oauth-authorization-server.json

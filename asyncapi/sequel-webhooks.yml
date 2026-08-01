@@ -1,0 +1,25 @@
+generated: '2026-07-21'
+method: searched
+spec_type: Webhooks
+source: https://docs.introvoke.com/reference/getting-started-with-sequel-web-hooks
+description: >-
+  Sequel documents a webhook surface for pushing event data to external systems. No
+  machine-readable AsyncAPI document is published, so this captures the documented
+  webhook/event catalog only.
+docs:
+- title: Getting started with Sequel webhooks
+  url: https://docs.introvoke.com/reference/getting-started-with-sequel-web-hooks
+- title: Using Custom CMS Webhooks
+  url: https://docs.introvoke.com/reference/using-custom-cms
+- title: Using Custom CRM Integration
+  url: https://docs.introvoke.com/reference/using-custom-crm-integration
+delivery:
+  direction: outbound (Sequel -> subscriber) and inbound registration (third-party form -> Sequel)
+  transports:
+  - Custom CMS webhooks (sync event data into a CMS)
+  - Custom CRM integration (sync registrant/engagement data into a CRM)
+  - HubSpot Webhook Action (register participants from third-party forms)
+  - Zapier (3,000+ apps via Sequel's Zapier integration)
+notes: >-
+  Webhook/event names and payload schemas are documented narratively in the reference
+  guides rather than as an AsyncAPI channel catalog; not fabricated here.
