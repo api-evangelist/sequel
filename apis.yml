@@ -219,6 +219,8 @@ apis:
   - type: APIReference
     url: https://docs.introvoke.com/reference
 common:
+- type: Overlay
+  url: overlays/sequel-openapi-overlay.yaml
 - type: Website
   url: https://sequel.io/
 - type: DeveloperPortal
