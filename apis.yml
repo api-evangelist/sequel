@@ -32,7 +32,7 @@ x-tier: stub
 x-tier-reason: portfolio-lead
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-21'
+modified: '2026-08-13'
 tags:
 - Company
 - Webinars
@@ -275,12 +275,28 @@ common:
   url: asyncapi/sequel-webhooks.yml
 - type: LLMsTxt
   url: llms/sequel-llms.txt
+- type: ToolCrosswalk
+  url: mcp/sequel-tool-crosswalk.yml
+- type: OAuthScopes
+  url: scopes/sequel-scopes.yml
+- type: Plans
+  url: plans/sequel-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/sequel-rate-limits.yml
+- type: ChangeLog
+  url: changelog/sequel-changelog.yml
+- type: TrustCenter
+  url: https://trust.sequel.io/
+- type: Compliance
+  url: https://trust.sequel.io/
+- type: Blog
+  url: https://sequel.io/blog
 - type: AgentSkill
   url: skills/sequel-create-and-embed-event.md
 - type: AgentSkill
   url: skills/sequel-networking-hub-setup.md
 x-enrichment:
-  date: '2026-07-21'
+  date: '2026-08-13'
   status: enriched
-  artifacts_added: 19
+  artifacts_added: 6
   pass: local-v1
