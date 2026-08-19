@@ -1,0 +1,44 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Introvoke Analytics Media API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Media",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "get_apimediacreate-asset",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.introvoke.com/api/v1/api/media/create-asset"
+          }
+        },
+        {
+          "info": {
+            "name": "get_apimediaupload-asset",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.introvoke.com/api/v1/api/media/upload-asset"
+          }
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

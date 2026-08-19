@@ -1,0 +1,43 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Introvoke Analytics event theme API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "event theme",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "GET /v3/events/{eventId}/theme",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.introvoke.com/api/v1/v3/events/:eventId/theme",
+            "params": [
+              {
+                "name": "eventId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of the event"
+              }
+            ]
+          },
+          "docs": "Returns the event customization theme for the event based on the business rules."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

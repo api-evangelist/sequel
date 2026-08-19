@@ -1,0 +1,92 @@
+generated: '2026-08-13'
+method: searched
+source: https://sequel.io/pricing
+currency: USD
+model: >-
+  Seat-free, attendee-volume based subscription. Every tier is sold through a demo
+  rather than self-serve checkout — the page states plainly: "Every plan starts with
+  a demo, not a checkout — we'll confirm the right attendee volume with you first."
+  Only the entry tier publishes a price; the two higher tiers are quoted on attendee
+  volume.
+billing_periods:
+- monthly
+- annual
+annual_discount: "12% (page states 'Save 12%' / 'Pay for the full year and save 12%')"
+plan_count: 3
+plans:
+- name: Growth
+  price_annual_per_month: 833
+  price_monthly: 950
+  currency: USD
+  billing_note: >-
+    $833/m billed annually (page shows $950/m as the monthly rate and "Billed annually,
+    save $1,400").
+  quota:
+    attendees_per_session: "up to 500"
+    sessions: unlimited
+    session_duration: "up to 3 hours each"
+    hosts: unlimited
+  included:
+  - Unlimited sessions up to 3 hours each
+  - Unlimited hosts
+  - Advanced registration with bulk upload and email validation
+  - Email customization and cadences
+  - Brand customization including fonts, colors, backgrounds, and overlays
+  - Audience engagement including chat, polls, breakout rooms, Q&A and post-event surveys
+  - Media Hub with video editing, simulive, and social sharing
+  feature_count_advertised: 10
+- name: Business
+  price: null
+  price_label: "Let's talk"
+  currency: USD
+  billing_note: Priced on your attendee volume. Marked "Most popular" on the pricing page.
+  quota:
+    attendees_per_session: "1,000 - 3,000"
+    session_duration: custom
+    concurrent_sessions: unlimited
+  included:
+  - Everything in Growth
+  - Custom session duration
+  - Unlimited concurrent sessions
+  - Drag & drop email editor
+  - One-off and scheduled custom emails
+  - Advanced registration (waitlist, block domains, approvals)
+  - Drag & drop landing pages
+  - In-Person events (add-on)
+  feature_count_advertised: 17
+- name: Enterprise
+  price: null
+  price_label: Custom contract and security review
+  currency: USD
+  quota:
+    attendees_per_session: "3,000 - 10,000"
+    session_duration: unlimited
+  included:
+  - Everything in Business
+  - Unlimited session duration
+  - Custom embed functionality with direct access to styles
+  - Custom email domain
+  - Custom analytics and reporting with integrations to your own database
+  - Custom built integrations for your system
+  - Custom CMS integrations
+  - Enhanced security with IP proxy
+  feature_count_advertised: 13
+api_and_agent_access:
+  api_included: >-
+    The REST (Introvoke) API is not sold as a separate metered product and no per-call
+    pricing is published; API access is part of the platform subscription.
+  mcp_server: >-
+    The MCP server page states the MCP Server is "Included on every Sequel plan. No
+    extra cost." (https://sequel.io/platform/mcp-server)
+comparison_table:
+  published: true
+  features_compared: 166
+  categories: 17
+  note: >-
+    The pricing page carries a 166-feature comparison matrix across 17 categories,
+    including per-tier allowances (e.g. on-stage presenters 25, concurrent stage 1 on
+    Growth, session duration 1 hour on the base allowance row).
+notes: >-
+  No free tier and no free trial are published; the only entry point is a demo request
+  at https://sequel.io/book-a-demo. Prices captured verbatim from the public pricing
+  page on the date above and may change.

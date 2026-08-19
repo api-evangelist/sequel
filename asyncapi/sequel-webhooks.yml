@@ -1,25 +1,167 @@
-generated: '2026-07-21'
+generated: '2026-08-13'
 method: searched
 spec_type: Webhooks
 source: https://docs.introvoke.com/reference/getting-started-with-sequel-web-hooks
 description: >-
-  Sequel documents a webhook surface for pushing event data to external systems. No
-  machine-readable AsyncAPI document is published, so this captures the documented
-  webhook/event catalog only.
+  Sequel publishes a named, documented webhook surface with six event types and a full
+  subscription-management API. No machine-readable AsyncAPI document is published, so
+  this captures the documented event catalog and subscription contract only — the event
+  names, subscription operations, request/response bodies and expiry rules below are
+  quoted from the provider's own reference and are not fabricated.
 docs:
 - title: Getting started with Sequel webhooks
   url: https://docs.introvoke.com/reference/getting-started-with-sequel-web-hooks
+  updated: '2025-05-02'
 - title: Using Custom CMS Webhooks
   url: https://docs.introvoke.com/reference/using-custom-cms
 - title: Using Custom CRM Integration
   url: https://docs.introvoke.com/reference/using-custom-crm-integration
+base_url: https://api.introvoke.com
 delivery:
-  direction: outbound (Sequel -> subscriber) and inbound registration (third-party form -> Sequel)
-  transports:
-  - Custom CMS webhooks (sync event data into a CMS)
-  - Custom CRM integration (sync registrant/engagement data into a CRM)
-  - HubSpot Webhook Action (register participants from third-party forms)
-  - Zapier (3,000+ apps via Sequel's Zapier integration)
-notes: >-
-  Webhook/event names and payload schemas are documented narratively in the reference
-  guides rather than as an AsyncAPI channel catalog; not fabricated here.
+  direction: outbound (Sequel POSTs to a subscriber endpoint)
+  transport: HTTPS POST to a subscriber-registered endpoint
+  authentication: >-
+    A per-subscription `clientSecret` is returned once at registration (and reissued on
+    renewal) and is never retrievable afterwards. The docs do not publish the signature
+    algorithm or the header the secret is used to verify.
+  model: >-
+    Explicit, expiring subscriptions rather than a dashboard toggle — closer to Microsoft
+    Graph than to a Stripe-style endpoint list.
+events:
+- name: virtual-stage-event-started
+  title: Virtual Stage Event Started
+  trigger: >-
+    The stream for the event starts, usually when the host clicks "Go Live" on the
+    virtual stage.
+  payload: Event and company information for the event that went live.
+- name: virtual-stage-event-ended
+  title: Virtual Stage Event Ended
+  trigger: >-
+    The stream for the event ends, usually when the host clicks "End Event" or
+    "End Event and Start Networking".
+  payload: >-
+    A list of users (hosts, presenters and attendees) for the event, covering from the
+    event start date.
+- name: new-attendee-pre-registration
+  title: New Attendee Pre-registration
+  trigger: An attendee registers for a virtual stage event configured for pre-registration.
+  payload: >-
+    Attendee name, e-mail, and responses to any custom questions configured for the event.
+- name: virtual-stage-created
+  title: Event Created
+  trigger: An event is created.
+- name: virtual-stage-updated
+  title: Event Updated
+  trigger: An event is updated.
+- name: virtual-stage-deleted
+  title: Event Deleted
+  trigger: An event is deleted.
+event_count: 6
+subscription:
+  authentication: JWT for the Introvoke API, sent as a request header.
+  default_length_days: 90
+  min_length_days: 2
+  max_length_days: 365
+  expiry_note: >-
+    Subscriptions expire. A consumer that does not renew silently stops receiving events
+    after 90 days by default.
+  operations:
+  - name: Register a web hook
+    method: POST
+    path: /api/integrations/webhooks
+    request_body:
+      eventType: "Introvoke event type, e.g. virtual-stage-event-ended"
+      subscriptionInfo:
+        companyId: unique id of the company
+        eventId: unique id of the event (optional)
+        endpoint: web hook endpoint to POST data to
+        subscriptionLengthInDays: "optional, 2-365, default 90"
+    responses:
+      '201':
+        body:
+          webHookSubscriptionId: unique id of the subscription
+          clientSecret: secret phrase
+          expiresOn: date for subscription expiration
+        note: The clientSecret is not retrievable after this response.
+      '400': Event type is not valid or subscription length is out of range.
+      '404': The company does not exist or the user does not have access to it.
+  - name: Retrieve a web hook
+    method: GET
+    path: /api/integrations/webhooks/:webHookSubscriptionId
+    responses:
+      '200':
+        body:
+          webHookSubscriptionId: unique id of the subscription
+          subscriptionInfo:
+            eventType: Introvoke event type
+            companyId: unique id of the company
+            eventId: unique id of the event
+            endpoint: web hook endpoint to POST data to
+            expiresOn: date for subscription expiration
+      '404': Subscription id does not exist or the user does not have access to it.
+  - name: Edit a web hook
+    method: PUT
+    path: /api/integrations/webhooks/:webHookSubscriptionId
+    request_body:
+      subscriptionInfo:
+        endpoint: "(optional) web hook endpoint to POST data to"
+        extendSubscriptionByDays: "(optional) 2-365, default 0"
+    responses:
+      '200': Returns the updated subscription info.
+      '404': Subscription id does not exist or the user does not have access to it.
+  - name: Renew a web hook
+    method: POST
+    path: /api/integrations/webhooks/renew/:webHookSubscriptionId
+    request_body:
+      subscriptionInfo:
+        subscriptionLengthInDays: "(optional) 2-365, default 90"
+    responses:
+      '200':
+        body:
+          webHookSubscriptionId: unique id of the subscription
+          clientSecret: new secret phrase
+          expiresOn: date for subscription expiration
+        note: Renewal issues a NEW clientSecret; the previous one stops being valid.
+      '404': Subscription id does not exist or the user does not have access to it.
+  - name: Unregister a web hook
+    method: DELETE
+    path: /api/integrations/webhooks/:webHookSubscriptionId
+    responses:
+      '200':
+        body:
+          webHookSubscriptionId: unique id of the subscription
+      '404': Subscription id does not exist or the user does not have access to it.
+other_event_transports:
+- name: Custom CMS webhooks
+  description: Create, update and delete CMS entries automatically from Sequel events.
+  docs: https://docs.introvoke.com/reference/using-custom-cms
+- name: Custom CRM integration
+  description: Sync registrant and engagement data into a CRM.
+  docs: https://docs.introvoke.com/reference/using-custom-crm-integration
+- name: Native CMS integrations
+  description: WordPress and Webflow one-click, plus Contentful and Drupal (Drupal added 2026-07-10).
+  docs: https://sequel.io/integrations
+- name: Zapier
+  description: 1,000+ apps via Sequel's Zapier integration.
+  docs: https://sequel.io/integrations
+asyncapi:
+  published: false
+  note: >-
+    No AsyncAPI document is served at /asyncapi.yaml or linked from the docs, the
+    llms.txt index or the GitHub org. The event catalog above is complete enough to
+    author one, but authoring a spec the provider does not publish would misrepresent
+    their surface, so none is written.
+gaps:
+  - >-
+    The webhook subscription operations (POST/GET/PUT/DELETE /api/integrations/webhooks)
+    are documented in prose but are absent from the published OpenAPI, so they are not
+    in openapi/ and cannot be reached by a generated client.
+  - >-
+    Payload schemas are described narratively ("event and company information", "a list
+    of users") with no field-level schema or example body for any of the six events.
+  - >-
+    No signature verification scheme is documented for the clientSecret, so a consumer
+    cannot verify a delivery is genuinely from Sequel.
+  - >-
+    Three of the six event types (virtual-stage-created / -updated / -deleted) are named
+    in the catalog with no description, trigger detail or payload at all.

@@ -1,0 +1,205 @@
+{
+  "item": [
+    {
+      "id": "8a799a95-4785-4700-9360-b2de72ce7702",
+      "name": "platform",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "02ecf74a-00ca-4fa2-ad06-ed692e0a20ba",
+          "name": "Returns the default event customization theme that applies to all events, unless overridden at the company and event level.\nThis endpoint can be used for clients which update to theme or for preview. The default theme can be used as a starting point to edit new themes.",
+          "request": {
+            "name": "Returns the default event customization theme that applies to all events, unless overridden at the company and event level.\nThis endpoint can be used for clients which update to theme or for preview. The default theme can be used as a starting point to edit new themes.",
+            "description": {
+              "content": "Returns the default event customization theme that applies to all events, unless overridden at the company and event level.\nThis endpoint can be used for clients which update to theme or for preview. The default theme can be used as a starting point to edit new themes.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "customizations",
+                "events",
+                "default"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5f443a24-2399-4dc6-9b44-90c7e2918f76",
+              "name": "default platform event customization theme",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customizations",
+                    "events",
+                    "default"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"string\",\n  \"defaultTheme\": true,\n  \"brandColors\": [\n    \"string\",\n    \"string\"\n  ],\n  \"fonts\": [\n    {\n      \"fontName\": \"string\",\n      \"fontUrl\": \"string\",\n      \"isPrimary\": true\n    },\n    {\n      \"fontName\": \"string\",\n      \"fontUrl\": \"string\",\n      \"isPrimary\": true\n    }\n  ],\n  \"virtualStage\": {\n    \"background\": {\n      \"backgroundColor\": \"string\",\n      \"imageUrl\": \"string\",\n      \"textColor\": \"string\"\n    },\n    \"watermark\": {\n      \"backgroundColor\": \"string\",\n      \"imageUrl\": \"string\",\n      \"textColor\": \"string\"\n    },\n    \"countdown\": {\n      \"textColor\": \"string\"\n    },\n    \"presenter\": {\n      \"glowColor\": \"string\"\n    }\n  },\n  \"networkingHub\": {\n    \"circleGraphics\": {\n      \"backgroundColor\": \"string\",\n      \"imageUrl\": \"string\",\n      \"textColor\": \"string\"\n    },\n    \"joinNetworking\": {\n      \"backgroundColor\": \"string\",\n      \"imageUrl\": \"string\",\n      \"textColor\": \"string\"\n    },\n    \"returnToStage\": {\n      \"backgroundColor\": \"string\",\n      \"imageUrl\": \"string\",\n      \"textColor\": \"string\"\n    }\n  },\n  \"warningNotices\": {\n    \"buttonColor\": \"string\"\n  },\n  \"chat\": {\n    \"enabled\": true,\n    \"colors\": [\n      \"string\",\n      \"string\"\n    ],\n    \"badge\": {\n      \"backgroundColor\": \"string\",\n      \"imageUrl\": \"string\",\n      \"textColor\": \"string\"\n    }\n  },\n  \"participantList\": {\n    \"enabled\": false,\n    \"showTabFor\": 8383.075738937056,\n    \"showCountFor\": 7013.231345015936\n  },\n  \"qna\": {\n    \"enabled\": true\n  },\n  \"polls\": {\n    \"enabled\": false\n  },\n  \"privateMessages\": {\n    \"enabled\": true\n  },\n  \"poweredByIntrovokeLabel\": {\n    \"enabled\": false\n  },\n  \"chatReactions\": {\n    \"enabled\": false,\n    \"reactions\": [\n      {\n        \"reaction\": \"string\",\n        \"image\": \"string\",\n        \"label\": \"string\"\n      },\n      {\n        \"reaction\": \"string\",\n        \"image\": \"string\",\n        \"label\": \"string\"\n      }\n    ]\n  },\n  \"liveReactions\": {\n    \"enabled\": false,\n    \"reactions\": [\n      {\n        \"reaction\": \"string\",\n        \"image\": \"string\",\n        \"label\": \"string\"\n      },\n      {\n        \"reaction\": \"string\",\n        \"image\": \"string\",\n        \"label\": \"string\"\n      }\n    ]\n  },\n  \"emailSettings\": {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"when\": \"string\",\n    \"replayToEmail\": \"string\",\n    \"fromEmail\": \"string\",\n    \"fromName\": \"string\",\n    \"isCustom\": false,\n    \"activated\": false,\n    \"emailTemplate\": {\n      \"name\": \"string\",\n      \"subject\": \"string\",\n      \"hoursToWait\": 3670.2954305133294,\n      \"htmlBody\": \"string\",\n      \"sendGridTemplateId\": \"string\",\n      \"bodyText\": \"string\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "69936a85-aa31-48bf-94c7-6e51c0fb2c4b",
+          "name": "Returns an array of color pallets (with primary, secondary and tertiary colors) that can be used in the editor. This endpoint can be used for clients which update to theme or for preview.",
+          "request": {
+            "name": "Returns an array of color pallets (with primary, secondary and tertiary colors) that can be used in the editor. This endpoint can be used for clients which update to theme or for preview.",
+            "description": {
+              "content": "Returns an array of color pallets (with primary, secondary and tertiary colors) that can be used in the editor. This endpoint can be used for clients which update to theme or for preview.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "customizations",
+                "events",
+                "suggested-color-pallets"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ccd75879-954a-48ac-b36d-77f839641bc8",
+              "name": "suggested color pallets",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customizations",
+                    "events",
+                    "suggested-color-pallets"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  [\n    \"string\",\n    \"string\"\n  ],\n  [\n    \"string\",\n    \"string\"\n  ]\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.introvoke.com/api/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "57da72ad-8b62-47bf-888f-f13b59de93c7",
+    "name": "Introvoke Analytics platform API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "This is the documentation required to access the Introvoke API. It contains information on how to create Companies, add events to each company and manage the presenters.\n\nContact Support:\n Email: support@introvoke.com",
+      "type": "text/plain"
+    }
+  }
+}

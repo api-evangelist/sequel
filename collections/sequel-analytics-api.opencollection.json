@@ -1,0 +1,80 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Introvoke Analytics API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Analytics",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Live video watched over time",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.introvoke.com/api/v1/api/analytics/getVideoWatchOverTime/:EVENT_ID",
+            "params": [
+              {
+                "name": "EVENT_ID",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "The endpoint returns peak concurrent users for each minute during a live event"
+        },
+        {
+          "info": {
+            "name": "Participant List with engaged minutes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.introvoke.com/api/v1/api/analytics/user-engagement/events/:eventId/top-participants (COPY)",
+            "params": [
+              {
+                "name": "eventId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "startDate",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "endDate",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "engagementType",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Participant List with engaged minutes"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

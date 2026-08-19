@@ -1,22 +1,61 @@
-generated: '2026-07-21'
+generated: '2026-08-13'
 method: searched
 status: published
-source: https://github.com/introvoke/sequel-claude-plugin
+source: https://sequel.io/platform/mcp-server
+sources:
+- https://sequel.io/platform/mcp-server
+- https://github.com/introvoke/sequel-claude-plugin
+- https://api.introvoke.com/.well-known/oauth-protected-resource
 server:
   name: sequel
   transport: http
   url: https://api.introvoke.com/api/mcp
   auth: OAuth 2.0 (Auth0) — interactive browser flow via /mcp; tokens stored on client
   description: >-
-    Official Sequel MCP server. Exposes read-only access to a Sequel account's
-    companies, webinar events, and PII-redacted transcripts so agents can browse
-    events and repurpose transcript content (blog posts, newsletters, social posts).
+    Official Sequel MCP server. Makes event transcripts and audience/engagement data a
+    native data source inside MCP-capable AI tools (the product page names Claude,
+    ChatGPT, Microsoft Copilot and Gemini). Originally a read-only transcript surface for
+    content repurposing; the "Sequel MCP Server - Now With Data" product update extended
+    it to audience intelligence — leads, engagement history, event participation and
+    account-level analytics.
+deployment:
+  mode: remote
+  endpoint: https://api.introvoke.com/api/mcp
+  auth: oauth
+  verified: probed
+  probe: gated
+  checked: '2026-08-13'
+  note: >-
+    Remote, not stdio. An MCP client POSTs to the https endpoint above; there is no npx
+    or pip package to install. The Claude plugin is a convenience wrapper that configures
+    this same remote endpoint, not a local server.
+  evidence:
+  - url: https://api.introvoke.com/.well-known/oauth-protected-resource
+    http_status: 200
+    finding: >-
+      RFC 9728 protected-resource metadata naming the MCP resource
+      (https://prod-api-elb.sequelvideo.com/api/mcp behind the public
+      api.introvoke.com/api/mcp), its authorization server (https://login.introvoke.com)
+      and bearer_methods_supported [header]. This is provider-served proof the remote
+      endpoint exists and is OAuth-protected.
+  - url: https://sequel.io/platform/mcp-server
+    http_status: 200
+    finding: >-
+      Product page: "Link Sequel to your AI tool using the MCP endpoint in minutes, with
+      no engineering required" and "Included on every Sequel plan. No extra cost."
 distribution:
   claude_plugin: introvoke/sequel-claude-plugin
   marketplace: sequel-plugins
   install: claude plugin install sequel@sequel-plugins
   license: MIT
   author: Sequel (https://sequel.io)
+  chatgpt_app: >-
+    A "ChatGPT App" is listed in the provider's Product Updates feed
+    (https://sequel.io/product-updates) alongside the MCP server.
+pricing:
+  included_in_all_plans: true
+  additional_cost: false
+  source: https://sequel.io/platform/mcp-server
 tools:
 - name: list_companies
   description: Returns the companies your account belongs to
@@ -28,3 +67,13 @@ tools:
   description: Returns SRT/VTT transcript file references for an event
 - name: get_event_srt_chunks
   description: Returns paginated, PII-redacted transcript text
+tools_note: >-
+  This is the tool list the provider publishes with the Claude plugin. It could NOT be
+  confirmed against a live tools/list: an anonymous
+  POST {"jsonrpc":"2.0","id":1,"method":"tools/list"} to the endpoint is rejected by the
+  OAuth challenge, so no per-tool inputSchema was captured. The product page describes
+  audience/lead/account querying that has no corresponding tool in this published list,
+  which suggests the live tool set is now larger than what the plugin manifest documents.
+  Confirming that requires an authenticated introspection with a customer account.
+crosswalk: mcp/sequel-tool-crosswalk.yml
+scopes: scopes/sequel-scopes.yml

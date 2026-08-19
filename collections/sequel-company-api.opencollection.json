@@ -1,0 +1,169 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Introvoke Analytics company API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "company",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Find company by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.introvoke.com/api/v1/company/:companyId",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "",
+                "type": "path",
+                "description": "ID of company to return"
+              }
+            ]
+          },
+          "docs": "Returns a single company"
+        },
+        {
+          "info": {
+            "name": "Update a company with json data",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.introvoke.com/api/v1/company/:companyId",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "",
+                "type": "path",
+                "description": "ID of company that needs to be updated"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a company with json data"
+        },
+        {
+          "info": {
+            "name": "Get all circle recordings for a company",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.introvoke.com/api/v1/company/:companyId/circleRecordings",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "",
+                "type": "path",
+                "description": "ID of company to get circle recordings for"
+              }
+            ]
+          },
+          "docs": "Returns a list of all circle recordings associated with the company"
+        },
+        {
+          "info": {
+            "name": "Create a new company under a parent company",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.introvoke.com/api/v1/company/:companyId/create",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "",
+                "type": "path",
+                "description": "ID of company to return"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new company under a parent company"
+        },
+        {
+          "info": {
+            "name": "List all events under a parent company",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.introvoke.com/api/v1/company/:companyId/events",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "",
+                "type": "path",
+                "description": "ID of company to return"
+              }
+            ]
+          },
+          "docs": "List all events under a parent company"
+        },
+        {
+          "info": {
+            "name": "List all companies under a parent company",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.introvoke.com/api/v1/company/:companyId/list",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "",
+                "type": "path",
+                "description": "ID of company to return"
+              }
+            ]
+          },
+          "docs": "List all companies under a parent company"
+        },
+        {
+          "info": {
+            "name": "Update metadata for the company",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.introvoke.com/api/v1/company/:companyId/metadata",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "",
+                "type": "path",
+                "description": "ID of company to update"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update metadata for the company"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

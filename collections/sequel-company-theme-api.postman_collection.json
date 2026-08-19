@@ -1,0 +1,191 @@
+{
+  "item": [
+    {
+      "id": "6af4956b-ba93-4cb2-9de5-5ee83f150b89",
+      "name": "company theme",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a7c7e01a-a855-4a2a-aea8-bc62e982ccc7",
+          "name": "Returns the event customization theme for all events for the company based on the business rules.",
+          "request": {
+            "name": "Returns the event customization theme for all events for the company based on the business rules.",
+            "description": {
+              "content": "Returns the event customization theme for all events for the company based on the business rules.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v3",
+                "companies",
+                ":companyId",
+                "theme"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "companyId",
+                  "description": "(Required) Unique ID of the company"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "73d2105a-8901-4cb0-a4da-df7eaf1942e7",
+              "name": "event customization theme for the all events for the company",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "companies",
+                    ":companyId",
+                    "theme"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "companyId",
+                      "description": "(Required) Unique ID of the company"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"string\",\n  \"defaultTheme\": false,\n  \"brandColors\": [\n    \"string\",\n    \"string\"\n  ],\n  \"fonts\": [\n    {\n      \"fontName\": \"string\",\n      \"fontUrl\": \"string\",\n      \"isPrimary\": true\n    },\n    {\n      \"fontName\": \"string\",\n      \"fontUrl\": \"string\",\n      \"isPrimary\": false\n    }\n  ],\n  \"virtualStage\": {\n    \"background\": {\n      \"backgroundColor\": \"string\",\n      \"imageUrl\": \"string\",\n      \"textColor\": \"string\"\n    },\n    \"watermark\": {\n      \"backgroundColor\": \"string\",\n      \"imageUrl\": \"string\",\n      \"textColor\": \"string\"\n    },\n    \"countdown\": {\n      \"textColor\": \"string\"\n    },\n    \"presenter\": {\n      \"glowColor\": \"string\"\n    }\n  },\n  \"networkingHub\": {\n    \"circleGraphics\": {\n      \"backgroundColor\": \"string\",\n      \"imageUrl\": \"string\",\n      \"textColor\": \"string\"\n    },\n    \"joinNetworking\": {\n      \"backgroundColor\": \"string\",\n      \"imageUrl\": \"string\",\n      \"textColor\": \"string\"\n    },\n    \"returnToStage\": {\n      \"backgroundColor\": \"string\",\n      \"imageUrl\": \"string\",\n      \"textColor\": \"string\"\n    }\n  },\n  \"warningNotices\": {\n    \"buttonColor\": \"string\"\n  },\n  \"chat\": {\n    \"enabled\": true,\n    \"colors\": [\n      \"string\",\n      \"string\"\n    ],\n    \"badge\": {\n      \"backgroundColor\": \"string\",\n      \"imageUrl\": \"string\",\n      \"textColor\": \"string\"\n    }\n  },\n  \"participantList\": {\n    \"enabled\": true,\n    \"showTabFor\": 1646.755585781473,\n    \"showCountFor\": 7418.424447897094\n  },\n  \"qna\": {\n    \"enabled\": false\n  },\n  \"polls\": {\n    \"enabled\": false\n  },\n  \"privateMessages\": {\n    \"enabled\": false\n  },\n  \"poweredByIntrovokeLabel\": {\n    \"enabled\": true\n  },\n  \"chatReactions\": {\n    \"enabled\": true,\n    \"reactions\": [\n      {\n        \"reaction\": \"string\",\n        \"image\": \"string\",\n        \"label\": \"string\"\n      },\n      {\n        \"reaction\": \"string\",\n        \"image\": \"string\",\n        \"label\": \"string\"\n      }\n    ]\n  },\n  \"liveReactions\": {\n    \"enabled\": true,\n    \"reactions\": [\n      {\n        \"reaction\": \"string\",\n        \"image\": \"string\",\n        \"label\": \"string\"\n      },\n      {\n        \"reaction\": \"string\",\n        \"image\": \"string\",\n        \"label\": \"string\"\n      }\n    ]\n  },\n  \"emailSettings\": {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"when\": \"string\",\n    \"replayToEmail\": \"string\",\n    \"fromEmail\": \"string\",\n    \"fromName\": \"string\",\n    \"isCustom\": true,\n    \"activated\": false,\n    \"emailTemplate\": {\n      \"name\": \"string\",\n      \"subject\": \"string\",\n      \"hoursToWait\": 5687.6824973936,\n      \"htmlBody\": \"string\",\n      \"sendGridTemplateId\": \"string\",\n      \"bodyText\": \"string\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cf2b33cf-2ddb-43c4-a93e-d4a3ca02ca62",
+              "name": "company id is incorrect or user does not have access the company.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "companies",
+                    ":companyId",
+                    "theme"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "companyId",
+                      "description": "(Required) Unique ID of the company"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.introvoke.com/api/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "42e48007-dc22-4b85-ae93-48e32b503eef",
+    "name": "Introvoke Analytics company theme API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "This is the documentation required to access the Introvoke API. It contains information on how to create Companies, add events to each company and manage the presenters.\n\nContact Support:\n Email: support@introvoke.com",
+      "type": "text/plain"
+    }
+  }
+}

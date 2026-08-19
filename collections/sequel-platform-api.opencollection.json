@@ -1,0 +1,46 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Introvoke Analytics platform API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "platform",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "GET /customizations/events/default",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.introvoke.com/api/v1/customizations/events/default"
+          },
+          "docs": "Returns the default event customization theme that applies to all events, unless overridden at the company and event level.\nThis endpoint can be used for clients which update to theme or for preview. The default theme can be used as a starting point to edit new themes."
+        },
+        {
+          "info": {
+            "name": "GET /customizations/events/suggested-color-pallets",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.introvoke.com/api/v1/customizations/events/suggested-color-pallets"
+          },
+          "docs": "Returns an array of color pallets (with primary, secondary and tertiary colors) that can be used in the editor. This endpoint can be used for clients which update to theme or for preview."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,91 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Introvoke Analytics company theme fonts API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "company theme fonts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "GET /customizations/events/company/{companyId}/fonts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.introvoke.com/api/v1/customizations/events/company/:companyId/fonts",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of the company"
+              }
+            ]
+          },
+          "docs": "Returns list of customized fonts associated with the company"
+        },
+        {
+          "info": {
+            "name": "POST /customizations/events/company/{companyId}/fonts",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.introvoke.com/api/v1/customizations/events/company/:companyId/fonts",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of the companyId"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add new fonts for the company. The value is stored at the company level, but can be used by customization themes on both event and company levels. If the name of the font, matches the existing font, it will update the font URL."
+        },
+        {
+          "info": {
+            "name": "DELETE /customizations/events/company/{companyId}/fonts/font/{fontId}",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.introvoke.com/api/v1/customizations/events/company/:companyId/fonts/font/:fontId",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of the company"
+              },
+              {
+                "name": "fontId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of the registered font"
+              }
+            ]
+          },
+          "docs": "Unregister the specified font associated with the specified company."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

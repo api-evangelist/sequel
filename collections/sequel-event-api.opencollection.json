@@ -1,0 +1,332 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Introvoke Analytics event API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "event",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a new event",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.introvoke.com/api/v1/event/create",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new event"
+        },
+        {
+          "info": {
+            "name": "Find event by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.introvoke.com/api/v1/event/:eventId",
+            "params": [
+              {
+                "name": "eventId",
+                "value": "",
+                "type": "path",
+                "description": "ID of event to return"
+              }
+            ]
+          },
+          "docs": "Returns a single event"
+        },
+        {
+          "info": {
+            "name": "Update an event with json data",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.introvoke.com/api/v1/event/:eventId",
+            "params": [
+              {
+                "name": "eventId",
+                "value": "",
+                "type": "path",
+                "description": "ID of event that needs to be updated"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update an event with json data"
+        },
+        {
+          "info": {
+            "name": "Delete an event",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.introvoke.com/api/v1/event/:eventId",
+            "params": [
+              {
+                "name": "eventId",
+                "value": "",
+                "type": "path",
+                "description": "event id to delete"
+              }
+            ]
+          },
+          "docs": "Delete an event"
+        },
+        {
+          "info": {
+            "name": "Return a list of replays for this event",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.introvoke.com/api/v1/event/:eventId/availableReplays",
+            "params": [
+              {
+                "name": "eventId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of the event"
+              },
+              {
+                "name": "secondsValidFor",
+                "value": "",
+                "type": "query",
+                "description": "Number of seconds the replay is valid for. 3600 (1 hour) by default."
+              }
+            ]
+          },
+          "docs": "Returns an array of replays for this event"
+        },
+        {
+          "info": {
+            "name": "Create a new event based on source event ",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.introvoke.com/api/v1/event/:eventId/clone",
+            "params": [
+              {
+                "name": "eventId",
+                "value": "",
+                "type": "path",
+                "description": "ID of event to return"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new event based on source event "
+        },
+        {
+          "info": {
+            "name": "Return the embed code for the event component",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.introvoke.com/api/v1/event/:eventId/embedCode",
+            "params": [
+              {
+                "name": "eventId",
+                "value": "",
+                "type": "path",
+                "description": "ID of event for the embed code"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Return the embed code for the event component"
+        },
+        {
+          "info": {
+            "name": "Add an organizer id to the event",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.introvoke.com/api/v1/event/:eventId/organizer",
+            "params": [
+              {
+                "name": "eventId",
+                "value": "",
+                "type": "path",
+                "description": "ID of event to update"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns the updated list of organizers"
+        },
+        {
+          "info": {
+            "name": "Delete an organizer id from the event",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.introvoke.com/api/v1/event/:eventId/organizer/:organizerId",
+            "params": [
+              {
+                "name": "eventId",
+                "value": "",
+                "type": "path",
+                "description": "ID of event to update"
+              },
+              {
+                "name": "organizerId",
+                "value": "",
+                "type": "path",
+                "description": "ID of the organizer to delete"
+              }
+            ]
+          },
+          "docs": "Returns the updated list of organizers"
+        },
+        {
+          "info": {
+            "name": "Add a presenter id to the event",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.introvoke.com/api/v1/event/:eventId/presenter",
+            "params": [
+              {
+                "name": "eventId",
+                "value": "",
+                "type": "path",
+                "description": "ID of event to update"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns the updated list of presenters"
+        },
+        {
+          "info": {
+            "name": "Delete a presenter id from the event",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.introvoke.com/api/v1/event/:eventId/presenter/:presenterId",
+            "params": [
+              {
+                "name": "eventId",
+                "value": "",
+                "type": "path",
+                "description": "ID of event to update"
+              },
+              {
+                "name": "presenterId",
+                "value": "",
+                "type": "path",
+                "description": "ID of the presenter to delete"
+              }
+            ]
+          },
+          "docs": "Returns the updated list of presenters"
+        },
+        {
+          "info": {
+            "name": "Register a user for the event",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.introvoke.com/api/v1/event/:eventId/registrant",
+            "params": [
+              {
+                "name": "eventId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of the event"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Adds a new registered user to this event"
+        },
+        {
+          "info": {
+            "name": "Delete a registered user from the event",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.introvoke.com/api/v1/event/:eventId/registrant",
+            "params": [
+              {
+                "name": "eventId",
+                "value": "",
+                "type": "path",
+                "description": "ID of event to update"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns OK"
+        },
+        {
+          "info": {
+            "name": "Return a list of all registered users",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.introvoke.com/api/v1/event/:eventId/registrants",
+            "params": [
+              {
+                "name": "eventId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of the event"
+              }
+            ]
+          },
+          "docs": "Returns an array of registrants for this event"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

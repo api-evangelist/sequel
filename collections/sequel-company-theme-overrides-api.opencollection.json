@@ -1,0 +1,91 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Introvoke Analytics company theme overrides API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "company theme overrides",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "GET /customizations/events/company/{companyId}/all-events",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.introvoke.com/api/v1/customizations/events/company/:companyId/all-events",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of the company"
+              },
+              {
+                "name": "fullTheme",
+                "value": "",
+                "type": "query",
+                "description": "flag to return full theme merged with overrides"
+              }
+            ]
+          },
+          "docs": "Returns the event customization theme overrides over the platform event customization theme that applies to all events for the company, unless overridden at the event level.\nThis endpoint can be used for clients which update to theme or for preview."
+        },
+        {
+          "info": {
+            "name": "POST /customizations/events/company/{companyId}/all-events",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.introvoke.com/api/v1/customizations/events/company/:companyId/all-events",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of the company"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Adds or updates event customization theme overrides that will be applied to the all events for the company.\nThis endpoint can be used by clients which update to theme or for preview."
+        },
+        {
+          "info": {
+            "name": "DELETE /customizations/events/company/{companyId}/all-events",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.introvoke.com/api/v1/customizations/events/company/:companyId/all-events",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of the company"
+              }
+            ]
+          },
+          "docs": "Deletes the event customization theme for company. The events without their own customization will use the default Introvoke Platform theme, after deletion."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

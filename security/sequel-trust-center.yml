@@ -1,0 +1,48 @@
+generated: '2026-08-13'
+method: probed
+probe: true
+url: https://trust.sequel.io/
+vendor: Vanta
+description: >-
+  Sequel runs a hosted Trust Center at trust.sequel.io, built on Vanta's trust-report
+  product. https://sequel.io/security redirects to it, and the marketing navigation
+  carries a "Security — Enterprise-grade, built in" entry pointing at the same surface.
+evidence:
+- source: https://trust.sequel.io/
+  http_status: 200
+  content_type: text/html
+  signals:
+  - 'og:title = "Sequel.io Trust Center"'
+  - 'meta keywords = "Trust, Security, Compliance, Automation"'
+  - assets served from assets.vanta.com (Vanta trust-report bundle)
+  - 'og:image = https://app.vanta.com/doc?s=hskpdnb3qr74wzs085wtz5'
+- source: https://sequel.io/security
+  http_status: 200
+  note: 302/redirect chain resolves to https://trust.sequel.io/
+certifications: []
+certifications_status: not-machine-readable
+certifications_note: >-
+  NOT an assertion that Sequel holds no certifications — it is a statement about what
+  is anonymously readable. The Vanta trust report renders entirely client-side: the
+  served HTML contains only the page title and description, and the Vanta trust-report
+  API (api.vanta.com/v1/trust-report/<slug>) answers 401 Unauthorized without a token.
+  No named certification (SOC 2, ISO 27001, PCI DSS, HIPAA, FedRAMP) appears in any
+  anonymously-fetchable document on sequel.io, docs.introvoke.com or help.sequel.io.
+  Confirming the certification list requires either a JS-rendering client or the
+  document-request flow Vanta trust centers gate behind an email.
+probes_that_missed:
+- url: https://api.vanta.com/v1/trust-report/hskpdnb3qr74wzs085wtz5
+  status: 401
+- url: https://sequel.io/trust
+  status: 404
+- url: https://sequel.io/.well-known/security.txt
+  status: 404
+related:
+  vulnerability_disclosure: >-
+    No public vulnerability-disclosure policy, bug-bounty program or security.txt was
+    found — see the probes recorded in well-known/sequel-well-known.yml. No
+    VulnerabilityDisclosure or Security artifact is emitted for that reason.
+  enterprise_controls: >-
+    The Enterprise plan advertises "Custom contract and security review" and "Enhanced
+    security with IP proxy" (plans/sequel-plans-pricing.yml), which indicates a
+    security-review process exists for enterprise buyers.

@@ -1,0 +1,464 @@
+{
+  "item": [
+    {
+      "id": "c120a429-ffb0-404b-b146-558bd3bb0e3a",
+      "name": "Analytics",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e20104e0-8f41-425d-aa36-13b49e48c01e",
+          "name": "Live video watched over time",
+          "request": {
+            "name": "Live video watched over time",
+            "description": {
+              "content": "The endpoint returns peak concurrent users for each minute during a live event",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "analytics",
+                "getVideoWatchOverTime",
+                ":EVENT_ID"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "EVENT_ID",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8914cb9e-931b-4233-91df-46b92341f650",
+              "name": "200",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "analytics",
+                    "getVideoWatchOverTime",
+                    ":EVENT_ID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "EVENT_ID",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"{\\\"VideoViews\\\":[[0,3],[1,3],[2,3],[3,3],[4,12],[5,10],[6,13],[7,13],[8,14],[9,14],[10,16]]}\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1f8c1a7a-e67a-4204-a4fd-6883ee7ce66e",
+              "name": "401",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "analytics",
+                    "getVideoWatchOverTime",
+                    ":EVENT_ID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "EVENT_ID",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"Token not found\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7d5e7285-595c-4af6-a2cf-a177b1a00426",
+              "name": "404",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "analytics",
+                    "getVideoWatchOverTime",
+                    ":EVENT_ID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "EVENT_ID",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "Event not found",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "16fd5e53-551a-489e-b806-8c52caa2cd5b",
+          "name": "Participant List with engaged minutes",
+          "request": {
+            "name": "Participant List with engaged minutes",
+            "description": {
+              "content": "",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "analytics",
+                "user-engagement",
+                "events",
+                ":eventId",
+                "top-participants (COPY)"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "10"
+                },
+                {
+                  "disabled": false,
+                  "key": "startDate",
+                  "value": "<date>"
+                },
+                {
+                  "disabled": false,
+                  "key": "endDate",
+                  "value": "<date>"
+                },
+                {
+                  "disabled": false,
+                  "key": "engagementType",
+                  "value": "all"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "eventId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6c105176-0bbb-4e52-95b1-f99f49eebb90",
+              "name": "200",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "analytics",
+                    "user-engagement",
+                    "events",
+                    ":eventId",
+                    "top-participants (COPY)"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "startDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "engagementType",
+                      "value": "all"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "eventId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"{\\n  \\\"eventName\\\": \\\"From One-time Events to Recurring Engagements  \\\",\\n  \\\"eventId\\\": \\\"2f64d929-aa02-457d-852a-50b2756e3029\\\",\\n  \\\"eventType\\\": \\\"virtualStageEvent\\\",\\n  \\\"company\\\": \\\"Introvoke Marketing\\\",\\n  \\\"companyId\\\": \\\"fab4f3d2-aaf8-49ab-a5c0-0924b8773593\\\",\\n  \\\"startDate\\\": null,\\n  \\\"endDate\\\": \\\"2022-08-23T09:56:13.937Z\\\",\\n  \\\"limit\\\": 10,\\n  \\\"numberOfUsers\\\": 57,\\n  \\\"totalEngagedMinutes\\\": 898,\\n  \\\"averageEngagedMinutesByUser\\\": 15.75,\\n  \\\"topParticipants\\\": [\\n    {\\n      \\\"name\\\": \\\"Yuliya\\\",\\n      \\\"userEmail\\\": \\\"yuliya@sequel.io\\\",\\n      \\\"engagedMinutes\\\": 113\\n    },\\n    {\\n      \\\"name\\\": \\\"Oana\\\",\\n      \\\"userEmail\\\": \\\"oana@sequel.io\\\",\\n      \\\"engagedMinutes\\\": 108\\n    },\\n    {\\n      \\\"name\\\": \\\"Connor Kirsch\\\",\\n      \\\"userEmail\\\": \\\"connor@sequel.io\\\",\\n      \\\"engagedMinutes\\\": 107\\n    },\\n    {\\n      \\\"name\\\": \\\"jennifer li\\\",\\n      \\\"userEmail\\\": \\\"jennifer.li.125@gmail.com\\\",\\n      \\\"engagedMinutes\\\": 45\\n    },\\n    {\\n      \\\"name\\\": \\\"Andrei Ermilov\\\",\\n      \\\"userEmail\\\": \\\"andrei@sequel.io\\\",\\n      \\\"engagedMinutes\\\": 41\\n    },\\n    {\\n      \\\"name\\\": \\\"Zach\\\",\\n      \\\"userEmail\\\": \\\"zach@sequel.io\\\",\\n      \\\"engagedMinutes\\\": 38\\n    },\\n    {\\n      \\\"name\\\": \\\"Eric\\\",\\n      \\\"userEmail\\\": \\\"eric@sequel.io\\\",\\n      \\\"engagedMinutes\\\": 32\\n    },\\n    {\\n      \\\"name\\\": \\\"Kevin Verronneau\\\",\\n      \\\"userEmail\\\": \\\"kevin@edny.com\\\",\\n      \\\"engagedMinutes\\\": 31\\n    },\\n    {\\n      \\\"name\\\": \\\"Logan Amstey\\\",\\n      \\\"userEmail\\\": \\\"logan@sequel.io\\\",\\n      \\\"engagedMinutes\\\": 31\\n    },\\n    {\\n      \\\"name\\\": \\\"Rachel \\\",\\n      \\\"userEmail\\\": \\\"rachel@earthcoast.com\\\",\\n      \\\"engagedMinutes\\\": 31\\n    }\\n  ]\\n}\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0fe7bacc-5bf8-4ca3-85e5-369dd43c9b8b",
+              "name": "400",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "analytics",
+                    "user-engagement",
+                    "events",
+                    ":eventId",
+                    "top-participants (COPY)"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "startDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "engagementType",
+                      "value": "all"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "eventId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"{}\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.introvoke.com/api/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "ccc326eb-7566-4ae7-87cd-f9d7e2a860a4",
+    "name": "Introvoke Analytics API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "This is the documentation required to access the Introvoke API. It contains information on how to create Companies, add events to each company and manage the presenters.\n\nContact Support:\n Email: support@introvoke.com",
+      "type": "text/plain"
+    }
+  }
+}

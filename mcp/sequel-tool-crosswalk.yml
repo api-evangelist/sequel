@@ -1,0 +1,137 @@
+generated: '2026-08-13'
+method: derived
+source: mcp/sequel-mcp.yml + openapi/_original/sequel-openapi-original.yml
+description: >-
+  Binds each tool published by the official Sequel MCP server to the Introvoke REST
+  operation(s) that back it, so an agent can read a tool's real input contract from
+  the OpenAPI operation instead of guessing it. The live MCP tools/list is OAuth-gated
+  (Auth0 interactive browser flow), so the tool names and descriptions come from the
+  provider's published server manifest and the mapping is by name/semantics — input
+  schemas were NOT read from a live tools/list response and confidence is set
+  accordingly.
+surfaces:
+  openapi:
+    file: openapi/_original/sequel-openapi-original.yml
+    base_url: https://api.introvoke.com/api/v1
+    gated: false
+  mcp:
+    url: https://api.introvoke.com/api/mcp
+    transport: http
+    gated: true
+    note: >-
+      tools/list requires an OAuth 2.0 (Auth0) access token; anonymous introspection
+      returns an authorization challenge, so per-tool inputSchema could not be captured.
+  graphql:
+    present: false
+crosswalk:
+- tool: list_companies
+  category: company
+  rest:
+  - listChildCompanies
+  binding: rest
+  confidence: low
+  note: >-
+    The tool returns the companies the authenticated account belongs to. The REST API
+    has no "companies for the current token" operation; the closest published operation
+    lists child companies under a parent id (GET /company/{companyId}/list). The MCP
+    server most likely resolves the account scope server-side, so this is a semantic
+    match, not an exact one.
+- tool: list_events
+  category: event
+  rest:
+  - listCompanyEvents
+  binding: rest
+  confidence: high
+  note: GET /company/{companyId}/events returns the events under a company.
+- tool: get_event
+  category: event
+  rest:
+  - geteventById
+  binding: rest
+  confidence: high
+  note: GET /event/{eventId} returns a single event.
+mcp_only:
+- tool: get_event_assets
+  reason: >-
+    Returns SRT/VTT transcript file references for an event. No public REST operation
+    exposes transcript assets; the closest REST surface is
+    GET /event/{eventId}/availableReplays, which returns replay video URLs, not captions.
+- tool: get_event_srt_chunks
+  reason: >-
+    Returns paginated, PII-redacted transcript text. There is no published REST
+    operation for transcript text, and the PII redaction is applied by the MCP server
+    itself, so this capability exists only on the agent surface.
+rest_only:
+- capability: analytics
+  operations:
+  - live-video-watched-over-time
+  - participant-list-with-engaged-minutes
+- capability: company management
+  operations:
+  - getcompanyById
+  - updatecompanyWithJson
+  - addCompanyToParent
+  - updateCompanyMetadata
+  - getCompanyCircleRecordings
+- capability: event management
+  operations:
+  - addEvent
+  - deleteevent
+  - updateEventWithJsonData
+  - cloneEvent
+  - getEmbedEventById
+- capability: presenters and organizers
+  operations:
+  - putHostById
+  - deleteHostById
+  - putPresenterById
+  - deletePresenterById
+- capability: registrants
+  operations:
+  - deleteRegistrantById
+  - deleteHubRegistrantById
+  - POST /event/{eventId}/registrant
+  - GET /event/{eventId}/registrants
+  - POST /networking/{id}/registrant
+- capability: networking hubs
+  operations:
+  - addNetworkingHub
+  - getNetworkingHubById
+  - updateNetworkingHub
+  - getNetworkingHubCircleRecordingDownloadUrl
+  - postClearChat
+  - getEmbedNetworkingHubById
+  - inviteUser
+  - returnNetworkingHubParticipants
+  - setUserProfile
+- capability: simulive
+  operations:
+  - set-event-simulive
+  - remove-simulive-event
+- capability: media assets
+  operations:
+  - get_apimediacreate-asset
+  - get_apimediaupload-asset
+- capability: theming and customization
+  operations:
+  - GET /customizations/events/default
+  - GET /customizations/events/suggested-color-pallets
+  - GET|POST|DELETE /customizations/events/company/{companyId}/all-events
+  - GET|POST /customizations/events/company/{companyId}/fonts
+  - DELETE /customizations/events/company/{companyId}/fonts/font/{fontId}
+  - GET|POST|DELETE /customizations/events/event/{eventId}
+  - GET /v3/companies/{companyId}/theme
+  - GET /v3/events/{eventId}/theme
+coverage:
+  tools_named: 5
+  tools_bound_to_rest: 3
+  mcp_only: 2
+  rest_operations_total: 51
+  rest_operations_with_operation_id: 34
+  rest_operations_with_a_tool: 3
+notes: >-
+  The MCP server is deliberately a read-only, transcript-focused slice of the platform:
+  it exposes browsing (companies, events) plus the transcript capability the REST API
+  does not publish at all. Every write operation in the REST surface — creating events,
+  managing presenters, registrants, networking hubs, themes and simulive — has no MCP
+  tool, so an agent cannot mutate a Sequel account through the published agent surface.

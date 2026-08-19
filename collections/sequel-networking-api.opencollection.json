@@ -1,0 +1,269 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Introvoke Analytics networking API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "networking",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a new networking hub",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.introvoke.com/api/v1/networking",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new networking hub"
+        },
+        {
+          "info": {
+            "name": "Find NetworkingHub by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.introvoke.com/api/v1/networking/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of NetworkingHub hub to return"
+              }
+            ]
+          },
+          "docs": "Returns a single NetworkingHub"
+        },
+        {
+          "info": {
+            "name": "Update a NetworkingHub hub with json data",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.introvoke.com/api/v1/networking/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of NetworkingHub that needs to be updated"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a NetworkingHub hub with json data"
+        },
+        {
+          "info": {
+            "name": "Retrieves the download URL for the MP4 recording for the specified circle id and recording id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.introvoke.com/api/v1/networking/:id/circle/:circleId/recording/:recordingId",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of Networking Hub "
+              },
+              {
+                "name": "circleId",
+                "value": "",
+                "type": "path",
+                "description": "ID of Networking Hub Circle "
+              },
+              {
+                "name": "recordingId",
+                "value": "",
+                "type": "path",
+                "description": "ID of recording "
+              }
+            ]
+          },
+          "docs": "Returns the download URL for the recording and expiration date/time for the URL"
+        },
+        {
+          "info": {
+            "name": "Clear all networking hub chat channels with the option to clear individual circles",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.introvoke.com/api/v1/networking/:id/clearChat",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of NetworkingHub"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Clear all networking hub chat channels with the option to clear individual circles"
+        },
+        {
+          "info": {
+            "name": "Return the embed code for the Networking hub component",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.introvoke.com/api/v1/networking/:id/embedCode",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of NetworkingHub for the embed code"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Return the embed code for the Networking hub component"
+        },
+        {
+          "info": {
+            "name": "Invite another user to join a conversation",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.introvoke.com/api/v1/networking/:id/inviteUser",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of NetworkingHub"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Invite another user to join a conversation"
+        },
+        {
+          "info": {
+            "name": "Return a list of participants",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.introvoke.com/api/v1/networking/:id/participantsList",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of NetworkingHub that needs to be updated"
+              }
+            ]
+          },
+          "docs": "Return a list of participants"
+        },
+        {
+          "info": {
+            "name": "Register a user for the networking hub",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.introvoke.com/api/v1/networking/:id/registrant",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of the networking hub"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Adds a new registered user to this networking hub"
+        },
+        {
+          "info": {
+            "name": "Delete a registered user from the networking hub",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.introvoke.com/api/v1/networking/:id/registrant",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of networking hub to delete"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns OK"
+        },
+        {
+          "info": {
+            "name": "Set a user profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.introvoke.com/api/v1/networking/:id/setUserProfile",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of NetworkingHub"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Set a user profile"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

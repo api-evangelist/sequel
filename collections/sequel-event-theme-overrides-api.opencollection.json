@@ -1,0 +1,91 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Introvoke Analytics event theme overrides API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "event theme overrides",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "GET /customizations/events/event/{eventId}",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.introvoke.com/api/v1/customizations/events/event/:eventId",
+            "params": [
+              {
+                "name": "eventId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of the event"
+              },
+              {
+                "name": "fullTheme",
+                "value": "",
+                "type": "query",
+                "description": "flag to return full theme merged with overrides"
+              }
+            ]
+          },
+          "docs": "Returns the event customization theme overrides over the platform and event company customization theme for the event.\nThis endpoint can be used for clients which update to theme or for preview."
+        },
+        {
+          "info": {
+            "name": "POST /customizations/events/event/{eventId}",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.introvoke.com/api/v1/customizations/events/event/:eventId",
+            "params": [
+              {
+                "name": "eventId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of the event"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Adds or updates event customization theme overrides that will be applied for the event.\nThis endpoint can be used by clients which update to theme or for preview."
+        },
+        {
+          "info": {
+            "name": "DELETE /customizations/events/event/{eventId}",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.introvoke.com/api/v1/customizations/events/event/:eventId",
+            "params": [
+              {
+                "name": "eventId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of the event"
+              }
+            ]
+          },
+          "docs": "Deletes the event customization theme overrides for the event. All events default to company specific event customization theme, if it exists or the default platform theme, after deletion."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

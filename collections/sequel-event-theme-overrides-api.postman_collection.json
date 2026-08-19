@@ -1,0 +1,522 @@
+{
+  "item": [
+    {
+      "id": "13ec5a77-0e0d-44af-a293-e825a06d12cd",
+      "name": "event theme overrides",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "4c665e68-1f0a-4f5b-9dda-1ca298c67a1b",
+          "name": "Deletes the event customization theme overrides for the event. All events default to company specific event customization theme, if it exists or the default platform theme, after deletion.",
+          "request": {
+            "name": "Deletes the event customization theme overrides for the event. All events default to company specific event customization theme, if it exists or the default platform theme, after deletion.",
+            "description": {
+              "content": "Deletes the event customization theme overrides for the event. All events default to company specific event customization theme, if it exists or the default platform theme, after deletion.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "customizations",
+                "events",
+                "event",
+                ":eventId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "eventId",
+                  "description": "(Required) Unique ID of the event"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d9b3b2d5-2a40-49d9-8c85-d03ac44d1511",
+              "name": "Theme overrides for the event removed from the data store.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customizations",
+                    "events",
+                    "event",
+                    ":eventId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "eventId",
+                      "description": "(Required) Unique ID of the event"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "05015d8c-e73d-4fa5-aa57-39e2bd348579",
+              "name": "Event Id is incorrect or user does not have access to the event.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customizations",
+                    "events",
+                    "event",
+                    ":eventId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "eventId",
+                      "description": "(Required) Unique ID of the event"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4a0b1e2a-2e9b-44b5-8465-5e610a1ad68d",
+          "name": "Returns the event customization theme overrides over the platform and event company customization theme for the event.\nThis endpoint can be used for clients which update to theme or for preview.",
+          "request": {
+            "name": "Returns the event customization theme overrides over the platform and event company customization theme for the event.\nThis endpoint can be used for clients which update to theme or for preview.",
+            "description": {
+              "content": "Returns the event customization theme overrides over the platform and event company customization theme for the event.\nThis endpoint can be used for clients which update to theme or for preview.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "customizations",
+                "events",
+                "event",
+                ":eventId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "fullTheme",
+                  "value": "false",
+                  "description": "flag to return full theme merged with overrides"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "eventId",
+                  "description": "(Required) Unique ID of the event"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0d0a0439-858f-465a-9cf0-556be6d11cb9",
+              "name": "event customization theme overrides (or full theme) at applied at event level",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customizations",
+                    "events",
+                    "event",
+                    ":eventId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fullTheme",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "eventId",
+                      "description": "(Required) Unique ID of the event"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"string\",\n  \"defaultTheme\": false,\n  \"brandColors\": [\n    \"string\",\n    \"string\"\n  ],\n  \"fonts\": [\n    {\n      \"fontName\": \"string\",\n      \"fontUrl\": \"string\",\n      \"isPrimary\": true\n    },\n    {\n      \"fontName\": \"string\",\n      \"fontUrl\": \"string\",\n      \"isPrimary\": false\n    }\n  ],\n  \"virtualStage\": {\n    \"background\": {\n      \"backgroundColor\": \"string\",\n      \"imageUrl\": \"string\",\n      \"textColor\": \"string\"\n    },\n    \"watermark\": {\n      \"backgroundColor\": \"string\",\n      \"imageUrl\": \"string\",\n      \"textColor\": \"string\"\n    },\n    \"countdown\": {\n      \"textColor\": \"string\"\n    },\n    \"presenter\": {\n      \"glowColor\": \"string\"\n    }\n  },\n  \"networkingHub\": {\n    \"circleGraphics\": {\n      \"backgroundColor\": \"string\",\n      \"imageUrl\": \"string\",\n      \"textColor\": \"string\"\n    },\n    \"joinNetworking\": {\n      \"backgroundColor\": \"string\",\n      \"imageUrl\": \"string\",\n      \"textColor\": \"string\"\n    },\n    \"returnToStage\": {\n      \"backgroundColor\": \"string\",\n      \"imageUrl\": \"string\",\n      \"textColor\": \"string\"\n    }\n  },\n  \"warningNotices\": {\n    \"buttonColor\": \"string\"\n  },\n  \"chat\": {\n    \"enabled\": false,\n    \"colors\": [\n      \"string\",\n      \"string\"\n    ],\n    \"badge\": {\n      \"backgroundColor\": \"string\",\n      \"imageUrl\": \"string\",\n      \"textColor\": \"string\"\n    }\n  },\n  \"participantList\": {\n    \"enabled\": false,\n    \"showTabFor\": 5649.235368949526,\n    \"showCountFor\": 7206.9931155927015\n  },\n  \"qna\": {\n    \"enabled\": false\n  },\n  \"polls\": {\n    \"enabled\": true\n  },\n  \"privateMessages\": {\n    \"enabled\": true\n  },\n  \"poweredByIntrovokeLabel\": {\n    \"enabled\": true\n  },\n  \"chatReactions\": {\n    \"enabled\": true,\n    \"reactions\": [\n      {\n        \"reaction\": \"string\",\n        \"image\": \"string\",\n        \"label\": \"string\"\n      },\n      {\n        \"reaction\": \"string\",\n        \"image\": \"string\",\n        \"label\": \"string\"\n      }\n    ]\n  },\n  \"liveReactions\": {\n    \"enabled\": false,\n    \"reactions\": [\n      {\n        \"reaction\": \"string\",\n        \"image\": \"string\",\n        \"label\": \"string\"\n      },\n      {\n        \"reaction\": \"string\",\n        \"image\": \"string\",\n        \"label\": \"string\"\n      }\n    ]\n  },\n  \"emailSettings\": {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"when\": \"string\",\n    \"replayToEmail\": \"string\",\n    \"fromEmail\": \"string\",\n    \"fromName\": \"string\",\n    \"isCustom\": true,\n    \"activated\": false,\n    \"emailTemplate\": {\n      \"name\": \"string\",\n      \"subject\": \"string\",\n      \"hoursToWait\": 599.2483702075735,\n      \"htmlBody\": \"string\",\n      \"sendGridTemplateId\": \"string\",\n      \"bodyText\": \"string\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1813447e-64a6-46fb-976d-43c8076d72ac",
+          "name": "Adds or updates event customization theme overrides that will be applied for the event.\nThis endpoint can be used by clients which update to theme or for preview.",
+          "request": {
+            "name": "Adds or updates event customization theme overrides that will be applied for the event.\nThis endpoint can be used by clients which update to theme or for preview.",
+            "description": {
+              "content": "Adds or updates event customization theme overrides that will be applied for the event.\nThis endpoint can be used by clients which update to theme or for preview.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "customizations",
+                "events",
+                "event",
+                ":eventId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "eventId",
+                  "description": "(Required) Unique ID of the event"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"defaultTheme\": \"<boolean>\",\n  \"brandColors\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"fonts\": [\n    {\n      \"fontName\": \"<string>\",\n      \"fontUrl\": \"<string>\",\n      \"isPrimary\": \"<boolean>\"\n    },\n    {\n      \"fontName\": \"<string>\",\n      \"fontUrl\": \"<string>\",\n      \"isPrimary\": \"<boolean>\"\n    }\n  ],\n  \"virtualStage\": {\n    \"background\": {\n      \"backgroundColor\": \"<string>\",\n      \"imageUrl\": \"<string>\",\n      \"textColor\": \"<string>\"\n    },\n    \"watermark\": {\n      \"backgroundColor\": \"<string>\",\n      \"imageUrl\": \"<string>\",\n      \"textColor\": \"<string>\"\n    },\n    \"countdown\": {\n      \"textColor\": \"<string>\"\n    },\n    \"presenter\": {\n      \"glowColor\": \"<string>\"\n    }\n  },\n  \"networkingHub\": {\n    \"circleGraphics\": {\n      \"backgroundColor\": \"<string>\",\n      \"imageUrl\": \"<string>\",\n      \"textColor\": \"<string>\"\n    },\n    \"joinNetworking\": {\n      \"backgroundColor\": \"<string>\",\n      \"imageUrl\": \"<string>\",\n      \"textColor\": \"<string>\"\n    },\n    \"returnToStage\": {\n      \"backgroundColor\": \"<string>\",\n      \"imageUrl\": \"<string>\",\n      \"textColor\": \"<string>\"\n    }\n  },\n  \"warningNotices\": {\n    \"buttonColor\": \"<string>\"\n  },\n  \"chat\": {\n    \"enabled\": \"<boolean>\",\n    \"colors\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"badge\": {\n      \"backgroundColor\": \"<string>\",\n      \"imageUrl\": \"<string>\",\n      \"textColor\": \"<string>\"\n    }\n  },\n  \"participantList\": {\n    \"enabled\": \"<boolean>\",\n    \"showTabFor\": \"<number>\",\n    \"showCountFor\": \"<number>\"\n  },\n  \"qna\": {\n    \"enabled\": \"<boolean>\"\n  },\n  \"polls\": {\n    \"enabled\": \"<boolean>\"\n  },\n  \"privateMessages\": {\n    \"enabled\": \"<boolean>\"\n  },\n  \"poweredByIntrovokeLabel\": {\n    \"enabled\": \"<boolean>\"\n  },\n  \"chatReactions\": {\n    \"enabled\": \"<boolean>\",\n    \"reactions\": [\n      {\n        \"reaction\": \"<string>\",\n        \"image\": \"<string>\",\n        \"label\": \"<string>\"\n      },\n      {\n        \"reaction\": \"<string>\",\n        \"image\": \"<string>\",\n        \"label\": \"<string>\"\n      }\n    ]\n  },\n  \"liveReactions\": {\n    \"enabled\": \"<boolean>\",\n    \"reactions\": [\n      {\n        \"reaction\": \"<string>\",\n        \"image\": \"<string>\",\n        \"label\": \"<string>\"\n      },\n      {\n        \"reaction\": \"<string>\",\n        \"image\": \"<string>\",\n        \"label\": \"<string>\"\n      }\n    ]\n  },\n  \"emailSettings\": {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"when\": \"<string>\",\n    \"replayToEmail\": \"<string>\",\n    \"fromEmail\": \"<string>\",\n    \"fromName\": \"<string>\",\n    \"isCustom\": \"<boolean>\",\n    \"activated\": \"<boolean>\",\n    \"emailTemplate\": {\n      \"name\": \"<string>\",\n      \"subject\": \"<string>\",\n      \"hoursToWait\": \"<number>\",\n      \"htmlBody\": \"<string>\",\n      \"sendGridTemplateId\": \"<string>\",\n      \"bodyText\": \"<string>\"\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8745730d-3b72-4fa9-8508-deeb1f857e60",
+              "name": "Theme overrides accepted and committed to data store.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customizations",
+                    "events",
+                    "event",
+                    ":eventId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "eventId",
+                      "description": "(Required) Unique ID of the event"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"defaultTheme\": \"<boolean>\",\n  \"brandColors\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"fonts\": [\n    {\n      \"fontName\": \"<string>\",\n      \"fontUrl\": \"<string>\",\n      \"isPrimary\": \"<boolean>\"\n    },\n    {\n      \"fontName\": \"<string>\",\n      \"fontUrl\": \"<string>\",\n      \"isPrimary\": \"<boolean>\"\n    }\n  ],\n  \"virtualStage\": {\n    \"background\": {\n      \"backgroundColor\": \"<string>\",\n      \"imageUrl\": \"<string>\",\n      \"textColor\": \"<string>\"\n    },\n    \"watermark\": {\n      \"backgroundColor\": \"<string>\",\n      \"imageUrl\": \"<string>\",\n      \"textColor\": \"<string>\"\n    },\n    \"countdown\": {\n      \"textColor\": \"<string>\"\n    },\n    \"presenter\": {\n      \"glowColor\": \"<string>\"\n    }\n  },\n  \"networkingHub\": {\n    \"circleGraphics\": {\n      \"backgroundColor\": \"<string>\",\n      \"imageUrl\": \"<string>\",\n      \"textColor\": \"<string>\"\n    },\n    \"joinNetworking\": {\n      \"backgroundColor\": \"<string>\",\n      \"imageUrl\": \"<string>\",\n      \"textColor\": \"<string>\"\n    },\n    \"returnToStage\": {\n      \"backgroundColor\": \"<string>\",\n      \"imageUrl\": \"<string>\",\n      \"textColor\": \"<string>\"\n    }\n  },\n  \"warningNotices\": {\n    \"buttonColor\": \"<string>\"\n  },\n  \"chat\": {\n    \"enabled\": \"<boolean>\",\n    \"colors\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"badge\": {\n      \"backgroundColor\": \"<string>\",\n      \"imageUrl\": \"<string>\",\n      \"textColor\": \"<string>\"\n    }\n  },\n  \"participantList\": {\n    \"enabled\": \"<boolean>\",\n    \"showTabFor\": \"<number>\",\n    \"showCountFor\": \"<number>\"\n  },\n  \"qna\": {\n    \"enabled\": \"<boolean>\"\n  },\n  \"polls\": {\n    \"enabled\": \"<boolean>\"\n  },\n  \"privateMessages\": {\n    \"enabled\": \"<boolean>\"\n  },\n  \"poweredByIntrovokeLabel\": {\n    \"enabled\": \"<boolean>\"\n  },\n  \"chatReactions\": {\n    \"enabled\": \"<boolean>\",\n    \"reactions\": [\n      {\n        \"reaction\": \"<string>\",\n        \"image\": \"<string>\",\n        \"label\": \"<string>\"\n      },\n      {\n        \"reaction\": \"<string>\",\n        \"image\": \"<string>\",\n        \"label\": \"<string>\"\n      }\n    ]\n  },\n  \"liveReactions\": {\n    \"enabled\": \"<boolean>\",\n    \"reactions\": [\n      {\n        \"reaction\": \"<string>\",\n        \"image\": \"<string>\",\n        \"label\": \"<string>\"\n      },\n      {\n        \"reaction\": \"<string>\",\n        \"image\": \"<string>\",\n        \"label\": \"<string>\"\n      }\n    ]\n  },\n  \"emailSettings\": {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"when\": \"<string>\",\n    \"replayToEmail\": \"<string>\",\n    \"fromEmail\": \"<string>\",\n    \"fromName\": \"<string>\",\n    \"isCustom\": \"<boolean>\",\n    \"activated\": \"<boolean>\",\n    \"emailTemplate\": {\n      \"name\": \"<string>\",\n      \"subject\": \"<string>\",\n      \"hoursToWait\": \"<number>\",\n      \"htmlBody\": \"<string>\",\n      \"sendGridTemplateId\": \"<string>\",\n      \"bodyText\": \"<string>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "efc6526c-778a-47fa-900a-25245f8ec239",
+              "name": "Theme overrides did not match the expected schema.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customizations",
+                    "events",
+                    "event",
+                    ":eventId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "eventId",
+                      "description": "(Required) Unique ID of the event"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"defaultTheme\": \"<boolean>\",\n  \"brandColors\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"fonts\": [\n    {\n      \"fontName\": \"<string>\",\n      \"fontUrl\": \"<string>\",\n      \"isPrimary\": \"<boolean>\"\n    },\n    {\n      \"fontName\": \"<string>\",\n      \"fontUrl\": \"<string>\",\n      \"isPrimary\": \"<boolean>\"\n    }\n  ],\n  \"virtualStage\": {\n    \"background\": {\n      \"backgroundColor\": \"<string>\",\n      \"imageUrl\": \"<string>\",\n      \"textColor\": \"<string>\"\n    },\n    \"watermark\": {\n      \"backgroundColor\": \"<string>\",\n      \"imageUrl\": \"<string>\",\n      \"textColor\": \"<string>\"\n    },\n    \"countdown\": {\n      \"textColor\": \"<string>\"\n    },\n    \"presenter\": {\n      \"glowColor\": \"<string>\"\n    }\n  },\n  \"networkingHub\": {\n    \"circleGraphics\": {\n      \"backgroundColor\": \"<string>\",\n      \"imageUrl\": \"<string>\",\n      \"textColor\": \"<string>\"\n    },\n    \"joinNetworking\": {\n      \"backgroundColor\": \"<string>\",\n      \"imageUrl\": \"<string>\",\n      \"textColor\": \"<string>\"\n    },\n    \"returnToStage\": {\n      \"backgroundColor\": \"<string>\",\n      \"imageUrl\": \"<string>\",\n      \"textColor\": \"<string>\"\n    }\n  },\n  \"warningNotices\": {\n    \"buttonColor\": \"<string>\"\n  },\n  \"chat\": {\n    \"enabled\": \"<boolean>\",\n    \"colors\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"badge\": {\n      \"backgroundColor\": \"<string>\",\n      \"imageUrl\": \"<string>\",\n      \"textColor\": \"<string>\"\n    }\n  },\n  \"participantList\": {\n    \"enabled\": \"<boolean>\",\n    \"showTabFor\": \"<number>\",\n    \"showCountFor\": \"<number>\"\n  },\n  \"qna\": {\n    \"enabled\": \"<boolean>\"\n  },\n  \"polls\": {\n    \"enabled\": \"<boolean>\"\n  },\n  \"privateMessages\": {\n    \"enabled\": \"<boolean>\"\n  },\n  \"poweredByIntrovokeLabel\": {\n    \"enabled\": \"<boolean>\"\n  },\n  \"chatReactions\": {\n    \"enabled\": \"<boolean>\",\n    \"reactions\": [\n      {\n        \"reaction\": \"<string>\",\n        \"image\": \"<string>\",\n        \"label\": \"<string>\"\n      },\n      {\n        \"reaction\": \"<string>\",\n        \"image\": \"<string>\",\n        \"label\": \"<string>\"\n      }\n    ]\n  },\n  \"liveReactions\": {\n    \"enabled\": \"<boolean>\",\n    \"reactions\": [\n      {\n        \"reaction\": \"<string>\",\n        \"image\": \"<string>\",\n        \"label\": \"<string>\"\n      },\n      {\n        \"reaction\": \"<string>\",\n        \"image\": \"<string>\",\n        \"label\": \"<string>\"\n      }\n    ]\n  },\n  \"emailSettings\": {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"when\": \"<string>\",\n    \"replayToEmail\": \"<string>\",\n    \"fromEmail\": \"<string>\",\n    \"fromName\": \"<string>\",\n    \"isCustom\": \"<boolean>\",\n    \"activated\": \"<boolean>\",\n    \"emailTemplate\": {\n      \"name\": \"<string>\",\n      \"subject\": \"<string>\",\n      \"hoursToWait\": \"<number>\",\n      \"htmlBody\": \"<string>\",\n      \"sendGridTemplateId\": \"<string>\",\n      \"bodyText\": \"<string>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "da3c640d-636b-4345-8712-bcd2dc3068c7",
+              "name": "Event ID is incorrect or user does not have access to the event.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customizations",
+                    "events",
+                    "event",
+                    ":eventId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "eventId",
+                      "description": "(Required) Unique ID of the event"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"defaultTheme\": \"<boolean>\",\n  \"brandColors\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"fonts\": [\n    {\n      \"fontName\": \"<string>\",\n      \"fontUrl\": \"<string>\",\n      \"isPrimary\": \"<boolean>\"\n    },\n    {\n      \"fontName\": \"<string>\",\n      \"fontUrl\": \"<string>\",\n      \"isPrimary\": \"<boolean>\"\n    }\n  ],\n  \"virtualStage\": {\n    \"background\": {\n      \"backgroundColor\": \"<string>\",\n      \"imageUrl\": \"<string>\",\n      \"textColor\": \"<string>\"\n    },\n    \"watermark\": {\n      \"backgroundColor\": \"<string>\",\n      \"imageUrl\": \"<string>\",\n      \"textColor\": \"<string>\"\n    },\n    \"countdown\": {\n      \"textColor\": \"<string>\"\n    },\n    \"presenter\": {\n      \"glowColor\": \"<string>\"\n    }\n  },\n  \"networkingHub\": {\n    \"circleGraphics\": {\n      \"backgroundColor\": \"<string>\",\n      \"imageUrl\": \"<string>\",\n      \"textColor\": \"<string>\"\n    },\n    \"joinNetworking\": {\n      \"backgroundColor\": \"<string>\",\n      \"imageUrl\": \"<string>\",\n      \"textColor\": \"<string>\"\n    },\n    \"returnToStage\": {\n      \"backgroundColor\": \"<string>\",\n      \"imageUrl\": \"<string>\",\n      \"textColor\": \"<string>\"\n    }\n  },\n  \"warningNotices\": {\n    \"buttonColor\": \"<string>\"\n  },\n  \"chat\": {\n    \"enabled\": \"<boolean>\",\n    \"colors\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"badge\": {\n      \"backgroundColor\": \"<string>\",\n      \"imageUrl\": \"<string>\",\n      \"textColor\": \"<string>\"\n    }\n  },\n  \"participantList\": {\n    \"enabled\": \"<boolean>\",\n    \"showTabFor\": \"<number>\",\n    \"showCountFor\": \"<number>\"\n  },\n  \"qna\": {\n    \"enabled\": \"<boolean>\"\n  },\n  \"polls\": {\n    \"enabled\": \"<boolean>\"\n  },\n  \"privateMessages\": {\n    \"enabled\": \"<boolean>\"\n  },\n  \"poweredByIntrovokeLabel\": {\n    \"enabled\": \"<boolean>\"\n  },\n  \"chatReactions\": {\n    \"enabled\": \"<boolean>\",\n    \"reactions\": [\n      {\n        \"reaction\": \"<string>\",\n        \"image\": \"<string>\",\n        \"label\": \"<string>\"\n      },\n      {\n        \"reaction\": \"<string>\",\n        \"image\": \"<string>\",\n        \"label\": \"<string>\"\n      }\n    ]\n  },\n  \"liveReactions\": {\n    \"enabled\": \"<boolean>\",\n    \"reactions\": [\n      {\n        \"reaction\": \"<string>\",\n        \"image\": \"<string>\",\n        \"label\": \"<string>\"\n      },\n      {\n        \"reaction\": \"<string>\",\n        \"image\": \"<string>\",\n        \"label\": \"<string>\"\n      }\n    ]\n  },\n  \"emailSettings\": {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"when\": \"<string>\",\n    \"replayToEmail\": \"<string>\",\n    \"fromEmail\": \"<string>\",\n    \"fromName\": \"<string>\",\n    \"isCustom\": \"<boolean>\",\n    \"activated\": \"<boolean>\",\n    \"emailTemplate\": {\n      \"name\": \"<string>\",\n      \"subject\": \"<string>\",\n      \"hoursToWait\": \"<number>\",\n      \"htmlBody\": \"<string>\",\n      \"sendGridTemplateId\": \"<string>\",\n      \"bodyText\": \"<string>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.introvoke.com/api/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "2f380592-d4f6-4831-aeed-502bd05a9341",
+    "name": "Introvoke Analytics event theme overrides API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "This is the documentation required to access the Introvoke API. It contains information on how to create Companies, add events to each company and manage the presenters.\n\nContact Support:\n Email: support@introvoke.com",
+      "type": "text/plain"
+    }
+  }
+}

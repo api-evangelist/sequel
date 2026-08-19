@@ -1,0 +1,93 @@
+generated: '2026-08-13'
+method: searched
+source: https://sequel.io/releasehub
+also:
+- https://sequel.io/product-updates
+scheme:
+  style: dated-release-weeks
+  format: "Platform Release Week of M/D/YY"
+  note: >-
+    Sequel does not version the platform publicly with semver. Releases are published
+    as dated "Platform Release Week of ..." posts on the Release Hub, each grouped into
+    Enhancements / New Capabilities / Removals & Fixes. The REST API is separately
+    versioned by URI path (v1, with some v3 theme endpoints) — see
+    lifecycle/sequel-lifecycle.yml.
+current_version: null
+api_changelog:
+  published: false
+  note: >-
+    The Release Hub covers the product/platform. There is no API-specific changelog on
+    docs.introvoke.com, so API consumers get no dated record of contract changes.
+entries:
+- date: '2026-07-10'
+  title: Platform Release Week of 7/10/26
+  breaking: false
+  new_capabilities:
+  - Custom Roles & Permissions — granular role-based access across a team
+  - Drupal CMS Integration with configurable endpoint, authentication and a logs view
+  - Improved Marketo & Salesforce integration — bulk updates and CRM logs (a 3,000-person event syncs in minutes instead of hours)
+  - HubSpot Campaigns support
+  - Contentful CMS Integration — auto-create modules when a new event is created
+  enhancements:
+  - Proactive integration monitoring & alerting across all integration paths
+  - Clearer Marketo error handling with faster, more graceful timeout handling
+  - Embed validator improvements (shadow-DOM and externally injected embeds, clearer errors, schemeless URLs, live progress)
+  - Multi-select fields — built-in search, faster filtering, no-results state
+  fixes:
+  - Summit on-demand activity not pushing to CRM in certain configurations
+  - Watch-time reporting corrected for longer sessions
+  - Contentful description fields now render HTML instead of raw markup
+  - Reliability improvements for large, high-concurrency events
+  - Simulive streaming reliability with automatic recovery
+- date: '2026-05-22'
+  title: Platform Release Week of 5/18/26
+  tags: [summits, widgets]
+  breaking: false
+  highlights:
+  - Virtual Summits agenda widget spacing for maximum visibility on tracks
+  - Preview summit via a "Preview" button for Sequel admins
+  - Re-order speaker widget information via toggle sequence
+- date: '2026-05-15'
+  title: Platform Release Week of 5/11/26
+  tags: [sequel AI, templates, workflows]
+  breaking: false
+  highlights:
+  - Copy landing page templates between workspaces
+  - Create and download AI clips with no captions
+  - Corrected listing of an incorrect URL for the Claude MCP connection
+- date: '2026-05-08'
+  title: Platform Release Week of 5/4/26
+  tags: [audience engagement, automation, logs]
+  breaking: false
+  highlights:
+  - Activity Logs — admins can track all user actions across the dashboard, filterable by user, activity type or date range
+  - Chat & survey automations can be scheduled to publish automatically during live and simulive events
+  - CRM logs for custom integrations and the newest native integrations
+  fixes:
+  - Recently created polls now show in the Automation tab
+  - UTM fields populate in the Participants table of in-person events
+  - Toggle option save issues from the Themes & Features tab
+- date: '2026-05-01'
+  title: Platform Release Week of 4/27/26
+  tags: [AI tools, integrations, mcp]
+  breaking: false
+  highlights:
+  - Pass direct source data (Original Source, etc.) without using HubSpot forms, via a hidden form
+  - Optional CAPTCHA on the Sequel registration form, powered by Cloudflare
+recent_product_updates:
+  source: https://sequel.io/product-updates
+  note: >-
+    A separate, longer-form feed of named product announcements. The most recent entries
+    at capture were, newest first.
+  items:
+  - Sequel MCP Server - Now With Data
+  - Custom Roles and Permissions
+  - Certifications with Polls and Quizzes
+  - CRM Logs
+  - Sequel AI Intelligence
+  - Chat + Survey Automations
+  - Activity Logs
+  - ChatGPT App
+window: >-
+  Recent window only — the Release Hub and Product Updates feeds are the source of truth
+  and carry entries back to 2022.

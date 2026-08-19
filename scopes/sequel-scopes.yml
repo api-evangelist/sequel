@@ -1,0 +1,81 @@
+generated: '2026-08-13'
+method: probed
+source: https://api.introvoke.com/.well-known/oauth-protected-resource + https://api.introvoke.com/.well-known/oauth-authorization-server
+docs: https://docs.introvoke.com/docs
+note: >-
+  The published OpenAPI declares NO oauth2 securityScheme (only http bearer + an apiKey
+  Authorization header), so `derive-oauth-scopes.py` yields nothing for this provider.
+  Everything below was read from the two RFC 8414 / RFC 9728 discovery documents the
+  provider actually serves, and from the docs' authentication page. Nothing here is
+  inferred.
+schemes:
+- name: api-client-credentials
+  type: oauth2
+  flow: clientCredentials
+  token_url: https://api.introvoke.com/api/oauth/token
+  audience: https://www.introvoke.com/api
+  scopes_published: false
+  scopes: []
+  note: >-
+    The REST API's own machine-to-machine flow is scope-free. Sequel's docs instruct
+    clients to POST client_id + client_secret + audience + grant_type=client_credentials
+    and use the returned JWT as a bearer token; no `scope` parameter is documented and
+    no scope values are published. Authorization is therefore all-or-nothing per API
+    client — an agent holding a Sequel token can reach every operation that client's
+    company is entitled to, including destructive ones (deleteevent, deleteRegistrantById,
+    postClearChat). There is no way to issue a read-only API credential.
+- name: mcp-protected-resource
+  type: oauth2
+  resource: https://prod-api-elb.sequelvideo.com/api/mcp
+  resource_public_endpoint: https://api.introvoke.com/api/mcp
+  authorization_servers:
+  - https://login.introvoke.com
+  bearer_methods_supported:
+  - header
+  scopes:
+  - scope: openid
+    description: OpenID Connect — issue an ID token identifying the end user.
+    source: /.well-known/oauth-protected-resource
+  - scope: profile
+    description: Access the end user's basic profile claims.
+    source: /.well-known/oauth-protected-resource
+  - scope: email
+    description: Access the end user's email address claim.
+    source: /.well-known/oauth-protected-resource
+  - scope: offline_access
+    description: Issue a refresh token so the MCP client can act without re-prompting.
+    source: /.well-known/oauth-protected-resource
+  note: >-
+    These are the four standard OIDC scopes the Auth0 tenant advertises for the
+    interactive user-login flow that fronts the MCP server. They authenticate the human;
+    they do NOT describe or constrain what the MCP tools may read. There is no
+    Sequel-specific scope (nothing like `transcripts:read` or `events:read`), so an MCP
+    client's data access is bounded by the account's own permissions rather than by a
+    consent-time grant the user can narrow.
+discovery:
+- path: /.well-known/oauth-protected-resource
+  host: api.introvoke.com
+  status: 200
+  spec: RFC 9728 (OAuth 2.0 Protected Resource Metadata)
+  file: well-known/sequel-oauth-protected-resource.json
+- path: /.well-known/oauth-authorization-server
+  host: api.introvoke.com
+  status: 200
+  spec: RFC 8414 (OAuth 2.0 Authorization Server Metadata)
+  file: well-known/sequel-oauth-authorization-server.json
+authorization_server:
+  issuer: https://login.introvoke.com
+  provider: Auth0
+  grant_types_supported:
+  - authorization_code
+  - refresh_token
+  code_challenge_methods_supported:
+  - S256
+  - plain
+  token_endpoint_auth_methods_supported:
+  - client_secret_post
+  - client_secret_basic
+cross_ref:
+  authentication: authentication/sequel-authentication.yml
+  mcp: mcp/sequel-mcp.yml
+  well_known: well-known/sequel-well-known.yml

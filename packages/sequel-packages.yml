@@ -1,6 +1,6 @@
-generated: '2026-07-21'
+generated: '2026-08-13'
 method: searched
-source: npm registry + https://docs.introvoke.com/docs
+source: registry.npmjs.org + https://docs.introvoke.com/docs
 packages:
 - language: javascript
   registry: npm
@@ -8,6 +8,9 @@ packages:
   url: https://www.npmjs.com/package/@sequel.io/api
   install: npm install @sequel.io/api
   official: true
+  version: 0.1.6
+  published: '2023-02-17'
+  version_source: https://registry.npmjs.org/@sequel.io%2Fapi
   description: Sequel JavaScript API SDK for Node.js — access to pre-built audio, video and chat components.
 - language: javascript
   registry: npm
@@ -15,7 +18,30 @@ packages:
   url: https://www.npmjs.com/package/@sequel.io/sdk-core
   install: npm install @sequel.io/sdk-core
   official: true
+  version: 0.1.6
+  published: '2023-02-17'
+  version_source: https://registry.npmjs.org/@sequel.io%2Fsdk-core
   description: Core SDK primitives that @sequel.io/api depends on.
+currency:
+  checked: '2026-08-13'
+  finding: stale
+  detail: >-
+    Both first-party npm packages are pinned at 0.1.6, last published 2023-02-17 —
+    roughly three and a half years without a release, and still pre-1.0. Sequel has
+    shipped continuously over that window (the Release Hub records platform releases
+    through July 2026, plus a new MCP server, ChatGPT app, Contentful and Drupal
+    integrations and a v3 theme API), so the published SDKs demonstrably lag the API
+    they wrap. This is the provider's own dated evidence, not an inference.
+  registries_with_no_first_party_package:
+  - pypi
+  - rubygems
+  - packagist
+  - crates.io
+  - nuget
+  - maven-central
+  - pkg.go.dev
+languages_covered:
+- javascript
 examples:
 - name: sequel-react-quickstart
   url: https://github.com/introvoke/sequel-react-quickstart
@@ -23,7 +49,13 @@ examples:
 - name: sequel-custom-form-example
   url: https://github.com/introvoke/sequel-custom-form-example
   description: Next.js example integrating a custom registration form with Sequel embeds.
+- name: sequel-claude-plugin
+  url: https://github.com/introvoke/sequel-claude-plugin
+  description: >-
+    Official Claude plugin that wires the hosted Sequel MCP server into Claude
+    (`claude plugin install sequel@sequel-plugins`). Distributed via the plugin
+    marketplace rather than a package registry — see mcp/sequel-mcp.yml.
 notes: >-
-  No first-party MySQL/SQL "sequel-mcp" or "@sequel/react" package exists on npm;
-  the only official libraries are scoped under @sequel.io. The unrelated npm package
+  No first-party MySQL/SQL "sequel-mcp" or "@sequel/react" package exists on npm; the
+  only official libraries are scoped under @sequel.io. The unrelated npm package
   "sequel-mcp" is a third-party MySQL query tool and is NOT a Sequel.io product.

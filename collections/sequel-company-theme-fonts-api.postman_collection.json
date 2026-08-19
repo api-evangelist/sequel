@@ -1,0 +1,605 @@
+{
+  "item": [
+    {
+      "id": "1cf4ae71-1816-46a5-beb2-dd387b570b33",
+      "name": "company theme fonts",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "0873f6ed-9030-4caf-ab94-0597de46a567",
+          "name": "Returns list of customized fonts associated with the company",
+          "request": {
+            "name": "Returns list of customized fonts associated with the company",
+            "description": {
+              "content": "Returns list of customized fonts associated with the company",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "customizations",
+                "events",
+                "company",
+                ":companyId",
+                "fonts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "companyId",
+                  "description": "(Required) Unique ID of the company"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "39636293-8e4d-4a29-bf82-f8f0839019f9",
+              "name": "list of custom fonts associated with company",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customizations",
+                    "events",
+                    "company",
+                    ":companyId",
+                    "fonts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "companyId",
+                      "description": "(Required) Unique ID of the company"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"fontName\": \"string\",\n    \"fontUrl\": \"string\",\n    \"isIntrovokeManaged\": true,\n    \"uid\": \"string\"\n  },\n  {\n    \"fontName\": \"string\",\n    \"fontUrl\": \"string\",\n    \"isIntrovokeManaged\": false,\n    \"uid\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "daf13137-11e2-49d4-8f07-11eebdcf340e",
+              "name": "Company ID is incorrect or user does not have access to the company",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customizations",
+                    "events",
+                    "company",
+                    ":companyId",
+                    "fonts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "companyId",
+                      "description": "(Required) Unique ID of the company"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "881c5dab-519f-40f4-a23e-0182156a79c9",
+          "name": "Add new fonts for the company. The value is stored at the company level, but can be used by customization themes on both event and company levels. If the name of the font, matches the existing font, it will update the font URL.",
+          "request": {
+            "name": "Add new fonts for the company. The value is stored at the company level, but can be used by customization themes on both event and company levels. If the name of the font, matches the existing font, it will update the font URL.",
+            "description": {
+              "content": "Add new fonts for the company. The value is stored at the company level, but can be used by customization themes on both event and company levels. If the name of the font, matches the existing font, it will update the font URL.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "customizations",
+                "events",
+                "company",
+                ":companyId",
+                "fonts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "companyId",
+                  "description": "(Required) Unique ID of the companyId"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"fontName\": \"<string>\",\n  \"fontUrl\": \"<string>\",\n  \"isIntrovokeManaged\": \"<boolean>\",\n  \"uid\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "20fc4115-e447-4d64-9d66-343fd154c9fb",
+              "name": "Font accepted and committed to data store",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customizations",
+                    "events",
+                    "company",
+                    ":companyId",
+                    "fonts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "companyId",
+                      "description": "(Required) Unique ID of the companyId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"fontName\": \"<string>\",\n  \"fontUrl\": \"<string>\",\n  \"isIntrovokeManaged\": \"<boolean>\",\n  \"uid\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"uid\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e3854ed0-e6d8-4f19-bf0b-26fb20b2ba4a",
+              "name": "Incorrect format for the font schema",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customizations",
+                    "events",
+                    "company",
+                    ":companyId",
+                    "fonts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "companyId",
+                      "description": "(Required) Unique ID of the companyId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"fontName\": \"<string>\",\n  \"fontUrl\": \"<string>\",\n  \"isIntrovokeManaged\": \"<boolean>\",\n  \"uid\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "4f9c3e2e-51c4-4118-a96f-45094b29527f",
+              "name": "Company ID is incorrect or user does not have access to the company",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customizations",
+                    "events",
+                    "company",
+                    ":companyId",
+                    "fonts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "companyId",
+                      "description": "(Required) Unique ID of the companyId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"fontName\": \"<string>\",\n  \"fontUrl\": \"<string>\",\n  \"isIntrovokeManaged\": \"<boolean>\",\n  \"uid\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0de0aaae-1003-4ddc-ab55-9227c4952667",
+          "name": "Unregister the specified font associated with the specified company.",
+          "request": {
+            "name": "Unregister the specified font associated with the specified company.",
+            "description": {
+              "content": "Unregister the specified font associated with the specified company.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "customizations",
+                "events",
+                "company",
+                ":companyId",
+                "fonts",
+                "font",
+                ":fontId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "companyId",
+                  "description": "(Required) Unique ID of the company"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "fontId",
+                  "description": "(Required) Unique ID of the registered font"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4eadd7f2-6d21-44a0-8ede-9ce704d613e1",
+              "name": "Font unregistered from the company.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customizations",
+                    "events",
+                    "company",
+                    ":companyId",
+                    "fonts",
+                    "font",
+                    ":fontId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "companyId",
+                      "description": "(Required) Unique ID of the company"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "fontId",
+                      "description": "(Required) Unique ID of the registered font"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "2c4cd7b2-a30b-4ea3-8f24-8056678399a4",
+              "name": "Company or Font Id is incorrect or user does not have access to the company.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customizations",
+                    "events",
+                    "company",
+                    ":companyId",
+                    "fonts",
+                    "font",
+                    ":fontId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "companyId",
+                      "description": "(Required) Unique ID of the company"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "fontId",
+                      "description": "(Required) Unique ID of the registered font"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.introvoke.com/api/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "64806242-0847-40ae-80f1-c5bf75fe3fa4",
+    "name": "Introvoke Analytics company theme fonts API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "This is the documentation required to access the Introvoke API. It contains information on how to create Companies, add events to each company and manage the presenters.\n\nContact Support:\n Email: support@introvoke.com",
+      "type": "text/plain"
+    }
+  }
+}

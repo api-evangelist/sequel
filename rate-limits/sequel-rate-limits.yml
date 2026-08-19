@@ -1,0 +1,41 @@
+generated: '2026-08-13'
+method: searched
+source: https://docs.introvoke.com/llms.txt + https://docs.introvoke.com/reference + openapi/_original/sequel-openapi-original.yml
+limit_count: 0
+limits: []
+response_headers:
+  documented: false
+  observed: []
+  note: >-
+    No X-RateLimit-*, RateLimit-* or Retry-After headers are documented anywhere in the
+    Sequel/Introvoke reference, and none are declared in the published OpenAPI. The
+    live API could not be observed for headers because every operation requires a JWT
+    obtained from the OAuth client-credentials token endpoint, which requires customer
+    credentials.
+exhaustion_status_code: null
+searched:
+- url: https://docs.introvoke.com/llms.txt
+  status: 200
+  result: >-
+    The provider's own machine-readable docs index lists every guide and reference page;
+    none is a rate-limit, quota or throttling page.
+- url: https://docs.introvoke.com/docs/rate-limits
+  status: 404
+- url: https://sequel.io/pricing
+  status: 200
+  result: >-
+    Commercial limits are published as attendee-volume tiers (500 / 1,000-3,000 /
+    3,000-10,000 attendees per session), not as API request quotas.
+platform_limits:
+  note: >-
+    Sequel publishes capacity limits at the product level rather than the API level.
+    These are plan allowances, not request-rate limits, and are recorded in
+    plans/sequel-plans-pricing.yml.
+  examples:
+  - "attendees per session: 500 (Growth) / 1,000-3,000 (Business) / 3,000-10,000 (Enterprise)"
+  - "session duration: up to 3 hours (Growth), custom (Business), unlimited (Enterprise)"
+  - "webhook subscription length: 2-365 days, default 90 (see asyncapi/sequel-webhooks.yml)"
+notes: >-
+  Honest zero: Sequel documents no API rate limits and no rate-limit response headers.
+  An agent integrating this API has no published runtime signal telling it when it is
+  being throttled or how long to back off.
