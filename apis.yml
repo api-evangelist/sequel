@@ -41,6 +41,16 @@ tags:
 - Video
 - Networking
 - Marketing
+- Event
+- Webhook
+tags_raw:
+- Company
+- Webinars
+- Virtual Events
+- Live Streaming
+- Video
+- Networking
+- Marketing
 - Events
 - Webhooks
 maintainers:
@@ -69,6 +79,8 @@ apis:
   humanURL: https://docs.introvoke.com/reference
   baseURL: https://api.introvoke.com/api/v1
   tags:
+  - Clients
+  tags_raw:
   - Client
   properties:
   - type: OpenAPI
@@ -83,6 +95,8 @@ apis:
   humanURL: https://docs.introvoke.com/reference
   baseURL: https://api.introvoke.com/api/v1
   tags:
+  - Company
+  tags_raw:
   - company
   properties:
   - type: OpenAPI
@@ -140,6 +154,8 @@ apis:
   humanURL: https://docs.introvoke.com/reference
   baseURL: https://api.introvoke.com/api/v1
   tags:
+  - Event
+  tags_raw:
   - event
   properties:
   - type: OpenAPI
@@ -196,6 +212,8 @@ apis:
   humanURL: https://docs.introvoke.com/reference
   baseURL: https://api.introvoke.com/api/v1
   tags:
+  - Networking
+  tags_raw:
   - networking
   properties:
   - type: OpenAPI
@@ -210,6 +228,8 @@ apis:
   humanURL: https://docs.introvoke.com/reference
   baseURL: https://api.introvoke.com/api/v1
   tags:
+  - Platform
+  tags_raw:
   - platform
   properties:
   - type: OpenAPI
