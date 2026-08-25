@@ -1,0 +1,14 @@
+{
+  "repo": "sequel",
+  "feeds": [
+    {
+      "source": "https://trust.sequel.io/",
+      "feed_url": "https://trust.sequel.io/",
+      "title": "",
+      "saved": 0,
+      "method": "none"
+    }
+  ],
+  "post_count": 0,
+  "fetched": "2026-08-22T20:20:02Z"
+}
