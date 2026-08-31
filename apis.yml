@@ -107,7 +107,7 @@ apis:
   humanURL: https://docs.introvoke.com/reference
   baseURL: https://api.introvoke.com/api/v1
   tags:
-  - Company
+  - company
   tags_raw:
   - company
   properties:
@@ -224,7 +224,7 @@ apis:
   humanURL: https://docs.introvoke.com/reference
   baseURL: https://api.introvoke.com/api/v1
   tags:
-  - Networking
+  - networking
   tags_raw:
   - networking
   properties:
