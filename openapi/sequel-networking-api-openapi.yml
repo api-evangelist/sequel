@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Introvoke Analytics networking API
+  title: Introvoke Networking API
   description: This is the documentation required to access the Introvoke API. It contains information on how to create Companies, add events to each company and manage the presenters.
   termsOfService: https://www.introvoke.com/terms/
   contact:
@@ -11,13 +11,13 @@ servers:
 security:
 - bearerAuth: []
 tags:
-- name: networking
+- name: Networking
   description: Calls to managing networking hubs
 paths:
   /networking:
     post:
       tags:
-      - networking
+      - Networking
       summary: Create a new networking hub
       operationId: addNetworkingHub
       requestBody:
@@ -45,7 +45,7 @@ paths:
   /networking/{id}:
     get:
       tags:
-      - networking
+      - Networking
       summary: Find NetworkingHub by ID
       description: Returns a single NetworkingHub
       operationId: getNetworkingHubById
@@ -74,7 +74,7 @@ paths:
           content: {}
     post:
       tags:
-      - networking
+      - Networking
       summary: Update a NetworkingHub hub with json data
       operationId: updateNetworkingHub
       parameters:
@@ -108,8 +108,8 @@ paths:
   /networking/{id}/circle/{circleId}/recording/{recordingId}:
     get:
       tags:
-      - networking
-      summary: Retrieves the download URL for the MP4 recording for the specified circle id and recording id
+      - Networking
+      summary: Retrieves the download URL for the MP4 recording for the specified circle id…
       description: Returns the download URL for the recording and expiration date/time for the URL
       operationId: getNetworkingHubCircleRecordingDownloadUrl
       parameters:
@@ -152,8 +152,8 @@ paths:
   /networking/{id}/clearChat:
     post:
       tags:
-      - networking
-      summary: Clear all networking hub chat channels with the option to clear individual circles
+      - Networking
+      summary: Clear all networking hub chat channels with the option to clear individual…
       operationId: postClearChat
       parameters:
       - name: id
@@ -218,7 +218,7 @@ paths:
   /networking/{id}/embedCode:
     post:
       tags:
-      - networking
+      - Networking
       summary: Return the embed code for the Networking hub component
       operationId: getEmbedNetworkingHubById
       requestBody:
@@ -255,7 +255,7 @@ paths:
   /networking/{id}/inviteUser:
     post:
       tags:
-      - networking
+      - Networking
       summary: Invite another user to join a conversation
       operationId: inviteUser
       requestBody:
@@ -302,7 +302,7 @@ paths:
   /networking/{id}/participantsList:
     get:
       tags:
-      - networking
+      - Networking
       summary: Return a list of participants
       operationId: returnNetworkingHubParticipants
       parameters:
@@ -333,7 +333,7 @@ paths:
   /networking/{id}/registrant:
     delete:
       tags:
-      - networking
+      - Networking
       summary: Delete a registered user from the networking hub
       description: Returns OK
       operationId: deleteHubRegistrantById
@@ -378,7 +378,7 @@ paths:
       summary: Register a user for the networking hub
       description: Adds a new registered user to this networking hub
       tags:
-      - networking
+      - Networking
       parameters:
       - in: path
         name: id
@@ -433,10 +433,12 @@ paths:
           description: An invalid parameter was sent
         '404':
           description: Invalid auth token
+      operationId: postNetworkingByIdRegistrant
+      x-operation-id-source: derived
   /networking/{id}/setUserProfile:
     post:
       tags:
-      - networking
+      - Networking
       summary: Set a user profile
       operationId: setUserProfile
       requestBody:
@@ -474,43 +476,6 @@ paths:
           content: {}
 components:
   schemas:
-    NetworkingHub:
-      required:
-      - uid
-      - friendlyName
-      - organizers
-      - networkingHubRooms
-      type: object
-      properties:
-        uid:
-          type: string
-        friendlyName:
-          type: string
-          description: Friendly name to identify the hub
-        company:
-          type: string
-          description: The company that owns this hub
-        organizers:
-          description: Holds the ids of users that have organizer permission for this hub
-          type: array
-          items:
-            type: string
-          nullable: true
-        networkingHubRooms:
-          description: Holds the networking hub rooms
-          type: array
-          items:
-            $ref: '#/components/schemas/NetworkingHubRooms'
-        whitelabel:
-          type: object
-          description: Whitelabel options for this hub
-          properties:
-            hidePagination:
-              type: boolean
-            hideChat:
-              type: boolean
-            hideRandomUserMingle:
-              type: boolean
     CircleRecording:
       type: object
       properties:
@@ -569,10 +534,49 @@ components:
           description: The company that owns this hub
         organizers:
           description: Holds the ids of users that have organizer permission for this hub
-          type: array
+          type:
+          - array
+          - 'null'
           items:
             type: string
-          nullable: true
+        networkingHubRooms:
+          description: Holds the networking hub rooms
+          type: array
+          items:
+            $ref: '#/components/schemas/NetworkingHubRooms'
+        whitelabel:
+          type: object
+          description: Whitelabel options for this hub
+          properties:
+            hidePagination:
+              type: boolean
+            hideChat:
+              type: boolean
+            hideRandomUserMingle:
+              type: boolean
+    NetworkingHub:
+      required:
+      - uid
+      - friendlyName
+      - organizers
+      - networkingHubRooms
+      type: object
+      properties:
+        uid:
+          type: string
+        friendlyName:
+          type: string
+          description: Friendly name to identify the hub
+        company:
+          type: string
+          description: The company that owns this hub
+        organizers:
+          description: Holds the ids of users that have organizer permission for this hub
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
         networkingHubRooms:
           description: Holds the networking hub rooms
           type: array

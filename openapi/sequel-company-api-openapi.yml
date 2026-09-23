@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Introvoke Analytics company API
+  title: Introvoke Company API
   description: This is the documentation required to access the Introvoke API. It contains information on how to create Companies, add events to each company and manage the presenters.
   termsOfService: https://www.introvoke.com/terms/
   contact:
@@ -11,13 +11,13 @@ servers:
 security:
 - bearerAuth: []
 tags:
-- name: company
+- name: Company
   description: Calls to managing companies
 paths:
   /company/{companyId}:
     get:
       tags:
-      - company
+      - Company
       summary: Find company by ID
       description: Returns a single company
       operationId: getcompanyById
@@ -45,7 +45,7 @@ paths:
           content: {}
     post:
       tags:
-      - company
+      - Company
       summary: Update a company with json data
       operationId: updatecompanyWithJson
       parameters:
@@ -79,7 +79,7 @@ paths:
   /company/{companyId}/circleRecordings:
     get:
       tags:
-      - company
+      - Company
       summary: Get all circle recordings for a company
       description: Returns a list of all circle recordings associated with the company
       operationId: getCompanyCircleRecordings
@@ -107,7 +107,7 @@ paths:
   /company/{companyId}/create:
     post:
       tags:
-      - company
+      - Company
       summary: Create a new company under a parent company
       operationId: addCompanyToParent
       parameters:
@@ -142,7 +142,7 @@ paths:
   /company/{companyId}/events:
     get:
       tags:
-      - company
+      - Company
       summary: List all events under a parent company
       operationId: listCompanyEvents
       parameters:
@@ -172,7 +172,7 @@ paths:
   /company/{companyId}/list:
     get:
       tags:
-      - company
+      - Company
       summary: List all companies under a parent company
       operationId: listChildCompanies
       parameters:
@@ -202,7 +202,7 @@ paths:
   /company/{companyId}/metadata:
     post:
       tags:
-      - company
+      - Company
       summary: Update metadata for the company
       operationId: updateCompanyMetadata
       parameters:
@@ -245,28 +245,6 @@ components:
           - value
           type: object
         type: array
-    Company:
-      type: object
-      properties:
-        uid:
-          type: string
-        name:
-          type: string
-        logo:
-          type: string
-        parentCompanyId:
-          type: string
-          nullable: true
-        eventIds:
-          description: Holds an array of all the events for this company
-          type: array
-          items:
-            type: string
-          nullable: true
-        metadata:
-          $ref: '#/components/schemas/Metadata'
-      xml:
-        name: Company
     CompanyCircleRecording:
       type: object
       properties:
@@ -300,15 +278,30 @@ components:
         logo:
           type: string
           description: Logo of the company
-    CompanyUpdate:
+    Company:
       type: object
       properties:
+        uid:
+          type: string
         name:
           type: string
-          description: Updated name of the company
         logo:
           type: string
-          description: Updated logo of the company
+        parentCompanyId:
+          type:
+          - string
+          - 'null'
+        eventIds:
+          description: Holds an array of all the events for this company
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+        metadata:
+          $ref: '#/components/schemas/Metadata'
+      xml:
+        name: Company
     Event:
       type: object
       properties:
@@ -321,8 +314,9 @@ components:
         name:
           type: string
         picture:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         startDate:
           type: string
           format: date-time
@@ -338,31 +332,38 @@ components:
           - LiveStreamInPerson
         metadata:
           description: Can be any value - string, number, boolean, array or object.
-          type: object
-          nullable: true
+          type:
+          - object
+          - 'null'
         networkingHub:
-          type: string
+          type:
+          - string
+          - 'null'
           description: (Optional) The networking hub linked when networking starts
-          nullable: true
         presenters:
-          type: array
-          nullable: true
+          type:
+          - array
+          - 'null'
           items:
             type: string
         organizers:
-          type: array
-          nullable: true
+          type:
+          - array
+          - 'null'
           items:
             type: string
         isRegistrationModeEnabled:
-          type: boolean
-          nullable: true
+          type:
+          - boolean
+          - 'null'
         isAttendeeRegistrationModeEnabled:
-          type: boolean
-          nullable: true
+          type:
+          - boolean
+          - 'null'
         privateEventInfo:
-          type: object
-          nullable: true
+          type:
+          - object
+          - 'null'
           properties:
             attendeePasscode:
               type: string
@@ -375,18 +376,30 @@ components:
             rtmpUrl:
               type: string
         closeCaptioningSettings:
-          type: object
-          nullable: true
+          type:
+          - object
+          - 'null'
           properties:
             transcription:
-              type: object
-              nullable: true
+              type:
+              - object
+              - 'null'
               properties:
                 enabled:
-                  type: boolean
-                  nullable: true
+                  type:
+                  - boolean
+                  - 'null'
       xml:
         name: Event
+    CompanyUpdate:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Updated name of the company
+        logo:
+          type: string
+          description: Updated logo of the company
   responses:
     UnauthorizedError:
       description: Access token is missing or invalid

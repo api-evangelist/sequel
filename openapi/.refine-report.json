@@ -1,22 +1,12 @@
 {
   "provider": "sequel",
   "sources": [
-    "sequel-analytics-api-openapi.yml",
-    "sequel-client-api-openapi.yml",
-    "sequel-company-api-openapi.yml",
-    "sequel-company-theme-api-openapi.yml",
-    "sequel-company-theme-fonts-api-openapi.yml",
-    "sequel-company-theme-overrides-api-openapi.yml",
-    "sequel-event-api-openapi.yml",
-    "sequel-event-theme-api-openapi.yml",
-    "sequel-event-theme-overrides-api-openapi.yml",
-    "sequel-media-api-openapi.yml",
-    "sequel-networking-api-openapi.yml",
-    "sequel-platform-api-openapi.yml"
+    "_original/sequel-openapi-original.yml"
   ],
   "outputs": [
     "sequel-analytics-api-openapi.yml",
     "sequel-client-api-openapi.yml",
+    "sequel-media-api-openapi.yml",
     "sequel-company-api-openapi.yml",
     "sequel-company-theme-api-openapi.yml",
     "sequel-company-theme-fonts-api-openapi.yml",
@@ -24,13 +14,44 @@
     "sequel-event-api-openapi.yml",
     "sequel-event-theme-api-openapi.yml",
     "sequel-event-theme-overrides-api-openapi.yml",
-    "sequel-media-api-openapi.yml",
     "sequel-networking-api-openapi.yml",
     "sequel-platform-api-openapi.yml"
   ],
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "sequel-openapi-original.yml: upgraded openapi 3.0.1 -> OpenAPI 3.2.0",
+    "sequel-openapi-original.yml: tagged paths GET /api/analytics/getVideoWatchOverTime/{EVENT_ID} -> Analytics",
+    "sequel-openapi-original.yml: tagged paths GET /api/analytics/user-engagement/events/{eventId}/top-participants (COPY) -> Analytics",
+    "sequel-openapi-original.yml: tagged paths PUT /api/client/removeEventSimulive -> Client",
+    "sequel-openapi-original.yml: tagged paths PUT /api/client/setEventSimuliveUrl -> Client",
+    "sequel-openapi-original.yml: tagged paths GET /api/media/create-asset -> Media",
+    "sequel-openapi-original.yml: tagged paths GET /api/media/upload-asset -> Media",
+    "sequel-openapi-original.yml: declared missing tag: Analytics",
+    "sequel-openapi-original.yml: declared missing tag: Client",
+    "sequel-openapi-original.yml: declared missing tag: Media",
+    "sequel-openapi-original.yml: declared missing tag: company theme",
+    "sequel-openapi-original.yml: declared missing tag: company theme fonts",
+    "sequel-openapi-original.yml: declared missing tag: company theme overrides",
+    "sequel-openapi-original.yml: declared missing tag: event theme",
+    "sequel-openapi-original.yml: declared missing tag: event theme overrides",
+    "sequel-openapi-original.yml: declared missing tag: platform",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "sequel-analytics-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "sequel-client-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "sequel-company-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "sequel-company-theme-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "sequel-company-theme-fonts-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "sequel-company-theme-overrides-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "sequel-event-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "sequel-event-theme-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "sequel-event-theme-overrides-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "sequel-media-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "sequel-networking-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "sequel-platform-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

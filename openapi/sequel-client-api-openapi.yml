@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Introvoke Analytics Client API
+  title: Introvoke Client API
   description: This is the documentation required to access the Introvoke API. It contains information on how to create Companies, add events to each company and manage the presenters.
   termsOfService: https://www.introvoke.com/terms/
   contact:

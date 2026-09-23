@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Introvoke Analytics company theme API
+  title: Introvoke company theme API
   description: This is the documentation required to access the Introvoke API. It contains information on how to create Companies, add events to each company and manage the presenters.
   termsOfService: https://www.introvoke.com/terms/
   contact:
@@ -35,6 +35,10 @@ paths:
                 $ref: '#/components/schemas/IntrovokeEventTheme'
         '404':
           description: company id is incorrect or user does not have access the company.
+      summary: Get companies by company id theme
+      x-summary-source: derived
+      operationId: getV3CompaniesByCompanyIdTheme
+      x-operation-id-source: derived
 components:
   schemas:
     IntrovokeEventTheme:
@@ -51,8 +55,9 @@ components:
           maxItems: 3
           minItems: 2
         fonts:
-          type: array
-          nullable: true
+          type:
+          - array
+          - 'null'
           items:
             type: object
             properties:
@@ -74,195 +79,238 @@ components:
               type: object
               properties:
                 backgroundColor:
-                  type: string
-                  nullable: true
+                  type:
+                  - string
+                  - 'null'
                 imageUrl:
-                  type: string
-                  nullable: true
+                  type:
+                  - string
+                  - 'null'
                 textColor:
-                  type: string
-                  nullable: true
+                  type:
+                  - string
+                  - 'null'
               additionalProperties: false
             watermark:
               type: object
               properties:
                 backgroundColor:
-                  type: string
-                  nullable: true
+                  type:
+                  - string
+                  - 'null'
                 imageUrl:
-                  type: string
-                  nullable: true
+                  type:
+                  - string
+                  - 'null'
                 textColor:
-                  type: string
-                  nullable: true
+                  type:
+                  - string
+                  - 'null'
               additionalProperties: false
             countdown:
-              type: object
-              nullable: true
+              type:
+              - object
+              - 'null'
               properties:
                 textColor:
-                  type: string
-                  nullable: true
+                  type:
+                  - string
+                  - 'null'
               additionalProperties: false
             presenter:
-              type: object
-              nullable: true
+              type:
+              - object
+              - 'null'
               properties:
                 glowColor:
-                  type: string
-                  nullable: true
+                  type:
+                  - string
+                  - 'null'
               additionalProperties: false
           additionalProperties: false
         networkingHub:
           type: object
           properties:
             circleGraphics:
-              type: object
-              nullable: true
+              type:
+              - object
+              - 'null'
               properties:
                 backgroundColor:
-                  type: string
-                  nullable: true
+                  type:
+                  - string
+                  - 'null'
                 imageUrl:
-                  type: string
-                  nullable: true
+                  type:
+                  - string
+                  - 'null'
                 textColor:
-                  type: string
-                  nullable: true
+                  type:
+                  - string
+                  - 'null'
               additionalProperties: false
             joinNetworking:
-              type: object
-              nullable: true
+              type:
+              - object
+              - 'null'
               properties:
                 backgroundColor:
-                  type: string
-                  nullable: true
+                  type:
+                  - string
+                  - 'null'
                 imageUrl:
-                  type: string
-                  nullable: true
+                  type:
+                  - string
+                  - 'null'
                 textColor:
-                  type: string
-                  nullable: true
+                  type:
+                  - string
+                  - 'null'
               additionalProperties: false
             returnToStage:
               type: object
               properties:
                 backgroundColor:
-                  type: string
-                  nullable: true
+                  type:
+                  - string
+                  - 'null'
                 imageUrl:
-                  type: string
-                  nullable: true
+                  type:
+                  - string
+                  - 'null'
                 textColor:
-                  type: string
-                  nullable: true
+                  type:
+                  - string
+                  - 'null'
               additionalProperties: false
           additionalProperties: false
         warningNotices:
           type: object
           properties:
             buttonColor:
-              type: string
-              nullable: true
+              type:
+              - string
+              - 'null'
           additionalProperties: false
         chat:
           type: object
           properties:
             enabled:
-              type: boolean
-              nullable: true
+              type:
+              - boolean
+              - 'null'
             colors:
-              type: array
-              nullable: true
+              type:
+              - array
+              - 'null'
               items:
-                type: string
-                nullable: true
+                type:
+                - string
+                - 'null'
             badge:
               type: object
               properties:
                 backgroundColor:
-                  type: string
-                  nullable: true
+                  type:
+                  - string
+                  - 'null'
                 imageUrl:
-                  type: string
-                  nullable: true
+                  type:
+                  - string
+                  - 'null'
                 textColor:
-                  type: string
-                  nullable: true
+                  type:
+                  - string
+                  - 'null'
               additionalProperties: false
           additionalProperties: false
         participantList:
-          type: object
-          nullable: true
+          type:
+          - object
+          - 'null'
           properties:
             enabled:
-              type: boolean
+              type:
+              - boolean
+              - 'null'
               deprecated: true
-              nullable: true
             showTabFor:
-              type: number
-              nullable: true
+              type:
+              - number
+              - 'null'
               description: Expects a number for the user role. 0 - Host, 1 - Host & Presenter, 2 - Everyone
             showCountFor:
-              type: number
-              nullable: true
+              type:
+              - number
+              - 'null'
               description: Expects a number for the user role. 0 - Host, 1 - Host & Presenter, 2 - Everyone
           additionalProperties: false
         qna:
-          type: object
-          nullable: true
+          type:
+          - object
+          - 'null'
           properties:
             enabled:
-              type: boolean
-              nullable: true
+              type:
+              - boolean
+              - 'null'
           additionalProperties: false
         polls:
-          type: object
-          nullable: true
+          type:
+          - object
+          - 'null'
           properties:
             enabled:
-              type: boolean
-              nullable: true
+              type:
+              - boolean
+              - 'null'
           additionalProperties: false
         privateMessages:
-          type: object
-          nullable: true
+          type:
+          - object
+          - 'null'
           properties:
             enabled:
-              type: boolean
-              nullable: true
+              type:
+              - boolean
+              - 'null'
           additionalProperties: false
         poweredByIntrovokeLabel:
-          type: object
-          nullable: true
+          type:
+          - object
+          - 'null'
           properties:
             enabled:
-              type: boolean
-              nullable: true
+              type:
+              - boolean
+              - 'null'
           additionalProperties: false
         chatReactions:
-          type: object
-          nullable: true
+          type:
+          - object
+          - 'null'
           properties:
             enabled:
-              type: boolean
-              nullable: true
+              type:
+              - boolean
+              - 'null'
             reactions:
-              type: array
-              nullable: true
+              type:
+              - array
+              - 'null'
               items:
-                type: object
-                nullable: true
+                type:
+                - object
+                - 'null'
                 properties:
                   reaction:
                     type: string
-                    nullable: false
                   image:
                     type: string
-                    nullable: false
                   label:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                 maxItems: 7
                 required:
                 - reaction
@@ -270,28 +318,31 @@ components:
                 additionalProperties: false
           additionalProperties: false
         liveReactions:
-          type: object
-          nullable: true
+          type:
+          - object
+          - 'null'
           properties:
             enabled:
-              type: boolean
-              nullable: true
+              type:
+              - boolean
+              - 'null'
             reactions:
-              type: array
-              nullable: true
+              type:
+              - array
+              - 'null'
               items:
-                type: object
-                nullable: true
+                type:
+                - object
+                - 'null'
                 properties:
                   reaction:
                     type: string
-                    nullable: false
                   image:
                     type: string
-                    nullable: false
                   label:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                 maxItems: 7
                 required:
                 - reaction
@@ -299,8 +350,9 @@ components:
                 additionalProperties: false
           additionalProperties: false
         emailSettings:
-          type: object
-          nullable: true
+          type:
+          - object
+          - 'null'
           properties:
             id:
               type: string
@@ -309,14 +361,17 @@ components:
             when:
               type: string
             replayToEmail:
-              type: string
-              nullable: true
+              type:
+              - string
+              - 'null'
             fromEmail:
-              type: string
-              nullable: true
+              type:
+              - string
+              - 'null'
             fromName:
-              type: string
-              nullable: true
+              type:
+              - string
+              - 'null'
             isCustom:
               type: boolean
             activated:
@@ -327,20 +382,25 @@ components:
                 name:
                   type: string
                 subject:
-                  type: string
-                  nullable: true
+                  type:
+                  - string
+                  - 'null'
                 hoursToWait:
-                  type: number
-                  nullable: true
+                  type:
+                  - number
+                  - 'null'
                 htmlBody:
-                  type: string
-                  nullable: true
+                  type:
+                  - string
+                  - 'null'
                 sendGridTemplateId:
-                  type: string
-                  nullable: true
+                  type:
+                  - string
+                  - 'null'
                 bodyText:
-                  type: string
-                  nullable: true
+                  type:
+                  - string
+                  - 'null'
       additionalProperties: false
       required:
       - name

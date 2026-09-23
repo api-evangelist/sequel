@@ -1,15 +1,13 @@
-generated: '2026-08-13'
+generated: '2026-09-19'
 method: searched
 source: live probe of /.well-known/ on Sequel + Introvoke hosts
-notes: >-
-  Two genuine machine-readable documents are served, both by the API host: the OAuth
-  authorization-server metadata (RFC 8414, Auth0-backed at login.introvoke.com) and the
-  protected-resource metadata for the MCP endpoint (RFC 9728). The sequel.io marketing
-  site now returns proper 404s for /.well-known/* — on the 2026-07-21 pass it was a
-  WordPress soft-404 catch-all answering 200 with the homepage for every path, and those
-  false 200s were excluded; the site has since moved to a Next.js/Vercel stack that 404s
-  correctly, so the exclusions are no longer needed. embed.introvoke.com answers 200 with
-  a single-page-app HTML shell for every /.well-known/ path and is treated as a miss.
+notes: 'Two genuine machine-readable documents are served, both by the API host: the OAuth authorization-server
+  metadata (RFC 8414, Auth0-backed at login.introvoke.com) and the protected-resource metadata for the
+  MCP endpoint (RFC 9728). The sequel.io marketing site now returns proper 404s for /.well-known/* — on
+  the 2026-07-21 pass it was a WordPress soft-404 catch-all answering 200 with the homepage for every
+  path, and those false 200s were excluded; the site has since moved to a Next.js/Vercel stack that 404s
+  correctly, so the exclusions are no longer needed. embed.introvoke.com answers 200 with a single-page-app
+  HTML shell for every /.well-known/ path and is treated as a miss.'
 hosts:
 - host: https://api.introvoke.com
   documents:
@@ -23,10 +21,8 @@ hosts:
     content_type: application/json
     file: sequel-oauth-protected-resource.json
     spec: RFC 9728
-    note: >-
-      Declares the MCP endpoint as a protected resource
-      (https://prod-api-elb.sequelvideo.com/api/mcp), names login.introvoke.com as its
-      authorization server, and advertises the four OIDC scopes. Feeds
+    note: Declares the MCP endpoint as a protected resource (https://prod-api-elb.sequelvideo.com/api/mcp),
+      names login.introvoke.com as its authorization server, and advertises the four OIDC scopes. Feeds
       scopes/sequel-scopes.yml and mcp/sequel-mcp.yml.
   - path: /.well-known/security.txt
     status: 404
@@ -60,23 +56,51 @@ hosts:
     status: 200
     content_type: text/plain
     file: ../llms/sequel-llms.txt
-    note: Not a /.well-known/ path, recorded here because it is the provider's other served discovery document.
+    note: Not a /.well-known/ path, recorded here because it is the provider's other served discovery
+      document.
 - host: https://embed.introvoke.com
   documents:
   - path: /.well-known/agent-card.json
     status: 200
     excluded: true
-    reason: >-
-      SPA catch-all — the body is the embed player's index.html (text/html), not a JSON
-      AgentCard. Treated as a miss, not a hit.
+    reason: SPA catch-all — the body is the embed player's index.html (text/html), not a JSON AgentCard.
+      Treated as a miss, not a hit.
 - host: https://admin.sequel.io
   documents:
   - path: /.well-known/agent-card.json
     status: 404
+- host: https://prod-api-elb.sequelvideo.com
+  documents:
+  - path: /.well-known/oauth-protected-resource
+    status: 200
+    file: sequel-prod-api-elb-oauth-protected-resource.json
+    bytes: 218
+  path_echo_control: passed
+- host: https://login.introvoke.com
+  documents:
+  - path: /.well-known/oauth-authorization-server
+    status: 200
+    file: sequel-login-oauth-authorization-server.json
+    bytes: 2512
+  path_echo_control: passed
 agent_card:
   found: false
-  note: >-
-    No A2A Agent Card on any host, at either the canonical
-    /.well-known/agent-card.json or the legacy /.well-known/agent.json. No a2a/ artifact
-    is written and no AgentCard pointer is emitted — an agent card may only ever be
-    recorded when the provider actually serves one.
+  note: No A2A Agent Card on any host, at either the canonical /.well-known/agent-card.json or the legacy
+    /.well-known/agent.json. No a2a/ artifact is written and no AgentCard pointer is emitted — an agent
+    card may only ever be recorded when the provider actually serves one.
+x-mcp-probe:
+  probed: '2026-09-19'
+  issue: roadmap#321, roadmap#337
+  documents:
+  - host: https://prod-api-elb.sequelvideo.com
+    path: /.well-known/oauth-protected-resource
+    file: sequel-prod-api-elb-oauth-protected-resource.json
+  - host: https://login.introvoke.com
+    path: /.well-known/oauth-authorization-server
+    file: sequel-login-oauth-authorization-server.json
+  validated_on: resource (RFC 9728) / issuer (RFC 8414, OIDC)
+  negative_control: one per host; a 2xx JSON object at an impossible path discards the host
+note: 'MCP-host OAuth discovery added 2026-09-19 (roadmap#321/#337): the harvest visits a provider''s
+  primary hosts, and RFC 9728 protected-resource metadata lives on the MCP host, so these documents existed
+  and were invisible to the scorer. Fetched live and validated on `resource`/`issuer`; one negative control
+  per host.'
