@@ -233,75 +233,6 @@ paths:
           $ref: '#/components/responses/UnauthorizedError'
 components:
   schemas:
-    Metadata:
-      type: object
-      additionalProperties:
-        items:
-          additionalProperties: false
-          properties:
-            value:
-              type: string
-          required:
-          - value
-          type: object
-        type: array
-    CompanyCircleRecording:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Unique identifier of the circle recording
-        name:
-          type: string
-          description: Name of the circle recording
-        url:
-          type: string
-          description: Public URL to access the recording
-        downloadVideoUrl:
-          type: string
-          description: URL to download the video recording
-      required:
-      - id
-      - name
-      - url
-      - downloadVideoUrl
-    CompanyCreate:
-      required:
-      - name
-      - logo
-      - metadata
-      type: object
-      properties:
-        name:
-          type: string
-          description: Name of the company
-        logo:
-          type: string
-          description: Logo of the company
-    Company:
-      type: object
-      properties:
-        uid:
-          type: string
-        name:
-          type: string
-        logo:
-          type: string
-        parentCompanyId:
-          type:
-          - string
-          - 'null'
-        eventIds:
-          description: Holds an array of all the events for this company
-          type:
-          - array
-          - 'null'
-          items:
-            type: string
-        metadata:
-          $ref: '#/components/schemas/Metadata'
-      xml:
-        name: Company
     Event:
       type: object
       properties:
@@ -391,6 +322,18 @@ components:
                   - 'null'
       xml:
         name: Event
+    Metadata:
+      type: object
+      additionalProperties:
+        items:
+          additionalProperties: false
+          properties:
+            value:
+              type: string
+          required:
+          - value
+          type: object
+        type: array
     CompanyUpdate:
       type: object
       properties:
@@ -400,6 +343,63 @@ components:
         logo:
           type: string
           description: Updated logo of the company
+    CompanyCircleRecording:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier of the circle recording
+        name:
+          type: string
+          description: Name of the circle recording
+        url:
+          type: string
+          description: Public URL to access the recording
+        downloadVideoUrl:
+          type: string
+          description: URL to download the video recording
+      required:
+      - id
+      - name
+      - url
+      - downloadVideoUrl
+    Company:
+      type: object
+      properties:
+        uid:
+          type: string
+        name:
+          type: string
+        logo:
+          type: string
+        parentCompanyId:
+          type:
+          - string
+          - 'null'
+        eventIds:
+          description: Holds an array of all the events for this company
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+        metadata:
+          $ref: '#/components/schemas/Metadata'
+      xml:
+        name: Company
+    CompanyCreate:
+      required:
+      - name
+      - logo
+      - metadata
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the company
+        logo:
+          type: string
+          description: Logo of the company
   responses:
     UnauthorizedError:
       description: Access token is missing or invalid

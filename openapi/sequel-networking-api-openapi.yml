@@ -483,42 +483,6 @@ components:
           type: string
         expiresOn:
           type: string
-    NetworkingHubRooms:
-      type: object
-      properties:
-        name:
-          type: string
-          description: Name of the networking hub room
-        maxSlots:
-          type: number
-          description: Max number of users that can join the room
-    Participant:
-      type: object
-      properties:
-        meta:
-          type: object
-          properties:
-            userId:
-              type: string
-            username:
-              type: string
-            email:
-              type: string
-            avatar:
-              type: string
-        when:
-          type: number
-    User:
-      type: object
-      properties:
-        userId:
-          type: string
-        userDisplayName:
-          type: string
-        userEmail:
-          type: string
-        userAvatar:
-          type: string
     NetworkingHubCreate:
       required:
       - friendlyName
@@ -592,6 +556,42 @@ components:
               type: boolean
             hideRandomUserMingle:
               type: boolean
+    Participant:
+      type: object
+      properties:
+        meta:
+          type: object
+          properties:
+            userId:
+              type: string
+            username:
+              type: string
+            email:
+              type: string
+            avatar:
+              type: string
+        when:
+          type: number
+    NetworkingHubRooms:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the networking hub room
+        maxSlots:
+          type: number
+          description: Max number of users that can join the room
+    User:
+      type: object
+      properties:
+        userId:
+          type: string
+        userDisplayName:
+          type: string
+        userEmail:
+          type: string
+        userAvatar:
+          type: string
   responses:
     UnauthorizedError:
       description: Access token is missing or invalid

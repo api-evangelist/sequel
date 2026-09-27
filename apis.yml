@@ -102,7 +102,7 @@ apis:
   - type: APIReference
     url: https://docs.introvoke.com/reference
 - aid: sequel:sequel-company-api
-  name: Sequel company API
+  name: Sequel Company API
   description: Calls to managing companies
   humanURL: https://docs.introvoke.com/reference
   baseURL: https://api.introvoke.com/api/v1
@@ -161,7 +161,7 @@ apis:
   - type: APIReference
     url: https://docs.introvoke.com/reference
 - aid: sequel:sequel-event-api
-  name: Sequel event API
+  name: Sequel Event API
   description: Calls to managing events
   humanURL: https://docs.introvoke.com/reference
   baseURL: https://api.introvoke.com/api/v1
@@ -219,7 +219,7 @@ apis:
   - type: APIReference
     url: https://docs.introvoke.com/reference
 - aid: sequel:sequel-networking-api
-  name: Sequel networking API
+  name: Sequel Networking API
   description: Calls to managing networking hubs
   humanURL: https://docs.introvoke.com/reference
   baseURL: https://api.introvoke.com/api/v1
@@ -235,7 +235,7 @@ apis:
   - type: APIReference
     url: https://docs.introvoke.com/reference
 - aid: sequel:sequel-platform-api
-  name: Sequel platform API
+  name: Sequel Platform API
   description: The platform API from Sequel — 2 operation(s) for platform.
   humanURL: https://docs.introvoke.com/reference
   baseURL: https://api.introvoke.com/api/v1
