@@ -476,6 +476,31 @@ paths:
           content: {}
 components:
   schemas:
+    Participant:
+      type: object
+      properties:
+        meta:
+          type: object
+          properties:
+            userId:
+              type: string
+            username:
+              type: string
+            email:
+              type: string
+            avatar:
+              type: string
+        when:
+          type: number
+    NetworkingHubRooms:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the networking hub room
+        maxSlots:
+          type: number
+          description: Max number of users that can join the room
     CircleRecording:
       type: object
       properties:
@@ -483,41 +508,6 @@ components:
           type: string
         expiresOn:
           type: string
-    NetworkingHubCreate:
-      required:
-      - friendlyName
-      - organizers
-      - networkingHubRooms
-      type: object
-      properties:
-        friendlyName:
-          type: string
-          description: Friendly name to identify the hub
-        company:
-          type: string
-          description: The company that owns this hub
-        organizers:
-          description: Holds the ids of users that have organizer permission for this hub
-          type:
-          - array
-          - 'null'
-          items:
-            type: string
-        networkingHubRooms:
-          description: Holds the networking hub rooms
-          type: array
-          items:
-            $ref: '#/components/schemas/NetworkingHubRooms'
-        whitelabel:
-          type: object
-          description: Whitelabel options for this hub
-          properties:
-            hidePagination:
-              type: boolean
-            hideChat:
-              type: boolean
-            hideRandomUserMingle:
-              type: boolean
     NetworkingHub:
       required:
       - uid
@@ -556,31 +546,41 @@ components:
               type: boolean
             hideRandomUserMingle:
               type: boolean
-    Participant:
+    NetworkingHubCreate:
+      required:
+      - friendlyName
+      - organizers
+      - networkingHubRooms
       type: object
       properties:
-        meta:
-          type: object
-          properties:
-            userId:
-              type: string
-            username:
-              type: string
-            email:
-              type: string
-            avatar:
-              type: string
-        when:
-          type: number
-    NetworkingHubRooms:
-      type: object
-      properties:
-        name:
+        friendlyName:
           type: string
-          description: Name of the networking hub room
-        maxSlots:
-          type: number
-          description: Max number of users that can join the room
+          description: Friendly name to identify the hub
+        company:
+          type: string
+          description: The company that owns this hub
+        organizers:
+          description: Holds the ids of users that have organizer permission for this hub
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+        networkingHubRooms:
+          description: Holds the networking hub rooms
+          type: array
+          items:
+            $ref: '#/components/schemas/NetworkingHubRooms'
+        whitelabel:
+          type: object
+          description: Whitelabel options for this hub
+          properties:
+            hidePagination:
+              type: boolean
+            hideChat:
+              type: boolean
+            hideRandomUserMingle:
+              type: boolean
     User:
       type: object
       properties:

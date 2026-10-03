@@ -597,185 +597,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    Error:
-      type: object
-      properties:
-        hasError:
-          description: Always `true` if the request has failed.
-          type: boolean
-          default: true
-        errorMessage:
-          type: string
-          description: The error message describing the issue.
-    EventCreate:
-      required:
-      - companyId
-      - name
-      - startDate
-      - endDate
-      - timezone
-      - type
-      type: object
-      properties:
-        companyId:
-          type: string
-          description: Id of company
-        name:
-          type: string
-          description: Name of the event
-        startDate:
-          type: string
-          format: date-time
-        endDate:
-          type: string
-          format: date-time
-        timezone:
-          $ref: '#/components/schemas/Timezones'
-        type:
-          type: string
-          enum:
-          - Virtual
-          - LiveStreamInPerson
-        picture:
-          type: string
-          description: (Optional) Picture of the event
-        networkingHub:
-          type: string
-          description: (Optional) The networking hub linked when networking starts
-        presenters:
-          type: array
-          description: (Optional) Array of ids for presenters
-          items:
-            type: string
-        organizers:
-          type: array
-          description: (Optional) Array of organizers ids
-          items:
-            type: string
-        autoSelectLatestReplay:
-          description: (Optional) Turn on automatic selection of latest replay
-          type:
-          - boolean
-          - 'null'
-        disableEventRecording:
-          description: (Optional) Turn off recording for this event
-          type:
-          - boolean
-          - 'null'
-        isRegistrationModeEnabled:
-          description: (Optional) Turn on registration mode
-          type:
-          - boolean
-          - 'null'
-        isAttendeeRegistrationModeEnabled:
-          description: (Optional) Turn on to require attendee codes to enter
-          type:
-          - boolean
-          - 'null'
-        closeCaptioningSettings:
-          description: (Optional) Turn on automatic closed captioning
-          type:
-          - object
-          - 'null'
-          properties:
-            transcription:
-              type:
-              - object
-              - 'null'
-              properties:
-                enabled:
-                  type:
-                  - boolean
-                  - 'null'
-    Event:
-      type: object
-      properties:
-        uid:
-          type: string
-        companyUid:
-          type: string
-        creatorUid:
-          type: string
-        name:
-          type: string
-        picture:
-          type:
-          - string
-          - 'null'
-        startDate:
-          type: string
-          format: date-time
-        endDate:
-          type: string
-          format: date-time
-        timezone:
-          type: string
-        type:
-          type: string
-          enum:
-          - Virtual
-          - LiveStreamInPerson
-        metadata:
-          description: Can be any value - string, number, boolean, array or object.
-          type:
-          - object
-          - 'null'
-        networkingHub:
-          type:
-          - string
-          - 'null'
-          description: (Optional) The networking hub linked when networking starts
-        presenters:
-          type:
-          - array
-          - 'null'
-          items:
-            type: string
-        organizers:
-          type:
-          - array
-          - 'null'
-          items:
-            type: string
-        isRegistrationModeEnabled:
-          type:
-          - boolean
-          - 'null'
-        isAttendeeRegistrationModeEnabled:
-          type:
-          - boolean
-          - 'null'
-        privateEventInfo:
-          type:
-          - object
-          - 'null'
-          properties:
-            attendeePasscode:
-              type: string
-            presenterPasscode:
-              type: string
-            hostPasscode:
-              type: string
-            rtmpKey:
-              type: string
-            rtmpUrl:
-              type: string
-        closeCaptioningSettings:
-          type:
-          - object
-          - 'null'
-          properties:
-            transcription:
-              type:
-              - object
-              - 'null'
-              properties:
-                enabled:
-                  type:
-                  - boolean
-                  - 'null'
-      xml:
-        name: Event
     Timezones:
       type: string
       description: Timezones taken from https://www.npmjs.com/package/timezone-support
@@ -928,77 +749,6 @@ components:
       - Pacific/Pago_Pago
       - Pacific/Norfolk
       - Pacific/Tongatapu
-    User:
-      type: object
-      properties:
-        userId:
-          type: string
-        userDisplayName:
-          type: string
-        userEmail:
-          type: string
-        userAvatar:
-          type: string
-    EventClone:
-      required:
-      - name
-      - startDate
-      - endDate
-      - timezone
-      type: object
-      properties:
-        name:
-          type: string
-          description: Name of the event
-        startDate:
-          type: string
-          format: date-time
-        endDate:
-          type: string
-          format: date-time
-        timezone:
-          $ref: '#/components/schemas/Timezones'
-        type:
-          type: string
-          enum:
-          - Virtual
-          - LiveStreamInPerson
-        picture:
-          type: string
-          description: Picture of the event
-        networkingHub:
-          type: string
-          description: The networking hub linked when networking starts
-        presenters:
-          type: array
-          description: Array of ids for presenters
-          items:
-            type: string
-        organizers:
-          type: array
-          description: Array of organizers ids
-          items:
-            type: string
-        autoSelectLatestReplay:
-          description: Turn on automatic selection of latest replay
-          type:
-          - boolean
-          - 'null'
-        disableEventRecording:
-          description: Turn off recording for this event
-          type:
-          - boolean
-          - 'null'
-        isRegistrationModeEnabled:
-          description: Turn on registration mode
-          type:
-          - boolean
-          - 'null'
-        isAttendeeRegistrationModeEnabled:
-          description: Turn on to require attendee codes to enter
-          type:
-          - boolean
-          - 'null'
     EventUpdate:
       type: object
       properties:
@@ -1071,6 +821,256 @@ components:
                   type:
                   - boolean
                   - 'null'
+    Error:
+      type: object
+      properties:
+        hasError:
+          description: Always `true` if the request has failed.
+          type: boolean
+          default: true
+        errorMessage:
+          type: string
+          description: The error message describing the issue.
+    EventCreate:
+      required:
+      - companyId
+      - name
+      - startDate
+      - endDate
+      - timezone
+      - type
+      type: object
+      properties:
+        companyId:
+          type: string
+          description: Id of company
+        name:
+          type: string
+          description: Name of the event
+        startDate:
+          type: string
+          format: date-time
+        endDate:
+          type: string
+          format: date-time
+        timezone:
+          $ref: '#/components/schemas/Timezones'
+        type:
+          type: string
+          enum:
+          - Virtual
+          - LiveStreamInPerson
+        picture:
+          type: string
+          description: (Optional) Picture of the event
+        networkingHub:
+          type: string
+          description: (Optional) The networking hub linked when networking starts
+        presenters:
+          type: array
+          description: (Optional) Array of ids for presenters
+          items:
+            type: string
+        organizers:
+          type: array
+          description: (Optional) Array of organizers ids
+          items:
+            type: string
+        autoSelectLatestReplay:
+          description: (Optional) Turn on automatic selection of latest replay
+          type:
+          - boolean
+          - 'null'
+        disableEventRecording:
+          description: (Optional) Turn off recording for this event
+          type:
+          - boolean
+          - 'null'
+        isRegistrationModeEnabled:
+          description: (Optional) Turn on registration mode
+          type:
+          - boolean
+          - 'null'
+        isAttendeeRegistrationModeEnabled:
+          description: (Optional) Turn on to require attendee codes to enter
+          type:
+          - boolean
+          - 'null'
+        closeCaptioningSettings:
+          description: (Optional) Turn on automatic closed captioning
+          type:
+          - object
+          - 'null'
+          properties:
+            transcription:
+              type:
+              - object
+              - 'null'
+              properties:
+                enabled:
+                  type:
+                  - boolean
+                  - 'null'
+    EventClone:
+      required:
+      - name
+      - startDate
+      - endDate
+      - timezone
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the event
+        startDate:
+          type: string
+          format: date-time
+        endDate:
+          type: string
+          format: date-time
+        timezone:
+          $ref: '#/components/schemas/Timezones'
+        type:
+          type: string
+          enum:
+          - Virtual
+          - LiveStreamInPerson
+        picture:
+          type: string
+          description: Picture of the event
+        networkingHub:
+          type: string
+          description: The networking hub linked when networking starts
+        presenters:
+          type: array
+          description: Array of ids for presenters
+          items:
+            type: string
+        organizers:
+          type: array
+          description: Array of organizers ids
+          items:
+            type: string
+        autoSelectLatestReplay:
+          description: Turn on automatic selection of latest replay
+          type:
+          - boolean
+          - 'null'
+        disableEventRecording:
+          description: Turn off recording for this event
+          type:
+          - boolean
+          - 'null'
+        isRegistrationModeEnabled:
+          description: Turn on registration mode
+          type:
+          - boolean
+          - 'null'
+        isAttendeeRegistrationModeEnabled:
+          description: Turn on to require attendee codes to enter
+          type:
+          - boolean
+          - 'null'
+    Event:
+      type: object
+      properties:
+        uid:
+          type: string
+        companyUid:
+          type: string
+        creatorUid:
+          type: string
+        name:
+          type: string
+        picture:
+          type:
+          - string
+          - 'null'
+        startDate:
+          type: string
+          format: date-time
+        endDate:
+          type: string
+          format: date-time
+        timezone:
+          type: string
+        type:
+          type: string
+          enum:
+          - Virtual
+          - LiveStreamInPerson
+        metadata:
+          description: Can be any value - string, number, boolean, array or object.
+          type:
+          - object
+          - 'null'
+        networkingHub:
+          type:
+          - string
+          - 'null'
+          description: (Optional) The networking hub linked when networking starts
+        presenters:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+        organizers:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+        isRegistrationModeEnabled:
+          type:
+          - boolean
+          - 'null'
+        isAttendeeRegistrationModeEnabled:
+          type:
+          - boolean
+          - 'null'
+        privateEventInfo:
+          type:
+          - object
+          - 'null'
+          properties:
+            attendeePasscode:
+              type: string
+            presenterPasscode:
+              type: string
+            hostPasscode:
+              type: string
+            rtmpKey:
+              type: string
+            rtmpUrl:
+              type: string
+        closeCaptioningSettings:
+          type:
+          - object
+          - 'null'
+          properties:
+            transcription:
+              type:
+              - object
+              - 'null'
+              properties:
+                enabled:
+                  type:
+                  - boolean
+                  - 'null'
+      xml:
+        name: Event
+    User:
+      type: object
+      properties:
+        userId:
+          type: string
+        userDisplayName:
+          type: string
+        userEmail:
+          type: string
+        userAvatar:
+          type: string
   responses:
     UnauthorizedError:
       description: Access token is missing or invalid
