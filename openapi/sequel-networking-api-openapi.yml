@@ -476,31 +476,6 @@ paths:
           content: {}
 components:
   schemas:
-    Participant:
-      type: object
-      properties:
-        meta:
-          type: object
-          properties:
-            userId:
-              type: string
-            username:
-              type: string
-            email:
-              type: string
-            avatar:
-              type: string
-        when:
-          type: number
-    NetworkingHubRooms:
-      type: object
-      properties:
-        name:
-          type: string
-          description: Name of the networking hub room
-        maxSlots:
-          type: number
-          description: Max number of users that can join the room
     CircleRecording:
       type: object
       properties:
@@ -508,16 +483,13 @@ components:
           type: string
         expiresOn:
           type: string
-    NetworkingHub:
+    NetworkingHubCreate:
       required:
-      - uid
       - friendlyName
       - organizers
       - networkingHubRooms
       type: object
       properties:
-        uid:
-          type: string
         friendlyName:
           type: string
           description: Friendly name to identify the hub
@@ -546,13 +518,25 @@ components:
               type: boolean
             hideRandomUserMingle:
               type: boolean
-    NetworkingHubCreate:
+    NetworkingHubRooms:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the networking hub room
+        maxSlots:
+          type: number
+          description: Max number of users that can join the room
+    NetworkingHub:
       required:
+      - uid
       - friendlyName
       - organizers
       - networkingHubRooms
       type: object
       properties:
+        uid:
+          type: string
         friendlyName:
           type: string
           description: Friendly name to identify the hub
@@ -592,6 +576,22 @@ components:
           type: string
         userAvatar:
           type: string
+    Participant:
+      type: object
+      properties:
+        meta:
+          type: object
+          properties:
+            userId:
+              type: string
+            username:
+              type: string
+            email:
+              type: string
+            avatar:
+              type: string
+        when:
+          type: number
   responses:
     UnauthorizedError:
       description: Access token is missing or invalid

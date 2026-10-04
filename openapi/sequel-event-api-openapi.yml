@@ -749,6 +749,17 @@ components:
       - Pacific/Pago_Pago
       - Pacific/Norfolk
       - Pacific/Tongatapu
+    User:
+      type: object
+      properties:
+        userId:
+          type: string
+        userDisplayName:
+          type: string
+        userEmail:
+          type: string
+        userAvatar:
+          type: string
     EventUpdate:
       type: object
       properties:
@@ -821,16 +832,66 @@ components:
                   type:
                   - boolean
                   - 'null'
-    Error:
+    EventClone:
+      required:
+      - name
+      - startDate
+      - endDate
+      - timezone
       type: object
       properties:
-        hasError:
-          description: Always `true` if the request has failed.
-          type: boolean
-          default: true
-        errorMessage:
+        name:
           type: string
-          description: The error message describing the issue.
+          description: Name of the event
+        startDate:
+          type: string
+          format: date-time
+        endDate:
+          type: string
+          format: date-time
+        timezone:
+          $ref: '#/components/schemas/Timezones'
+        type:
+          type: string
+          enum:
+          - Virtual
+          - LiveStreamInPerson
+        picture:
+          type: string
+          description: Picture of the event
+        networkingHub:
+          type: string
+          description: The networking hub linked when networking starts
+        presenters:
+          type: array
+          description: Array of ids for presenters
+          items:
+            type: string
+        organizers:
+          type: array
+          description: Array of organizers ids
+          items:
+            type: string
+        autoSelectLatestReplay:
+          description: Turn on automatic selection of latest replay
+          type:
+          - boolean
+          - 'null'
+        disableEventRecording:
+          description: Turn off recording for this event
+          type:
+          - boolean
+          - 'null'
+        isRegistrationModeEnabled:
+          description: Turn on registration mode
+          type:
+          - boolean
+          - 'null'
+        isAttendeeRegistrationModeEnabled:
+          description: Turn on to require attendee codes to enter
+          type:
+          - boolean
+          - 'null'
     EventCreate:
       required:
       - companyId
@@ -911,66 +972,6 @@ components:
                   type:
                   - boolean
                   - 'null'
-    EventClone:
-      required:
-      - name
-      - startDate
-      - endDate
-      - timezone
-      type: object
-      properties:
-        name:
-          type: string
-          description: Name of the event
-        startDate:
-          type: string
-          format: date-time
-        endDate:
-          type: string
-          format: date-time
-        timezone:
-          $ref: '#/components/schemas/Timezones'
-        type:
-          type: string
-          enum:
-          - Virtual
-          - LiveStreamInPerson
-        picture:
-          type: string
-          description: Picture of the event
-        networkingHub:
-          type: string
-          description: The networking hub linked when networking starts
-        presenters:
-          type: array
-          description: Array of ids for presenters
-          items:
-            type: string
-        organizers:
-          type: array
-          description: Array of organizers ids
-          items:
-            type: string
-        autoSelectLatestReplay:
-          description: Turn on automatic selection of latest replay
-          type:
-          - boolean
-          - 'null'
-        disableEventRecording:
-          description: Turn off recording for this event
-          type:
-          - boolean
-          - 'null'
-        isRegistrationModeEnabled:
-          description: Turn on registration mode
-          type:
-          - boolean
-          - 'null'
-        isAttendeeRegistrationModeEnabled:
-          description: Turn on to require attendee codes to enter
-          type:
-          - boolean
-          - 'null'
     Event:
       type: object
       properties:
@@ -1060,17 +1061,16 @@ components:
                   - 'null'
       xml:
         name: Event
-    User:
+    Error:
       type: object
       properties:
-        userId:
+        hasError:
+          description: Always `true` if the request has failed.
+          type: boolean
+          default: true
+        errorMessage:
           type: string
-        userDisplayName:
-          type: string
-        userEmail:
-          type: string
-        userAvatar:
-          type: string
+          description: The error message describing the issue.
   responses:
     UnauthorizedError:
       description: Access token is missing or invalid
